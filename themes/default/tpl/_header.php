@@ -15,7 +15,7 @@
         <li>
           <h3>General</h3>
           <ul class="links">
-            <li><a href="#">Discussion</a></li>
+            <li><a href="http://groups.google.com/group/php-wiki">Discussion</a></li>
             <li><a href="https://github.com/oipn4e2/phpwiki/wiki">Documentation</a></li>
           </ul>
         </li>

@@ -1,8 +1,8 @@
 html, body { margin: 0; margin-bottom: 25px; padding: 0; background-color: #f0f0f0; font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana"; font-size: 13px; color: #333; }
 h1 { font-size: 28px; color: #000; }
 h2 { font-size: 15px; color: #000; margin-top: 2em; margin-bottom: 0.5em; }
-a  {color: #03c}
-a:hover { background-color: #03c; color: white; text-decoration: none; }
+a  { color: #03c; }
+a:hover { text-decoration: underline; }
 
 #page { width: 900px; margin: 0; margin-top: 20px; margin-left: auto; margin-right: auto; }
 #content { float: left; background-color: white; border: 3px solid #aaa; padding: 25px; width: 650px; }
@@ -16,15 +16,19 @@ a:hover { background-color: #03c; color: white; text-decoration: none; }
 #center { border-top: 1px solid #ccc; margin-top: 25px; padding-top: 25px; }
 #center h1 { margin: 0; font-size: 20px; }
 #center ol { margin-left: 0; padding-left: 0; }
-#center li { font-size: 18px; color: #888; margin-bottom: 25px; }
-#center li p { color: #555; font-size: 13px; }
+#center ol li { font-size: 18px; color: #888; margin-bottom: 25px; }
+#center ol li p { color: #555; font-size: 13px; }
 
 #sidebar ul { margin-left: 0; padding-left: 0; }
 #sidebar ul h3 { margin-top: 25px; font-size: 16px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
 #sidebar li { list-style-type: none; }
 #sidebar ul.links { margin-top: 10px; }
 #sidebar ul.links li { margin-bottom: 5px; }
+#sidebar a:hover { background-color: #03c; color: white; text-decoration: none; }
 
 #outtro { border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; background: #eee; color: #555; font-size: 9px; padding: 10px; margin: 5em 0 0 0; text-align: center; }
 #outtro a { color: #333; }
-#outtro a:hover { color: white; }
+#outtro a:hover { text-decoration: underline; }
+
+.success { color: #234600; background-color: #F8FFF0; border: 1px solid #BE7; padding: 10px; margin-bottom: 15px; }
+.failure { color: #8C2E0B; background-color: #FEF5F1; border: 1px solid #ED541D; padding: 10px; margin-bottom: 15px; }

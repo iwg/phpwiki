@@ -8,36 +8,39 @@ include '_header.php';
 <?php fMessaging::show('success', 'groups'); ?>
 <?php fMessaging::show('failure', 'groups'); ?>
 
-<form action="<?php echo wiki_create_group_path(); ?>" method="post">
-  <input type="text" name="name"/>
-  <input type="submit" value="<?php echo $lang['create group']; ?>"/>
-</form>
-
 <dl class="groups">
 <?php foreach ($groups as $group): ?>
   <dt>
     <?php echo $group->getName(); ?>
-    <form action="<?php echo wiki_destroy_group_path($group->getId()); ?>" method="post">
-      <input type="submit" value="-"/>
-    </form>
+    <a class="remove" href="#">(remove)</a>
+    <form action="<?php echo wiki_destroy_group_path($group->getId()); ?>" method="post"></form>
   </dt>
   <dd>
-    <dl class="memberships">
+    <ul class="memberships">
     <?php foreach ($group->memberships() as $membership): ?>
-      <dt><?php echo $membership->getUserName(); ?></dt>
-      <dd>
-        <form action="<?php echo wiki_destroy_membership_path($membership->getId()); ?>" method="post">
-          <input type="submit" value="-"/>
-        </form>
-      </dd>
+      <li>
+        <span class="username" title="<?php echo $membership->getUserName(); ?>"><?php echo $membership->getUserName(); ?></span>
+        <a class="remove" href="#">(remove)</a>
+        <form action="<?php echo wiki_destroy_membership_path($membership->getId()); ?>" method="post"></form>
+      </li>
     <?php endforeach; ?>
-    </dl>
-    <form action="<?php echo wiki_create_membership_path($group->getId()); ?>" method="post">
-      <input type="text" name="user_name"/>
-      <input type="submit" value="+"/>
-    </form>
+      <li>
+        <form action="<?php echo wiki_create_membership_path($group->getId()); ?>" method="post">
+          <input class="name username" type="text" name="user_name"/>
+        </form>  
+        <a class="add" href="#">(add)</a>
+      </li>
+    </ul>
   </dd>
+  <div class="fn-clear"></div>
 <?php endforeach; ?>
+  <dt>
+    <form action="<?php echo wiki_create_group_path(); ?>" method="post">
+      <label for="group_name">Group name:</label>
+      <input class="name" type="text" id="group_name" name="name"/>
+      <input type="submit" value="<?php echo $lang['create group']; ?>"/>
+    </form>
+  </dt>
 </dl>
 
 <?php

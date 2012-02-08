@@ -1,4 +1,9 @@
 <?php
+function now()
+{
+  return date('Y-m-d H:i:s');
+}
+
 function wiki_path_info()
 {
   return array_key_exists('PATH_INFO', $_SERVER) ? $_SERVER['PATH_INFO'] : '/';

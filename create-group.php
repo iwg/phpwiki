@@ -7,6 +7,7 @@ if (fRequest::isPost()) {
     $group->setName(fRequest::get('name'));
     $group->setCreatedAt(now());
     $group->store();
+    fMessaging::create('success', 'groups', $lang['group created successfully']);
   } catch (fException $e) {
     fMessaging::create('failure', 'groups', $e->getMessage());
   }

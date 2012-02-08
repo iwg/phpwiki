@@ -9,6 +9,7 @@ if (fRequest::isPost()) {
     $membership->setUserName(fRequest::get('user_name'));
     $membership->setCreatedAt(now());
     $membership->store();
+    fMessaging::create('success', 'groups', $lang['membership created successfully']);
   } catch (fException $e) {
     fMessaging::create('failure', 'groups', $e->getMessage());
   }

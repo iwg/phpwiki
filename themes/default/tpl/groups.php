@@ -7,6 +7,7 @@ include '_header.php';
 
 <h1><?php echo $lang['Groups']; ?></h1>
 
+<?php fMessaging::show('success', 'groups'); ?>
 <?php fMessaging::show('failure', 'groups'); ?>
 
 <form action="<?php echo wiki_create_group_path(); ?>" method="post">
@@ -16,13 +17,18 @@ include '_header.php';
 
 <dl class="groups">
 <?php foreach ($groups as $group): ?>
-  <dt><?php echo $group->getName(); ?></dt>
+  <dt>
+    <?php echo $group->getName(); ?>
+    <form action="<?php echo wiki_destroy_group_path($group->getId()); ?>" method="post">
+      <input type="submit" value="-"/>
+    </form>
+  </dt>
   <dd>
     <dl class="memberships">
     <?php foreach ($group->memberships() as $membership): ?>
       <dt><?php echo $membership->getUserName(); ?></dt>
       <dd>
-        <form action="<?php echo wiki_destroy_membership_path($membership); ?>" method="post">
+        <form action="<?php echo wiki_destroy_membership_path($membership->getId()); ?>" method="post">
           <input type="submit" value="-"/>
         </form>
       </dd>

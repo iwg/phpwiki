@@ -1,0 +1,68 @@
+pages
+  id
+  path
+  owner_name
+  group_id
+  permission  # Unix-like permission bits (an integer; ugo/rwx)
+  type  # an integer which represents the type and keeps extensibility
+        # type = 0  normal page
+        # type = 1  hyperlink
+        # type = 2  downloadable file (id/path connected with http://upload.acm-project.org)
+  created_at
+  updated_at
+  
+  `path:string owner_name:string group_id:integer permission:integer type:integer`
+
+revisions
+  id
+  page_id
+  title
+  body
+  markup_name # human-readable name such as 'Markdown', 'MediaWiki', 'HTML', etc.
+  theme_id
+  is_minor_edit
+  editor_name
+  commit_message
+  created_at
+  updated_at
+  
+  `page_id:integer title:string body:text markup_name:string theme_id:integer is_minor_edit:boolean editor_name:string commit_message:text`
+
+hyperlinks
+  id
+  page_id
+  url
+  created_at
+  updated_at
+  
+  `page_id:integer url:string`
+
+groups
+  id
+  name  # human-readable name
+  created_at
+  updated_at
+  
+  `name:string`
+
+memberships # since user model is not included in this app, we transform the relationship to a one-to-many one
+  id
+  group_id
+  user_name # this field is connected with the federated identity system (http://login.acm-project.org)
+  created_at
+  updated_at
+  
+  `group_id:integer user_name:string`
+
+themes  # themes are installed from filesystem
+  id
+  name  # human-readable name
+  path  # location in the filesystem, e.g. /var/lib/wiki-themes/default
+  created_at
+  updated_at
+  
+  `name:string path:string`
+
+markups are built-in components (identified by using human-readable names)
+
+{prefix_rules, roles, rule_actions, users} are replaced by the Unix-like permission design

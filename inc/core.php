@@ -13,3 +13,14 @@ function wiki_get_slug()
 {
   return wiki_slugify(wiki_path_info());
 }
+
+function wiki_theme($theme_name, $view_name)
+{
+  // XXX should query database for themes dir
+  return __DIR__ . "/../themes/$theme_name/tpl/$view_name.php";
+}
+
+function wiki_title($title)
+{
+  return $title . TITLE_SUFFIX;
+}

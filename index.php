@@ -6,6 +6,7 @@ $slug = wiki_get_slug();
 try {
   $page = new Page(array('path' => $slug));
 } catch (fNotFoundException $e) {
+  fMessaging::create('not found', 'new page', $lang['page not found']);
   fURL::redirect(wiki_new_page_path($slug));
 }
 

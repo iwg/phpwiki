@@ -1,11 +1,9 @@
 <?php
 fSession::open();
-$css = array('base', 'groups');
+$css = array('main', 'groups');
 $js = array('jquery', 'groups');
 include '_header.php';
 ?>
-
-<h1><?php echo $lang['Groups']; ?></h1>
 
 <?php fMessaging::show('success', 'groups'); ?>
 <?php fMessaging::show('failure', 'groups'); ?>

@@ -61,7 +61,7 @@ themes  # themes are installed from filesystem
   created_at
   updated_at
   
-  `name:string path:string`
+  `name:string`
 
 markups are built-in components (identified by using human-readable names)
 

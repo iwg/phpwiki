@@ -1,6 +1,6 @@
 <?php
 fSession::open();
-$css = array('main', 'themes');
+$css = array('main');
 $js = array('jquery', 'themes');
 include '_header.php';
 ?>

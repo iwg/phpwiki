@@ -1,0 +1,778 @@
+
+
+/*--------------------------------------------------------------------------
+ * tag definitions
+ ------------------------------------------------------------------------*/
+body,html{
+    font-size: 16px;
+    font-family: "Garamond", "Times New Roman", "Times", serif;
+    line-height: 29px;
+    color:#0c1a30;
+    padding:0;
+    height: 100%;
+    margin: 0 0 1px;
+}
+
+tt, code, pre {
+    font-family: "Liberation Mono", "monospace";
+    font-size: 90%;
+    line-height: 29px;
+}
+
+.new_page textarea { width: 95%; }
+.new_page p { margin: 5px; }
+
+.edit_page textarea { width: 95%; }
+.edit_page p { margin: 5px; }
+
+/*a:link,a:visited{ color: #ad104f; text-decoration: none; }*/
+a:link,a:visited{ color: #2B7EA1; text-decoration: none; }
+
+h1{
+    font-size: 22px;
+}
+
+h2{
+    font-size: 22px;
+}
+
+h3 {
+    font-size: 19px;
+}
+
+h4 {
+    font-size: 17px;
+}
+
+h1,h2,h3,h4{
+    color: #2c558a;
+    font-weight: normal;
+    text-shadow: #fff 0px 1px 1px;
+    letter-spacing:0.1em;
+    font-family: "Gill Sans", "PT Sans", "Arial", sans-serif;
+    text-transform: uppercase;
+}
+
+h1 code, h2 code, h3 code, h4 code {
+    font-family: "Gill Sans", "PT Sans", "Arial", sans-serif;
+    font-size: inherit;
+}
+
+p {
+    margin: 0 0 29px 0;
+}
+
+p.zh {
+  text-indent: 2em;
+  text-align: justify;
+  font-family: "Garamond", "Times New Roman", "Times", serif;
+  margin-bottom: 0.5em;
+}
+
+ul {
+    list-style: none;
+    margin: 0 0 29px 10px;
+    padding-left: 10px;
+    text-indent: -13px;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+ul li p:first-child { display: inline; }
+
+ul li p {
+    text-indent: 0;
+    margin: 29px 0;
+}
+
+ul li:before {
+    content: "» ";
+}
+
+img {
+    border:0;
+}
+
+dl, dt, dd {
+    margin: 0;
+    padding: 0;
+    line-height: 29px;
+}
+
+dd {
+    padding-left: 3em;
+    padding-bottom: 29px;
+}
+
+dt {
+    height: 29px;
+    font-weight: bold;
+}
+
+
+/*--------------------------------------------------------------------------
+ * styling for css classes
+  ------------------------------------------------------------------------*/
+
+dl span.linklist {
+    color: #888;
+    font-size: 15px;
+    vertical-align: top;
+    font-family: "PT Sans", "Arial", sans-serif;
+}
+
+pre.code, pre.sourceCode, pre.shell, .faqs {
+    background: #222 url(../img/black-screen.png) scroll repeat-x top left;
+    color: #ffbf00;
+    width: 87%;
+    margin: 0px auto 29px auto;
+    padding: 16px;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+.faqs a {
+    color: #96C1D4;
+}
+
+.faqs a:hover, .faqs a:active {
+    color: #FFFAEB;
+}
+
+#blog-index table {
+    border-collapse:collapse;
+    border-spacing:0;
+    margin-bottom: 29px;
+}
+
+#blog-index h2 a {
+    vertical-align: middle;
+}
+
+#blog-post .post-content {
+    margin-bottom: 29px;
+}
+
+#blog-post .post-meta {
+    width: 226px;
+    padding: 0 22px 0 0;
+    float: left;
+}
+
+#blog-post .post-date {
+    line-height: 29px;
+    font-size: 70%;
+    margin-bottom: 29px;
+}
+
+#blog-post .post-summary {
+    line-height: 29px;
+    color: #666;
+}
+
+#blog-post .post-content {
+    width: 680px;
+    padding-right: 8px;
+    float: left;
+}
+
+#blog-post .post-content hr {
+    width: 66%;
+    margin: 2.5em auto;
+}
+
+
+tr.post {
+    /*font-family: "Gill Sans", "PT Sans", "Arial", sans-serif;*/
+    font-family: "PT Sans", "Arial", sans-serif;
+}
+
+tr.post td {
+    padding: 1em 0;
+    border-bottom: 1px dotted #eee;
+}
+
+td.date {
+    width:102px;
+    padding-right:12px;
+    font-size:0.8em;
+    text-align:left;
+}
+
+td.title {
+    font-size: 1.2em;
+    letter-spacing:0.085em;
+    width: 466px;
+}
+
+td.summary {
+    color: #222;
+    font-size: 0.8em;
+    font-family: "Garamond", "Times New Roman", "Times", serif;
+    width:368px;
+    padding-left: 12px;
+    margin-bottom: 1em;
+}
+
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode, table.sourceCode pre 
+   { margin: 0; padding: 0; border: 0; vertical-align: baseline; border: none; }
+td.lineNumbers { text-align: right; background-color: #ccc; color: black; padding-right: 5px; padding-left: 5px; } 
+td.sourceCode { padding-left: 5px; }
+
+li pre.sourceCode { font-size: 80%; padding: 16px 16px 16px 32px; margin-top: 29px;}
+pre.sourceCode { }
+pre.sourceCode span.Normal { }
+pre.sourceCode span.Keyword, pre.sourceCode span.kw { font-weight: bold; } 
+pre.sourceCode span.DataType, pre.sourceCode span.dt { color: #ff0; }
+pre.sourceCode span.DecVal, pre.sourceCode span.de { color: #4f4; }
+pre.sourceCode span.BaseN { color: #4f4; }
+pre.sourceCode span.Float, pre.sourceCode span.fl { color: #4f4; }
+pre.sourceCode span.Char, pre.sourceCode span.ch { color: #4f4; }
+pre.sourceCode span.String, pre.sourceCode span.st { color: #4f4; }
+pre.sourceCode span.Comment, pre.sourceCode span.co { color: #999; font-style: italic; }
+pre.sourceCode span.Others { }
+pre.sourceCode span.Alert { color: #4f4; font-weight: bold; }
+pre.sourceCode span.Function, pre.sourceCode span.fu { color: #C4E7FF; }
+pre.sourceCode span.RegionMarker { }
+pre.sourceCode span.Error, pre.sourceCode span.er { color: #f44; font-weight: bold; }
+
+pre.sourceCode span.ModuleName, pre.sourceCode span.mo { color: #f44; } 
+pre.sourceCode span.Keyword, pre.sourceCode span.kw { color: #C4E7FF; }
+pre.sourceCode span.FunctionDefinition { color: #C4E7FF; }
+pre.sourceCode span.Class { color: #C4E7FF; font-weight: bold; }
+pre.sourceCode span.Constructor { font-weight: bold; }
+pre.sourceCode span.DataConstructor { color: #C4E7FF; }
+pre.sourceCode span.TypeConstructor { font-weight: bold; }
+pre.sourceCode span.InfixOperator { color: #aaa; }
+
+
+.singlecolumn {
+    width: 728px;
+    margin-top: 20px;
+    padding-bottom: 58px;
+}
+
+.singlecolumn pre.sourceCode,
+.singlecolumn pre.code,
+.singlecolumn pre.shell {
+    width: 656px;
+    margin: 0 0 29px 40px;
+    padding: 16px;
+}
+
+.left-cell{
+    float:left;
+}
+.right-cell{
+    float:right;
+}
+.doubles{
+    overflow:auto;
+}
+.doubles .left-cell,.doubles .right-cell{
+    width: 50%;
+}
+
+p.foundabug {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 29px;
+    background: #F7D081;
+    font-family: "Droid Sans", sans-serif;
+
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.newspaper{
+    width: 100%;
+    overflow:auto;
+/*background: transparent url(../img/bars.png) repeat-y center;*/
+/*border-bottom:1px solid #fff;
+  border-left:1px solid #fff;
+  border-right:1px solid #fff;*/
+}
+.newspaper .section{
+    float:left;
+    width: 50%;
+}
+
+.newspaper .inner {
+    padding: 0 20px;
+    margin: 0;
+}
+
+.newspaper .inner h2, .singlecolumn h2, #blog-post h2, #blog-index h2
+{
+    margin:0;
+    border-bottom: 1px solid #c2d1e1;
+    line-height: 44px;
+    margin-bottom: 13px;
+    padding:0;
+}
+
+.newspaper .inner h3, .singlecolumn h3,
+.newspaper .inner h4, .singlecolumn h4
+{
+    margin:0;
+    line-height: 44px;
+    margin-bottom: 14px;
+    padding:0;
+}
+
+.newspaper .section.left .inner{
+    padding-left: 0;
+}
+.newspaper .section.right .inner{
+    padding-right: 0;
+}
+
+
+.clear {
+    padding:0;margin:0;
+    clear:both;
+}
+
+
+/*--------------------------------------------------------------------------
+ * styling for divs with ids
+ ------------------------------------------------------------------------*/
+#splash .content, #content {
+    width: 960px;
+    margin: 0 auto;
+    overflow:hidden;
+    position: relative;
+}
+
+#content.subpage{
+    margin-top: 20px;
+}
+#content.subpage .inner-page{
+        padding: 0px;
+}
+
+.front-page #content{
+    margin-top:20px;
+}
+
+#faqspage h3 {
+    background: url(../img/chat-quotes.png) no-repeat center left;
+    font-family: "PT Sans", "Arial", sans-serif;
+    margin:54px 0 14px 0;
+    padding:4px 0 0 60px;
+    line-height: 43px;
+    border-top: 1px solid #c2d1e1;
+    text-transform: none;
+    color: #705E3A;
+    /*F7D081*/
+}
+
+#faqspage h5 {
+    font-family: "PT Sans", "Arial", sans-serif;
+    padding: 0;
+    margin: 0;
+    line-height: 29px;
+}
+
+#main{
+    background:#fff url(../img/holy-light.png) scroll repeat-x 0px -100px;
+    margin: 0;
+    padding: 0;
+    width:100%;
+    min-height: 100%;
+
+    /*background: #FFFFFF;*/
+}
+
+#splash{
+    width: 100%;
+    overflow:hidden;
+    background:#2e5d9c;
+    padding: 0;
+    background: url(../img/splash-back.png) scroll repeat-x top left;
+    position:relative;
+    border-bottom:10px solid #F2F7FD;
+}
+#splash .logo img {
+    width: 800px;
+    margin: 0 auto;
+    display: block;
+}
+#splash .blurb{
+    position:absolute;
+    top: 35%;
+    right: 75px;
+    font-size: 1.7em;
+    width: 50%;
+    line-height: 1.2em;
+    font-family: "PT Sans Italic";
+    letter-spacing: 0.05em;
+    text-shadow: 1px 1px #DAE6F5;
+    color: #1f4986;
+}
+#splash .slideshow{
+    margin: 0px auto;
+    margin-bottom: -8px;
+}
+
+#splash #pager{
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+#splash #pager a{
+    width: 15px;
+    height: 15px;
+    overflow: hidden;
+    text-indent: -100px;
+    background: #fff;
+    opacity: 0.4;
+    margin: 0 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    display: -moz-inline-stack;
+    display: inline-block;
+    zoom: 1; /*IE HACK*/
+    *display: inline; /* IE HACK */
+}
+.slideshow .content{
+    display: relative;
+}
+.slideshow .code-example{
+    position: absolute;
+    width: 300px;
+    top: 50%;
+    bottom: 50%;
+    height: 6em;
+    margin-top: -4em;
+}
+
+#splash #pager a.activeSlide{ opacity: 0.9 }
+
+#triptych {
+    background: #f1f1f1 url(../img/splash-2-back.png) scroll repeat-x bottom left;
+    /*background: #D6EFFF;*/
+    color: #000;
+    width: 100%;
+    padding: 10px 0;
+    font-family: "Gill Sans", "PT Sans", "Arial", sans-serif;
+    font-style: italic;
+    display: none;
+}
+
+#triptych div.triptych-content {
+    width: 960px;
+    margin: 0px auto;
+/*    background: url("../img/splash-2.png") scroll no-repeat center;*/
+    height: 160px;
+}
+
+#triptych div.triptych-content h2{
+    float: left;
+    width: 33%;
+    text-align:center;
+    font-size: 1.7em;
+    line-height: 110px;
+}
+
+#triptych div div.panel {
+    text-shadow: #f5f5f5 0px 2px 0px;
+    width: 300px;
+    padding: 6px 10px;
+    margin: 0;
+    float: left;
+    text-align: center;
+    font-size: 12pt;
+}
+
+#triptych .panel a {
+    padding: 16px 4px 4px 4px;
+}
+
+#triptych .panel a:link, #triptych .panel a:visited {
+    color: inherit;
+    border: none;
+    text-decoration: none;
+    display: block;
+}
+
+#triptych .panel a:hover, #triptych .panel a:active {
+    color: inherit;
+    border: none;
+    text-decoration: none;
+    display: block;
+    background: #62747F;
+    color: #fff;
+    padding: 15px 3px 3px 3px;
+    text-shadow: #000 0px 2px 0px;
+    border-left: 1px solid #000;
+    border-top: 1px solid #000;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+
+#triptych .panel img {
+    border: none;
+}
+
+
+#hero-shot{
+    /*background: url(../img/bars.png) scroll repeat-x top left ;*/
+    color:#fff;
+    /*border-bottom: solid 4px #fff;*/
+    height: 1px;
+}
+#hero-shot h1{
+    text-shadow: #101f33 0px 1px 1px;
+    color: #fff;
+    text-align: center;
+    margin-bottom:10px;
+}
+#hero-shot table{
+    vertical-align: middle;
+}
+#hero-shot td{
+    width:50%;
+}
+
+#docframe-wrapper {
+    width: 100%;
+    position: absolute;
+    top:0; left: 0;
+    padding-top: 35px;
+}
+
+#apiheader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #132742;
+    height: 23px;
+    width: 100%;
+    color: #C4E7FF;
+    padding: 8px 0 4px 0;
+    margin:0;
+    overflow:hidden;
+}
+
+#heading{
+    width: 100%;
+    background: #132742 url(../img/nav-back.png) scroll repeat-x bottom left;
+    color: #C4E7FF;
+    padding: 45px 0 0 0;
+    margin:0;
+    height: 40px;
+    overflow:hidden;
+}
+
+#heading .inner{
+    width: 960px;
+    margin:0 auto;
+    overflow:hidden;
+    line-height: 1em;
+    vertical-align: top;
+    height: 40px;
+    padding: 0;
+    height: 2em;
+}
+
+#heading .inner h1 { margin-top: 16px; }
+
+#apiheader .inner{
+    width: 960px;
+    margin:0 auto;
+    overflow:hidden;
+    line-height: 1em;
+    vertical-align: top;
+    height: 40px;
+    padding: 0;
+    position: relative;
+    height: 2em;
+}
+
+#heading h1,
+#apiheader h1{
+    margin:0;
+    padding:0;
+    margin: 0 auto;
+    position: absolute;
+    top:0px;
+}
+
+#nav .selected {
+    background-image: url(../img/selected-tick.png);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+
+#nav{
+   overflow:hidden;
+   color: #C4E7FF;
+   height: 36px;
+   padding: 4px 0 0 0; margin: 0;
+   float:right;
+}
+
+#nav .heading span {
+    color: #fff;
+}
+
+#nav .navlist {
+   float:left;
+   margin: 0; padding: 0;
+   height: 100%;
+}
+
+#nav a:link, #nav a:visited {
+    color: inherit;
+    vertical-align: top;
+    height: 100%;
+    display: block;
+}
+
+#nav a:hover, #nav a:active {
+    color: #fff;
+    vertical-align: top;
+    height: 100%;
+    display: block;
+}
+
+#nav .active a:link, #nav .active a:visited{
+    color: #fff;
+}
+
+#nav ul {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    display: inline;
+}
+
+#nav li {
+    vertical-align: top;
+    padding: 0 0 10px 0;
+    height: 30px;
+    display: block;
+    list-style-type: none;
+    float:left;
+    letter-spacing: -0.01em;
+    margin:0 20px;
+    font-family: "Droid Sans", sans-serif;
+    text-shadow: 1px 1px #142845;
+}
+
+#nav li.selected {
+    color: #fff;
+}
+
+#nav li:before {
+    content: "";
+}
+
+#packages dt {
+    height: 28px;
+    border-bottom: 1px dotted #C2D1E1;
+    font-family: "PT Sans", sans-serif;
+    letter-spacing: 2px;
+}
+
+#docdls dt {
+    height: 28px;
+    border-bottom: 1px dotted #C2D1E1;
+
+    font-family: "PT Sans", sans-serif;
+    letter-spacing: 2px;
+    padding: 0 5px;
+}
+
+#packages dd, #docdls dd {
+    padding: 29px 0 ;
+    font-size:1em;
+    line-height: 28px;
+}
+
+#packages dd{
+    background: url(../img/package.png) no-repeat center left;
+    padding-left: 110px;
+}
+
+#docdls dd{
+    overflow: hidden;
+    width: 100%;
+    height: 100px;
+    padding-right: 10px;
+}
+#docdls dd a.book{
+    float: left;
+    margin-top: -5px;
+    margin-right: 20px;
+    height: 100px;
+}
+
+.small-logo{
+    float:left;
+    margin-right: 10px;
+}
+.photo{
+    float: left;
+    margin-right: 10px;
+}
+
+#footer{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    clear: both;
+    border-top: 1px solid #C2D1E1;
+    color: #a0acba;
+    padding: 4px 0px;
+    height: 31px;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.8em;
+    text-align: right;
+    background: #f5f9ff;
+    vertical-align: middle;
+    line-height: 31px;
+    overflow: hidden;
+}
+#footer b, #footer .b{
+  font-weight: bold;
+  font-family: "PT Sans Bold", sans-serif;
+}
+#footer img{
+    vertical-align: middle;
+    padding-left: 10px;
+}
+
+#footer p{
+    padding: 0 20px;
+    margin: 0;
+}
+#footer p.part-1{
+    float:left;
+}
+#footer p.part-2{
+    float:right;
+}
+@font-face {
+    font-family: "Droid Sans";
+    src: url("DroidSans.ttf") format("truetype");
+}
+@font-face {
+    font-family: "PT Sans";
+    src: url("PT_Sans.ttf") format("truetype");
+}
+@font-face {
+    font-family: "PT Sans Bold";
+    src: url("PT_Sans_Bold.ttf") format("truetype");
+}

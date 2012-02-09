@@ -6,5 +6,6 @@ class Page extends fActiveRecord
   
   protected function configure()
   {
+    fORMRelated::setOrderBys($this, 'Revision', array('revisions.created_at' => 'desc'));
   }
 }

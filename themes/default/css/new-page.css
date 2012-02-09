@@ -1,5 +1,5 @@
 #new-page fieldset { margin: 15px 0; padding: 5px; border: 1px solid #ccc; }
-#new-page legend { padding: 0.2em 0.5em; border: 1px solid #ccc; color: #333; font-size: 90%; text-align: right; }
+#new-page legend { padding: 0.2em 0.5em; border: 1px solid #ccc; color: #333; font-size: 90%; text-align: left; }
 #new-page .field { margin: 10px 0; }
 #new-page .action { margin: 20px 10px 10px 10px; }
 #new-page .action * { margin-left: 10px; }

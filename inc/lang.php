@@ -11,4 +11,10 @@ $lang = array(
   'Themes' => 'Themes',
   'theme enabled successfully' => 'Theme is enabled successfully.',
   'theme disabled successfully' => 'Theme is disabled successfully.',
+  'Management' => 'Management',
+  'General' => 'General',
+  'Discussion' => 'Discussion',
+  'Documentation' => 'Documentation',
+  'Development' => 'Development',
+  'Issues' => 'Issues',
 );

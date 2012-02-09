@@ -11,29 +11,7 @@
 <body>
   <div id="page">
     <div id="sidebar">
-      <ul id="sidebar-items">
-        <li>
-          <h3>General</h3>
-          <ul class="links">
-            <li><a href="http://groups.google.com/group/php-wiki">Discussion</a></li>
-            <li><a href="https://github.com/oipn4e2/phpwiki/wiki">Documentation</a></li>
-          </ul>
-        </li>
-        <li>
-          <h3>Development</h3>
-          <ul class="links">
-            <li><a href="https://github.com/oipn4e2/phpwiki">GitHub</a></li>
-            <li><a href="https://github.com/oipn4e2/phpwiki/issues">Issues</a></li>
-          </ul>
-        </li>
-        <li>
-          <h3>Developers</h3>
-          <ul class="links">
-            <li><a href="http://acm.sjtu.edu.cn">ACM class</a></li>
-            <li><a href="http://acm.sjtu.edu.cn/~xjia">Xiao Jia</a></li>
-          </ul>
-        </li>
-      </ul>
+      <?php include '_sidebar.php'; ?>
     </div>
 
     <div id="content">

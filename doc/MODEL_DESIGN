@@ -7,7 +7,7 @@ pages
   type  # an integer which represents the type and keeps extensibility
         # type = 0  normal page
         # type = 1  hyperlink
-        # type = 2  downloadable file (id/path connected with http://upload.acm-project.org)
+        #           or downloadable file (redirect to http://upload.acm-project.org/XXX)
   created_at
   updated_at
   

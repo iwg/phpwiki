@@ -17,4 +17,6 @@ $lang = array(
   'Documentation' => 'Documentation',
   'Development' => 'Development',
   'Issues' => 'Issues',
+  'New Page' => 'New Page',
+  'New Link' => 'New Link',
 );

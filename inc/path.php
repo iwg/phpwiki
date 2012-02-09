@@ -34,9 +34,20 @@ function wiki_disable_theme_path($theme_name)
   return SITE_BASE . '/disable-theme.php?name=' . $theme_name;
 }
 
-function wiki_new_page_path($slug)
+function wiki_new_page_path($slug = '')
 {
+  if (empty($slug)) {
+    return SITE_BASE . '/new-page.php';
+  }
   return SITE_BASE . '/new-page.php?slug=' . $slug;
+}
+
+function wiki_new_link_path($slug = '')
+{
+  if (empty($slug)) {
+    return SITE_BASE . '/new-link.php';
+  }
+  return SITE_BASE . '/new-link.php?slug=' . $slug;
 }
 
 function wiki_create_membership_path($group_id)

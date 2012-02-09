@@ -2,6 +2,8 @@
   <li>
     <h3><?php echo $lang['Management']; ?></h3>
     <ul class="links">
+      <li><a href="<?php echo wiki_new_page_path(); ?>"><?php echo $lang['New Page']; ?></a></li>
+      <li><a href="<?php echo wiki_new_link_path(); ?>"><?php echo $lang['New Link']; ?></a></li>
       <li><a href="<?php echo wiki_groups_path(); ?>"><?php echo $lang['Groups']; ?></a></li>
       <li><a href="<?php echo wiki_themes_path(); ?>"><?php echo $lang['Themes']; ?></a></li>
     </ul>

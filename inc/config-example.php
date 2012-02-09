@@ -6,4 +6,5 @@ define('DB_HOST', 'localhost');
 
 define('SITE_BASE', '/wiki');
 define('THEME_BASE', '/wiki/themes');
+define('DEFAULT_THEME', 'default');
 define('TITLE_SUFFIX', ' | phpwiki');

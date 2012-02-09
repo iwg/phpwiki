@@ -11,7 +11,14 @@ function wiki_path_info()
 
 function wiki_slugify($str)
 {
-  return preg_replace('/\s+/', '_', strtolower(trim($str)));
+  return
+    preg_replace('{/+}', '/',
+      preg_replace('/_+/', '_',
+        preg_replace('/\s+/', '_',
+          strtolower(trim($str))
+        )
+      )
+    );
 }
 
 function wiki_get_slug()

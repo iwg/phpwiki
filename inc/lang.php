@@ -8,4 +8,7 @@ $lang = array(
   'membership destroyed successfully' => 'Membership is destroyed successfully.',
   'group created successfully' => 'Group is created successfully.',
   'membership created successfully' => 'Membership is created successfully.',
+  'Themes' => 'Themes',
+  'theme enabled successfully' => 'Theme is enabled successfully.',
+  'theme disabled successfully' => 'Theme is disabled successfully.',
 );

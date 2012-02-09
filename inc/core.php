@@ -21,6 +21,27 @@ function wiki_get_slug()
 
 function wiki_theme($theme_name, $view_name)
 {
-  // XXX should query database for themes dir
   return __DIR__ . "/../themes/$theme_name/tpl/$view_name.php";
+}
+
+function wiki_list_theme_names()
+{
+  $names = array();
+  foreach (scandir(__DIR__ . '/../themes/') as $name) {
+    if ($name == '.' or $name == '..' or $name == 'default') {
+      continue;
+    }
+    $names[] = $name;
+  }
+  return $names;
+}
+
+function wiki_is_theme_enabled($theme_name)
+{
+  try {
+    $theme = new Theme(array('name' => $theme_name));
+    return true;
+  } catch (fNotFoundException $e) {
+    return false;
+  }
 }

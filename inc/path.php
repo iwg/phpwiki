@@ -19,6 +19,21 @@ function wiki_destroy_group_path($group_id)
   return SITE_BASE . '/destroy-group.php?id=' . $group_id;
 }
 
+function wiki_themes_path()
+{
+  return SITE_BASE . '/themes.php';
+}
+
+function wiki_enable_theme_path($theme_name)
+{
+  return SITE_BASE . '/enable-theme.php?name=' . $theme_name;
+}
+
+function wiki_disable_theme_path($theme_name)
+{
+  return SITE_BASE . '/disable-theme.php?name=' . $theme_name;
+}
+
 function wiki_new_page_path($slug)
 {
   return SITE_BASE . '/new-page.php?slug=' . $slug;

@@ -37,7 +37,7 @@ include '_header.php';
 <?php endforeach; ?>
   <dt>
     <form action="<?php echo wiki_create_group_path(); ?>" method="post">
-      <label for="group_name">Group name:</label>
+      <label for="group_name"><?php echo $lang['Group name:']; ?></label>
       <input class="name" type="text" id="group_name" name="name"/>
       <input type="submit" value="<?php echo $lang['create group']; ?>"/>
     </form>

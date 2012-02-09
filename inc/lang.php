@@ -2,6 +2,7 @@
 $lang = array(
   'page not found' => 'Page not found.',
   'Groups' => 'Groups',
+  'Group name:' => 'Group name:',
   'create group' => 'Create group',
   'system group cannot be destroyed' => 'System group cannot be destroyed.',
   'group destroyed successfully' => 'Group is destroyed successfully.',

@@ -14,4 +14,14 @@ class Group extends fActiveRecord
   {
     return $this->getName() == "root" or $this->getName() == "nobody";
   }
+  
+  public static function root()
+  {
+    return new Group(array('name' => 'root'));
+  }
+  
+  public static function nobody()
+  {
+    return new Group(array('name' => 'nobody'));
+  }
 }

@@ -21,7 +21,7 @@ include '_header.php';
         <span class="monofont"><?php echo HOST_URL . SITE_BASE; ?>/</span><input class="monofont" type="text" id="path" name="path" value="<?php echo $page_path; ?>"/>
       <?php else: ?>
         <span class="monofont"><?php echo HOST_URL . SITE_BASE . $slug; ?></span>
-        <input type="hidden" name="path" value="<?php echo $slug; ?>"/>
+        <input type="hidden" name="path" value="<?php echo substr($slug, 1); ?>"/>
       <?php endif; ?>
     </div>
   </fieldset>

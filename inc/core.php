@@ -78,3 +78,9 @@ function wiki_bit_checked_helper($bits, $mask)
 {
   return ($bits & $mask) > 0 ? ' checked' : '';
 }
+
+function wiki_get_current_user()
+{
+  // TODO
+  return "xjia";
+}

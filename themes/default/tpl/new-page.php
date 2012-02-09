@@ -55,21 +55,21 @@ include '_header.php';
       <label>Permission:</label>
       <div class="permission-group">
         <span class="group-type">(owner)</span>
-        <input type="checkbox" id="ur" checked/><label for="ur">r</label>
-        <input type="checkbox" id="uw" checked/><label for="uw">w</label>
-        <input type="checkbox" id="ux" checked/><label for="ux">x</label>
+        <input type="checkbox" name="owner_bits[]" value="4" id="ur" checked/><label for="ur">r</label>
+        <input type="checkbox" name="owner_bits[]" value="2" id="uw" checked/><label for="uw">w</label>
+        <input type="checkbox" name="owner_bits[]" value="1" id="ux" checked/><label for="ux">x</label>
       </div>
       <div class="permission-group">
         <span class="group-type">(group)</span>
-        <input type="checkbox" id="gr" checked/><label for="gr">r</label>
-        <input type="checkbox" id="gw" checked/><label for="gw">w</label>
-        <input type="checkbox" id="gx" checked/><label for="gx">x</label>
+        <input type="checkbox" name="group_bits[]" value="4" id="gr" checked/><label for="gr">r</label>
+        <input type="checkbox" name="group_bits[]" value="2" id="gw" checked/><label for="gw">w</label>
+        <input type="checkbox" name="group_bits[]" value="1" id="gx" checked/><label for="gx">x</label>
       </div>
       <div class="permission-group">
         <span class="group-type">(other)</span>
-        <input type="checkbox" id="or"/><label for="or">r</label>
-        <input type="checkbox" id="ow"/><label for="ow">w</label>
-        <input type="checkbox" id="ox"/><label for="ox">x</label>
+        <input type="checkbox" name="other_bits[]" value="4" id="or"/><label for="or">r</label>
+        <input type="checkbox" name="other_bits[]" value="2" id="ow"/><label for="ow">w</label>
+        <input type="checkbox" name="other_bits[]" value="1" id="ox"/><label for="ox">x</label>
       </div>
     </div>
     <div class="field">
@@ -79,7 +79,7 @@ include '_header.php';
     <div class="action">
       <input type="submit" name="submit" value="Save page"/>
       <input type="submit" name="submit" value="Show preview"/>
-      <a href="#">Cancel</a>
+      <a href="javascript: history.go(-1);">Cancel</a>
     </div>
   </fieldset>
 </form>

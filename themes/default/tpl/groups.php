@@ -12,6 +12,7 @@ include '_header.php';
 <?php foreach ($groups as $group): ?>
   <dt>
     <?php echo $group->getName(); ?>
+    (<?php echo $group->countMemberships(); ?> <?php echo fGrammar::inflectOnQuantity($group->countMemberships(), 'member'); ?>)
     <a class="remove" href="#">(remove)</a>
     <form action="<?php echo wiki_destroy_group_path($group->getId()); ?>" method="post"></form>
   </dt>

@@ -1,11 +1,6 @@
 -- phpMyAdmin SQL Dump
 -- version 3.2.4
 -- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Feb 08, 2012 at 03:52 AM
--- Server version: 5.1.44
--- PHP Version: 5.3.1
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -149,7 +144,6 @@ CREATE TABLE IF NOT EXISTS `revisions` (
 CREATE TABLE IF NOT EXISTS `themes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `path` varchar(500) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),

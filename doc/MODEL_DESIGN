@@ -56,8 +56,8 @@ memberships # since user model is not included in this app, we transform the rel
 
 themes  # themes are installed from filesystem
   id
-  name  # human-readable name
-  path  # location in the filesystem, e.g. /var/lib/wiki-themes/default
+  name  # machine-readable name
+        # location in the filesystem: phpwiki/themes/$name
   created_at
   updated_at
   

@@ -9,5 +9,14 @@ try {
 } catch (fNotFoundException $e) {
   $title = $lang['New Page'];
   $theme_path = wiki_theme_path(DEFAULT_THEME);
+  $page_title = wiki_guess_title_from_slug($slug);
+  $page_path = $slug;
+  $body = '';
+  $markup = '';
+  $page_theme = '';
+  $owner_bits = 7;
+  $group_bits = 7;
+  $other_bits = 0;
+  $summary = '';
   include wiki_theme(DEFAULT_THEME, 'new-page');
 }

@@ -62,3 +62,19 @@ function wiki_enabled_markup_names()
 {
   return array('MediaWiki', 'Markdown', 'HTML', 'Plain Text');
 }
+
+function wiki_is_valid_markup_name($markup_name)
+{
+  return in_array($markup_name, wiki_enabled_markup_names());
+}
+
+function wiki_guess_title_from_slug($slug)
+{
+  // TODO
+  return $slug;
+}
+
+function wiki_bit_checked_helper($bits, $mask)
+{
+  return ($bits & $mask) > 0 ? ' checked' : '';
+}

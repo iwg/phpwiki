@@ -42,6 +42,11 @@ function wiki_new_page_path($slug = '')
   return SITE_BASE . '/new-page.php?slug=' . $slug;
 }
 
+function wiki_create_page_path()
+{
+  return SITE_BASE . '/create-page.php';
+}
+
 function wiki_new_link_path($slug = '')
 {
   if (empty($slug)) {

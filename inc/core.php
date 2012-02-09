@@ -52,3 +52,13 @@ function wiki_is_theme_enabled($theme_name)
     return false;
   }
 }
+
+function wiki_enabled_theme_names()
+{
+  return array_filter(wiki_list_theme_names(), 'wiki_is_theme_enabled');
+}
+
+function wiki_enabled_markup_names()
+{
+  return array('MediaWiki', 'Markdown', 'HTML', 'Plain Text');
+}

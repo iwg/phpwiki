@@ -11,7 +11,7 @@ $lang = array(
   'Themes' => 'Themes',
   'theme enabled successfully' => 'Theme is enabled successfully.',
   'theme disabled successfully' => 'Theme is disabled successfully.',
-  'Management' => 'Management',
+  'Dashboard' => 'Dashboard',
   'General' => 'General',
   'Discussion' => 'Discussion',
   'Documentation' => 'Documentation',
@@ -19,4 +19,5 @@ $lang = array(
   'Issues' => 'Issues',
   'New Page' => 'New Page',
   'New Link' => 'New Link',
+  'Home' => 'Home',
 );

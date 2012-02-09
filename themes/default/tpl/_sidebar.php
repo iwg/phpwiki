@@ -1,7 +1,8 @@
 <ul id="sidebar-items">
   <li>
-    <h3><?php echo $lang['Management']; ?></h3>
+    <h3><?php echo $lang['Dashboard']; ?></h3>
     <ul class="links">
+      <li><a href="<?php echo SITE_BASE; ?>"><?php echo $lang['Home']; ?></a></li>
       <li><a href="<?php echo wiki_new_page_path(); ?>"><?php echo $lang['New Page']; ?></a></li>
       <li><a href="<?php echo wiki_new_link_path(); ?>"><?php echo $lang['New Link']; ?></a></li>
       <li><a href="<?php echo wiki_groups_path(); ?>"><?php echo $lang['Groups']; ?></a></li>

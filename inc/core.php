@@ -89,3 +89,8 @@ function wiki_get_current_user()
   // TODO
   return "xjia";
 }
+
+function wiki_render_markdown($text)
+{
+  return Markdown($text);
+}

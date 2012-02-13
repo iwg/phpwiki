@@ -13,6 +13,6 @@ class Revision extends fActiveRecord
   public function show()
   {
     // TODO
-    echo "<PRE>" . $this->getBody() . "</PRE>";
+    echo wiki_render_markdown($this->getBody());
   }
 }

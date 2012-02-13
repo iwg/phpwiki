@@ -2,7 +2,11 @@
             </div>
             <div class="post-meta">
               <div class="topic_nav">
-                <!-- TODO: $page->getSidebar()->getLatestRevision()->show() -->
+                <?php
+                  try {
+                    $page->getSidebar()->getLatestRevision()->show();
+                  } catch (Exception $e) {}
+                ?>
               </div>
             </div>
           </div>

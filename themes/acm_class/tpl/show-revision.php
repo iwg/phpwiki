@@ -4,7 +4,9 @@ $js = array('jquery');
 include '_header.php';
 ?>
 
-<h1>Hello</h1>
+<h1><?php echo $revision->getTitle(); ?></h1>
+
+<?php $revision->show(); ?>
 
 <?php
 include '_footer.php';

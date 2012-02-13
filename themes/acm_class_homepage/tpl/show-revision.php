@@ -4,7 +4,7 @@ $js = array('jquery', 'cycle', 'site');
 include '_header.php';
 ?>
 
-<h1>Hello</h1>
+<?php $revision->show(); ?>
 
 <?php
 include '_footer.php';

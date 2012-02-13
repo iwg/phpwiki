@@ -8,4 +8,18 @@ class Page extends fActiveRecord
   {
     fORMRelated::setOrderBys($this, 'Revision', array('revisions.created_at' => 'desc'));
   }
+  
+  public function getLatestRevision()
+  {
+    $revisions = $this->buildRevisions();
+    if ($revisions->count()) {
+      return $revisions->getRecord(0);
+    }
+    throw new Exception('Page does not have any revisions (database is inconsistency).');
+  }
+  
+  public function getSidebar()
+  {
+    return new Page(array('path' => $this->getPath() . ':sidebar'));
+  }
 }

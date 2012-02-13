@@ -17,9 +17,4 @@ class Page extends fActiveRecord
     }
     throw new Exception('Page does not have any revisions (database is inconsistent).');
   }
-  
-  public function getSidebar()
-  {
-    return new Page(array('path' => $this->getPath() . ':sidebar'));
-  }
 }

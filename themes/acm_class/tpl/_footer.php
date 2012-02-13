@@ -4,7 +4,7 @@
               <div class="topic_nav">
                 <?php
                   try {
-                    $page->getSidebar()->getLatestRevision()->show();
+                    theme_helper_get_page_sidebar($page)->getLatestRevision()->show();
                   } catch (Exception $e) {}
                 ?>
               </div>

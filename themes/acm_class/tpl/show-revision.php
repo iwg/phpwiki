@@ -1,4 +1,5 @@
 <?php
+include '_helper.php';
 $css = array('topic_nav');
 $js = array('jquery');
 include '_header.php';

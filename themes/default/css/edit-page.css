@@ -1,0 +1,12 @@
+#edit-page fieldset { margin: 15px 0; padding: 5px; background: #eee; border: 1px solid #ccc; border-radius: 3px; }
+#edit-page legend { padding: 0.2em 0.5em; background: #fff; border: 1px solid #ccc; color: #333; font-size: 90%; text-align: left; border-radius: 3px; }
+#edit-page .field { margin: 10px 0; }
+#edit-page .action { margin: 20px 10px 10px 10px; }
+#edit-page .action * { margin-left: 10px; }
+#edit-page label { display: inline-block; width: 80px; text-align: right; }
+#edit-page #title { width: 490px; }
+#edit-page #body { width: 585px; margin-left: 5px; height: 300px; border: 1px solid #ccc; border-radius: 3px; }
+#edit-page .permission-group { display: inline; margin-right: 20px; }
+#edit-page .permission-group label { width: 10px; text-align: left; }
+#edit-page #summary { width: 490px; }
+#edit-page label.checkbox-text { width: 200px; text-align: left; }

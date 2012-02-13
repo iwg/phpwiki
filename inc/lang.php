@@ -21,4 +21,5 @@ $lang = array(
   'New Page' => 'New Page',
   'New Link' => 'New Link',
   'Home' => 'Home',
+  'Edit Page' => 'Edit Page',
 );

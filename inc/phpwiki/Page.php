@@ -17,4 +17,19 @@ class Page extends fActiveRecord
     }
     throw new Exception('Page does not have any revisions (database is inconsistent).');
   }
+  
+  public function getOwnerBits()
+  {
+    return $this->getPermission() / 100;
+  }
+  
+  public function getGroupBits()
+  {
+    return ($this->getPermission() % 100) / 10;
+  }
+  
+  public function getOtherBits()
+  {
+    return $this->getPermission() % 10;
+  }
 }

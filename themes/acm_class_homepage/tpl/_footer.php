@@ -9,11 +9,7 @@
     <p class="part-1">
       Powered by <a class="b" target="_blank" href="https://github.com/oipn4e2/phpwiki">phpwiki</a>
       |
-      Edit
-      |
-      Login
-      |
-      Logout
+      <a href="<?php echo wiki_edit_page_path($page->getId()); ?>">Edit</a>
     </p>
     <p class="part-2">
       Copyright &copy; 2002-<?php echo date('Y'); ?> <a href="<?php echo SITE_BASE; ?>">ACM Class</a>. All rights reserved.

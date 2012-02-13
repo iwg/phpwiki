@@ -50,6 +50,16 @@ function wiki_create_page_path($slug = '')
   return SITE_BASE . '/create-page.php?slug=' . $slug;
 }
 
+function wiki_edit_page_path($page_id)
+{
+  return SITE_BASE . '/edit-page.php?id=' . $page_id;
+}
+
+function wiki_update_page_path($page_id)
+{
+  return SITE_BASE . '/update-page.php?id=' . $page_id;
+}
+
 function wiki_new_link_path($slug = '')
 {
   if (empty($slug)) {

@@ -12,7 +12,7 @@ try {
 
 try {
   $revision = $page->getLatestRevision();
-  $theme = new Theme($revision->getThemeId());
+  $theme = $revision->getTheme();
   $title = $revision->getTitle();
   $theme_path = wiki_theme_path($theme->getName());
   include wiki_theme($theme->getName(), 'show-revision');

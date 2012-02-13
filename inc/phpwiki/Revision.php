@@ -5,6 +5,11 @@ class Revision extends fActiveRecord
   {
   }
   
+  public function getTheme()
+  {
+    return new Theme($this->getThemeId());
+  }
+  
   public function show()
   {
     // TODO

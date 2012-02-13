@@ -15,7 +15,7 @@ class Page extends fActiveRecord
     if ($revisions->count()) {
       return $revisions->getRecord(0);
     }
-    throw new Exception('Page does not have any revisions (database is inconsistency).');
+    throw new Exception('Page does not have any revisions (database is inconsistent).');
   }
   
   public function getSidebar()

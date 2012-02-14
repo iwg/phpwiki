@@ -13,6 +13,21 @@ pages
   
   `path:string owner_name:string group_id:integer permission:integer type:integer`
 
+previews
+  id
+  path
+  owner_name
+  group_id
+  permission
+  title
+  body
+  markup_name
+  theme_id
+  created_at
+  updated_at
+  
+  `path:string owner_name:string group_id:integer permission:integer title:string body:text markup_name:string theme_id:integer`
+
 revisions
   id
   page_id

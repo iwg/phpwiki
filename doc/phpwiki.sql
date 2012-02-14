@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 INSERT INTO `groups` (`id`, `name`, `created_at`, `updated_at`) VALUES
 (1, 'root', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `memberships` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `group_id_2` (`group_id`,`user_name`),
   KEY `group_id` (`group_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `pages` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `pages` (
   UNIQUE KEY `path` (`path`),
   KEY `group_id` (`group_id`),
   KEY `owner_name` (`owner_name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `previews` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `revisions` (
   PRIMARY KEY (`id`),
   KEY `page_id` (`page_id`),
   KEY `theme_id` (`theme_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `themes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `themes` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 ALTER TABLE `hyperlinks`
   ADD CONSTRAINT `hyperlinks_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE;

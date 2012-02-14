@@ -1,3 +1,6 @@
+An Enterprise Wiki in PHP
+==========================
+
 Page Locking
 -------------
 See [how DokuWiki do it](http://www.dokuwiki.org/locking). We will do it similarly. 

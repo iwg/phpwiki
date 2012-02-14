@@ -1,6 +1,11 @@
 An Enterprise Wiki in PHP
 ==========================
 
+Markup Language
+----------------
+- Provide a subset of MediaWiki syntax
+- Utilize [Pandoc](http://johnmacfarlane.net/pandoc/) for migrating markups
+
 Page Locking
 -------------
 See [how DokuWiki do it](http://www.dokuwiki.org/locking). We will do it similarly. 

@@ -1,9 +1,9 @@
 .remove { position: absolute; top: 50%; right: 5px; margin-top: -9px; width: 18px; height: 18px; text-indent: -9999px; text-decoration: none; background: url('../img/close_pill.png') 0 0 no-repeat; }
 .remove:hover { background-position: 0 -50px; }
 .groups dt { position: relative; min-height: 24px; line-height: 24px; font-size: 12px; margin: 10px 0 5px 0; padding: 4px 5px 4px 10px; background: #ddd; color: #333; border: 1px solid #ddd; border-radius: 3px; }
-.memberships span.username { display: block; width: 80px; overflow: hidden; }
+.memberships span.username { display: block; width: 100px; overflow: hidden; }
 input.name { border: 1px solid #bbb; border-radius: 3px; outline: none; }
-.memberships input.username { width: 70px; }
-.memberships li { float: left; position: relative; min-height: 24px; line-height: 24px; font-size: 12px; width: 100px; margin: 4px 5px; padding: 4px 5px; background: #eee; color: #333; border: 1px solid #ddd; border-radius: 3px; }
+.memberships input.username { width: 90px; }
+.memberships li { float: left; position: relative; min-height: 24px; line-height: 24px; font-size: 12px; width: 120px; margin: 4px 5px; padding: 4px 5px; background: #eee; color: #333; border: 1px solid #ddd; border-radius: 3px; }
 .memberships li .add { position: absolute; top: 50%; right: 5px; margin-top: -9px; width: 18px; height: 18px; text-indent: -9999px; text-decoration: none; background: url('../img/add_pill.png') 0 0 no-repeat; }
 .memberships li .add:hover { background-position: 0 -50px; }

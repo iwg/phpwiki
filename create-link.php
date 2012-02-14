@@ -8,6 +8,7 @@ if (fRequest::isPost()) {
     $owner_bits = array_sum(fRequest::get('owner_bits', 'integer[]'));
     $group_bits = array_sum(fRequest::get('group_bits', 'integer[]'));
     $other_bits = array_sum(fRequest::get('other_bits', 'integer[]'));
+    $overwrite = fRequest::get('overwrite', 'boolean');
     
     if (empty($dest)) {
       throw new fValidationException('Destination cannot be blank.');
@@ -26,6 +27,10 @@ if (fRequest::isPost()) {
     if ($submit == 'Save link') {
       try {
         $db->query('BEGIN');
+        
+        if ($overwrite) {
+          wiki_remove_page_by_path($db, $page_path);
+        }
         
         $page = new Page();
         $page->setPath($page_path);

@@ -52,6 +52,11 @@ include '_header.php';
         <label for="ox">x</label>
       </div>
     </div>
+    <div class="field">
+      <label><!-- placeholder --></label>
+      <input type="checkbox" name="overwrite" value="1" id="overwrite"<?php if ($overwrite) echo ' checked'; ?>/>
+      <label class="checkbox-text" for="overwrite">Overwrite if path already exists</label>
+    </div>
     <div class="action">
       <input type="submit" name="submit" value="Save link"/>
       <a href="javascript: history.go(-1);">Cancel</a>

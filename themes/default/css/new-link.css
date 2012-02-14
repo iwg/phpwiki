@@ -8,3 +8,4 @@
 #new-link #dest { width: 600px; }
 #new-link .permission-group { display: inline; margin-right: 20px; }
 #new-link .permission-group label { width: 10px; text-align: left; }
+#new-link label.checkbox-text { width: 300px; text-align: left; }

@@ -99,3 +99,8 @@ function wiki_clear_previous_previews($db, $path, $user)
 {
   $db->translatedExecute('DELETE FROM previews WHERE path=%s AND owner_name=%s', $path, $user);
 }
+
+function wiki_remove_page_by_path($db, $path)
+{
+  $db->translatedExecute('DELETE FROM pages WHERE path=%s', $path);
+}

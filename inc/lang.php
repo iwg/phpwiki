@@ -22,4 +22,6 @@ $lang = array(
   'New Link' => 'New Link',
   'Home' => 'Home',
   'Edit Page' => 'Edit Page',
+  'link created successfully' => 'Link is created successfully.',
+  'preview created successfully' => 'Preview is created successfully.',
 );

@@ -7,3 +7,4 @@ include($phpwiki_root . 'Theme.php');
 include($phpwiki_root . 'Page.php');
 include($phpwiki_root . 'Revision.php');
 include($phpwiki_root . 'Preview.php');
+include($phpwiki_root . 'Hyperlink.php');

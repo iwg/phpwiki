@@ -32,4 +32,14 @@ class Page extends fActiveRecord
   {
     return $this->getPermission() % 10;
   }
+  
+  public function isNormal()
+  {
+    return $this->getType() == self::NORMAL;
+  }
+  
+  public function isHyperlink()
+  {
+    return $this->getType() == self::HYPERLINK;
+  }
 }

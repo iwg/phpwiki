@@ -10,6 +10,16 @@ try {
   fURL::redirect(wiki_new_page_path($slug));
 }
 
+if ($page->isHyperlink()) {
+  try {
+    $hyperlink = new Hyperlink(array('page_id' => $page->getId()));
+    fURL::redirect($hyperlink->getUrl());
+  } catch (fNotFoundException $e) {
+    // TODO fatal error
+    exit;
+  }
+}
+
 try {
   $revision = $page->getLatestRevision();
   $theme = $revision->getTheme();
@@ -18,4 +28,5 @@ try {
   include wiki_theme($theme->getName(), 'show-revision');
 } catch (Exception $e) {
   // TODO fatal error
+  exit;
 }

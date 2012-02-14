@@ -65,12 +65,14 @@ function wiki_show_preview_path($preview_id)
   return SITE_BASE . '/show-preview.php?id=' . $preview_id;
 }
 
-function wiki_new_link_path($slug = '')
+function wiki_new_link_path()
 {
-  if (empty($slug)) {
-    return SITE_BASE . '/new-link.php';
-  }
-  return SITE_BASE . '/new-link.php?slug=' . $slug;
+  return SITE_BASE . '/new-link.php';
+}
+
+function wiki_create_link_path()
+{
+  return SITE_BASE . '/create-link.php';
 }
 
 function wiki_create_membership_path($group_id)

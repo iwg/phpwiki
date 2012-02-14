@@ -77,7 +77,7 @@ if (fRequest::isPost()) {
         
         $db->query('COMMIT');
         
-        $preview_message = 'Preview is created successfully. <a target="_blank" href="' . wiki_show_preview_path($preview->getId()) . '">Click here</a>';
+        $preview_message = $lang['preview created successfully'] . ' <a target="_blank" href="' . wiki_show_preview_path($preview->getId()) . '">Click here</a>';
         
         fMessaging::create('success', 'edit page', $preview_message);
         $title = $lang['Edit Page'];

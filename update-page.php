@@ -61,6 +61,8 @@ if (fRequest::isPost()) {
       try {
         $db->query('BEGIN');
         
+        wiki_clear_previous_previews($db, $page_path, wiki_get_current_user());
+        
         $preview = new Preview();
         $preview->setPath($page_path);
         $preview->setOwnerName(wiki_get_current_user());

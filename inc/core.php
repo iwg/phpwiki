@@ -94,3 +94,8 @@ function wiki_render_markdown($text)
 {
   return Markdown($text);
 }
+
+function wiki_clear_previous_previews($db, $path, $user)
+{
+  $db->translatedExecute('DELETE FROM previews WHERE path=%s AND owner_name=%s', $path, $user);
+}

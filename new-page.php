@@ -8,7 +8,7 @@ try {
   fURL::redirect(SITE_BASE . $slug);
 } catch (fNotFoundException $e) {
   $page_title = wiki_guess_title_from_slug($slug);
-  $page_path = $slug;
+  $page_path = empty($slug) ? '/' : $slug;
   $body = '';
   $markup = '';
   $page_theme = '';

@@ -60,6 +60,11 @@ function wiki_update_page_path($page_id)
   return SITE_BASE . '/update-page.php?id=' . $page_id;
 }
 
+function wiki_show_preview_path($preview_id)
+{
+  return SITE_BASE . '/show-preview.php?id=' . $preview_id;
+}
+
 function wiki_new_link_path($slug = '')
 {
   if (empty($slug)) {

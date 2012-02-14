@@ -18,7 +18,7 @@ include '_header.php';
     <div class="field">
       <label for="path">Page URL:</label>
       <?php if (empty($slug)): ?>
-        <span class="monofont"><?php echo HOST_URL . SITE_BASE; ?>/</span><input class="monofont" type="text" id="path" name="path" value="<?php echo $page_path; ?>"/>
+        <span class="monofont"><?php echo HOST_URL . SITE_BASE; ?>/</span><input class="monofont" type="text" id="path" name="path" value="<?php echo substr($page_path, 1); ?>"/>
       <?php else: ?>
         <span class="monofont"><?php echo HOST_URL . SITE_BASE . $slug; ?></span>
         <input type="hidden" name="path" value="<?php echo substr($slug, 1); ?>"/>

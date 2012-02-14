@@ -58,8 +58,33 @@ if (fRequest::isPost()) {
         throw $e;
       }
     } else if ($submit == 'Show preview') {
-      // TODO
-      throw new fValidationException('Cannot show preview now.');
+      try {
+        $db->query('BEGIN');
+        
+        $preview = new Preview();
+        $preview->setPath($page_path);
+        $preview->setOwnerName(wiki_get_current_user());
+        $preview->setGroupId($page->getGroupId());
+        $preview->setPermission($owner_bits . $group_bits . $other_bits);
+        $preview->setTitle($page_title);
+        $preview->setBody($body);
+        $preview->setMarkupName($markup);
+        $preview->setThemeId($theme->getId());
+        $preview->setCreatedAt(now());
+        $preview->store();
+        
+        $db->query('COMMIT');
+        
+        $preview_message = 'Preview is created successfully. <a target="_blank" href="' . wiki_show_preview_path($preview->getId()) . '">Click here</a>';
+        
+        fMessaging::create('success', 'edit page', $preview_message);
+        $title = $lang['Edit Page'];
+        $theme_path = wiki_theme_path(DEFAULT_THEME);
+        include wiki_theme(DEFAULT_THEME, 'edit-page');
+      } catch (fException $e) {
+        $db->query('ROLLBACK');
+        throw $e;
+      }
     } else {
       throw new fValidationException('Invalid submit action.');
     }

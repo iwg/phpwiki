@@ -3,7 +3,7 @@ An Enterprise Wiki in PHP
 
 Markup Language
 ----------------
-- Provide a subset of MediaWiki syntax
+- Provide a subset of MediaWiki syntax (considering to use [Mediawiki2HTML machine](http://johbuc6.coconia.net/doku.php/mediawiki2html_machine/code))
 - Utilize [Pandoc](http://johnmacfarlane.net/pandoc/) for migrating markups
 
 Page Locking

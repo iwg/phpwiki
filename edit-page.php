@@ -8,7 +8,6 @@ try {
   $page_title = $revision->getTitle();
   $page_path = $page->getPath();
   $body = $revision->getBody();
-  $markup = $revision->getMarkupName();
   $page_theme = $revision->getTheme()->getName();
   $owner_bits = $page->getOwnerBits();
   $group_bits = $page->getGroupBits();

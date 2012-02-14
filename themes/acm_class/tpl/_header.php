@@ -41,4 +41,4 @@
         <div class="newspaper">
           <div id="blog-post">
             <div class="post-content">
-              <div class="zh_page_body <?php echo wiki_slugify($revision->getMarkupName()); ?>">
+              <div class="zh_page_body">

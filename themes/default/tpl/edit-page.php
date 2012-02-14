@@ -26,17 +26,6 @@ include '_header.php';
       <textarea class="monofont" id="body" name="body"><?php echo $body; ?></textarea>
     </div>
     <div class="field">
-      <label for="markup">Markup:</label>
-      <select id="markup" name="markup">
-        <option value="<?php echo $markup; ?>"><?php echo $markup; ?></option>
-        <?php foreach (wiki_enabled_markup_names() as $name): ?>
-          <?php if ($name != $markup): ?>
-            <option value="<?php echo $name; ?>"><?php echo $name; ?></option>
-          <?php endif; ?>
-        <?php endforeach; ?>
-      </select>
-    </div>
-    <div class="field">
       <label for="theme">Theme:</label>
       <select id="theme" name="theme">
         <option value="<?php echo $page_theme; ?>"><?php echo $page_theme; ?></option>

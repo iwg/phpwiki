@@ -10,7 +10,6 @@ try {
   $page_title = wiki_guess_title_from_slug($slug);
   $page_path = empty($slug) ? '/' : $slug;
   $body = '';
-  $markup = '';
   $page_theme = '';
   $owner_bits = 7;
   $group_bits = 7;

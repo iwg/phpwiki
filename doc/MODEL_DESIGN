@@ -21,19 +21,17 @@ previews
   permission
   title
   body
-  markup_name
   theme_id
   created_at
   updated_at
   
-  `path:string owner_name:string group_id:integer permission:integer title:string body:text markup_name:string theme_id:integer`
+  `path:string owner_name:string group_id:integer permission:integer title:string body:text theme_id:integer`
 
 revisions
   id
   page_id
   title
   body
-  markup_name # human-readable name such as 'Markdown', 'MediaWiki', 'HTML', etc.
   theme_id
   is_minor_edit
   editor_name
@@ -41,7 +39,7 @@ revisions
   created_at
   updated_at
   
-  `page_id:integer title:string body:text markup_name:string theme_id:integer is_minor_edit:boolean editor_name:string commit_message:text`
+  `page_id:integer title:string body:text theme_id:integer is_minor_edit:boolean editor_name:string commit_message:text`
 
 hyperlinks
   id

@@ -26,7 +26,6 @@ class Preview extends fActiveRecord
     $revision->setPageId(0);
     $revision->setTitle($this->getTitle());
     $revision->setBody($this->getBody());
-    $revision->setMarkupName($this->getMarkupName());
     $revision->setThemeId($this->getThemeId());
     $revision->setIsMinorEdit(false);
     $revision->setEditorName($this->getOwnerName());

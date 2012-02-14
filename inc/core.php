@@ -58,16 +58,6 @@ function wiki_enabled_theme_names()
   return array_filter(wiki_list_theme_names(), 'wiki_is_theme_enabled');
 }
 
-function wiki_enabled_markup_names()
-{
-  return array('MediaWiki', 'Markdown', 'HTML', 'Plain Text');
-}
-
-function wiki_is_valid_markup_name($markup_name)
-{
-  return in_array($markup_name, wiki_enabled_markup_names());
-}
-
 function wiki_guess_title_from_slug($slug)
 {
   // TODO

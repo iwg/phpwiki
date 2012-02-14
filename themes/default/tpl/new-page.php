@@ -1,7 +1,7 @@
 <?php
 fSession::open();
 $css = array('main', 'new-page');
-$js = array('jquery');
+$js = array('sugar', 'jquery');
 include '_header.php';
 ?>
 

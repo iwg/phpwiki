@@ -2,3 +2,4 @@
 $plugins_root = __DIR__ . '/plugins/';
 
 include($plugins_root . 'markdown.php');
+include($plugins_root . 'mediawiki.php');

@@ -1,209 +1,58 @@
 <?php
 function wiki_render_markup($title, $text)
 {
-  $html = $text;
-  $html = html_entity_decode($html);
-  $html = str_replace('&ndash;', '-', $html);
-  $html = str_replace('&quot;', '"', $html);
-  $html = preg_replace('/\&amp;(nbsp);/', '&${1};', $html);
+  $html = $text."\n"; // ensure the last line ends
+  $html = str_replace("\r\n", "\n", $html);
+  $html = str_replace("\r", "\n", $html);
   
-  $html = str_replace('{{PAGENAME}}', $title, $html);
+  // bold
+  $html = preg_replace('/\'\'\'([^\'\n]+)\'\'\'/', '<b>${1}</b>', $html);
+  // italic
+  $html = preg_replace('/\'\'([^\'\n]+)\'\'?/', '<i>${1}</i>', $html);
   
-  $html = wiki_render_convert_tables($html);
-  $html = wiki_render_simple_text($html);
+  // TODO process image and file links here so internal links can have namespace colons (:)
   
-  return $html;
-}
-
-function wiki_render_simple_text($html)
-{
-  $html = str_replace('&ndash;', '-', $html);
-	$html = str_replace('&quot;', '"', $html);
-	$html = preg_replace('/\&amp;(nbsp);/', '&${1};', $html);
-	
-	//formatting
-	// bold
-	$html = preg_replace('/\'\'\'([^\n\']+)\'\'\'/', '<strong>${1}</strong>', $html);
-	// emphasized
-	$html = preg_replace('/\'\'([^\'\n]+)\'\'?/', '<em>${1}</em>', $html);
-	//interwiki links
-	$html = preg_replace_callback('/\[\[([^\|\n\]:]+)[\|]([^\]]+)\]\]/', 'wiki_render_helper_interwikilinks', $html);
-	// without text
-	$html = preg_replace_callback('/\[\[([^\|\n\]:]+)\]\]/', 'wiki_render_helper_interwikilinks', $html);
-	// 
-	//$html = preg_replace('/{{([^}]+)+}}/','Interwiki: ${1}+${2}+${3}',$html);
-	$html = preg_replace('/{{([^\|\n\}]+)([\|]?([^\}]+))+\}\}/', 'Interwiki: ${1} &raquo; ${3}', $html);
-	// Template
-	//$html = preg_replace('/{{([^}]*)}}/',' ',$html);
-	// categories
-	//$html = preg_replace('/\[\[([^\|\n\]]+)([\|]([^\]]+))?\]\]/','',$html);
-	$html = preg_replace('/\[\[([^\|\n\]]{2})([\:]([^\]]+))?\]\]/', 'Translation: ${1} &raquo; ${3}', $html);
-	$html = preg_replace('/\[\[([^\|\n\]]+)([\:]([^\]]+))?\]\]/', 'Category: ${1} - ${2}', $html);
-	// image
-	$html = preg_replace('/\[\[([^\|\n\]]+)([\|]([^\]]+))+\]\]/', 'Image: ${0}+${1}+${2}+${3}', $html);
-	
-	//links
-	$html = preg_replace_callback('/\[([^\[\]\|\n\': ]+)\]/', 'wiki_render_helper_externlinks', $html);
-	// with text
-	$html = preg_replace_callback('/\[([^\[\]\|\n\' ]+)[\| ]([^\]\']+)\]/', 'wiki_render_helper_externlinks', $html);
-	
-	// allowed tags
-	$html = preg_replace('/&lt;(\/?)(small|sup|sub|u)&gt;/', '<${1}${2}>', $html);
-	
-	$html = preg_replace('/\n*&lt;br *\/?&gt;\n*/', "\n", $html);
-	$html = preg_replace('/&lt;(\/?)(math|pre|code|nowiki)&gt;/', '<${1}pre>', $html);
-	$html = preg_replace('/&lt;!--/', '<!--', $html);
-	$html = preg_replace('/--&gt;/', ' -->', $html);
-	
-	// headings
-	for ($i = 7; $i > 0; $i--) {
+  // internal links with text
+  $html = preg_replace_callback('/\[\[([^|\n\]]+)[|]([^|\n\]]+)\]\]/', 'wiki_render_internal_link_with_text', $html);
+  // internal links without text
+  $html = preg_replace_callback('/\[\[([^|\n\]]+)\]\]/', 'wiki_render_internal_link_without_text', $html);
+  
+  // headings
+	for ($i = 6; $i >= 2; $i--) {
 		$html = preg_replace(
-			'/\n+[=]{'.$i.'}([^=]+)[=]{'.$i.'}\n*/',
-			'<h'.$i.'>${1}</h'.$i.'>',
+			'/[=]{'.$i.'}([^=]+)[=]{'.$i.'}\n(\n+)/',
+			'<h'.$i.'>${1}</h'.$i.'>${2}',
 			$html
 		);
 	}
 	
-	//lists
-	$html = preg_replace(
-		'/(\n[ ]*[^#* ][^\n]*)\n(([ ]*[*]([^\n]*)\n)+)/',
-		'${1}<ul>'."\n".'${2}'.'</ul>'."\n",
-		$html
-	);
-	$html = preg_replace(
-		'/(\n[ ]*[^#* ][^\n]*)\n(([ ]*[#]([^\n]*)\n)+)/',
-		'${1}<ol>'."\n".'${2}'.'</ol>'."\n",
-		$html
-	);
-	$html = preg_replace('/\n[ ]*[\*#]+([^\n]*)/', '<li>${1}</li>', $html);
+	// natural line breaks
+	$html = preg_replace('/\n\n+/', "\n<br/>\n", $html);
 	
+	// lists
+	$html = preg_replace('/((^\s*[*#]+[^\n]*$\n)+)/m', '<pre>${1}</pre>', $html);
+	// TODO change them to real lists
+	
+	// horizontal rule
 	$html = preg_replace('/----/', '<hr/>', $html);
-  
-	//$html = nl2br($html);
-	// line breaks
-	$html = preg_replace('/[\n\r]{4}/', "<br/><br/>", $html);
-	$html = preg_replace('/[\n\r]{2}/', "<br/>", $html);
 	
-	$html = preg_replace('/[>]<br\/>[<]/', "><", $html);
+	// remove redundant line breaks
+	$html = preg_replace('/[>]<br\/>([\n]?)[<]/', '>${1}<', $html);
   
-	return $html;
+  return $html;
 }
 
-function wiki_render_helper_externlinks($matches)
+function wiki_render_internal_link_with_text($matches)
 {
-  $target = $matches[1];
-  $text = empty($matches[2]) ? $matches[1] : $matches[2];
-  return '<a target="_blank" href="'.$target.'">'.$text.'</a>';
+  $path = $matches[1];
+  $target = SITE_BASE.'/'.$path;
+  $text = $matches[2];
+  return '<a href="'.$target.'">'.$text.'</a>';
 }
 
-function wiki_render_helper_interwikilinks($matches)
+function wiki_render_internal_link_without_text($matches)
 {
-	$target = $matches[1];
-	$text = empty($matches[2]) ? $matches[1] : $matches[2];
-	$klass = " class=\"dunno\" ";
-	/*static $links_checked_interwiki = 0;
-	if (!$_GET["nocache"] && ++$links_checked_interwiki < 10) {
-		$data = cachedFunc("getPos", $target);
-		if ($data["pos"]) $klass = " class=\"exists\" "; $klass = " class=\"notexists\" ";
-	}*/
-	return '<a '.$klass.' href="?page='.$target.'">'.$text.'</a>';
-}
-
-function wiki_render_convert_tables($text)
-{
-	$lines = explode("\n", $text);
-	$innertable = 0;
-	$innertabledata = array();
-	foreach ($lines as $line) {
-		//echo "<pre>".++$i.": ".htmlspecialchars($line)."</pre>";
-		$line = str_replace("position:relative", "", $line);
-		$line = str_replace("position:absolute", "", $line);
-		if (substr($line, 0, 2) == '{|') {
-			// inner table
-			//echo "<p>beginning inner table #$innertable</p>";
-			$innertable++;
-		}
-		$innertabledata[$innertable] .= $line."\n";
-		if ($innertable) {
-			// we're inside
-			if (substr($line, 0, 2) == '|}') {
-				$innertableconverted = wiki_render_convert_table($innertabledata[$innertable]);
-				$innertabledata[$innertable] = "";
-				$innertable--;
-				$innertabledata[$innertable] .= $innertableconverted."\n";
-			}
-		}
-	}
-	return $innertabledata[0];
-}
-
-function wiki_render_convert_table($intext)
-{
-	$text = $intext;
-	$lines = explode("\n", $text);
-	$intable = false;
-	
-	//var_dump($lines);
-	foreach ($lines as $line) {
-		$line = trim($line);
-		if (substr($line, 0, 1) == '{') {
-			//begin of the table
-			$stuff = explode('| ', substr($line, 1), 2);
-			$tableopen = true;
-			$table = "<table ".$stuff[0].">\n";
-		} else if (substr($line, 0, 1) == '|') {
-			// table related
-			$line = substr($line, 1);
-			if (substr($line, 0, 5) == '-----') {
-				// row break
-				if ($thopen)  $table .="</th>\n";
-				if ($tdopen)  $table .="</td>\n";
-				if ($rowopen) $table .="\t</tr>\n";
-				$table .= "\t<tr>\n";
-				$rowopen = true;
-				$tdopen = false;
-				$thopen = false;
-			} else if (substr($line, 0, 1) == '}') {
-				// table end
-				break;
-			} else {
-				// td
-				$stuff = explode('| ', $line, 2);
-				if ($tdopen) {
-					$table .="</td>\n";
-				}
-				if (count($stuff) == 1) {
-					$table .= "\t\t<td>" . wiki_render_simple_text($stuff[0]);
-				} else {
-					$table .= "\t\t<td ".$stuff[0].">" . wiki_render_simple_text($stuff[1]);
-				}
-				$tdopen = true;
-			}
-		} else if (substr($line, 0, 1) == '!') {
-			// th
-			$stuff = explode('| ', substr($line, 1), 2);
-			if ($thopen) {
-				$table .="</th>\n";
-			}
-			if (count($stuff) == 1) {
-				$table .= "\t\t<th>" . wiki_render_simple_text($stuff[0]);
-			} else {
-				$table .= "\t\t<th ".$stuff[0].">" . wiki_render_simple_text($stuff[1]);
-			}
-			$thopen = true;
-		} else {
-			// plain text
-			$table .= wiki_render_simple_text($line) . "\n";
-		}
-		//echo "<pre>".++$i.": ".htmlspecialchars($line)."</pre>";
-		//echo "<p>Table so far: <pre>".htmlspecialchars($table)."</pre></p>";
-	}
-	if ($thopen)  $table .="</th>\n";
-	if ($tdopen)  $table .="</td>\n";
-	if ($rowopen) $table .="\t</tr>\n";
-	if ($tableopen) $table .="</table>\n";
-	//echo "<hr />";
-	//echo "<p>Table at the end: <pre>".htmlspecialchars($table)."</pre></p>";
-	//echo $table;	
-	return $table;
+  $path = $matches[1];
+  $target = SITE_BASE.'/'.$path;
+  return '<a href="'.$target.'">'.$path.'</a>';
 }

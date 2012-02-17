@@ -4,8 +4,8 @@
 #new-link .action { margin: 20px 10px 10px 10px; }
 #new-link .action * { margin-left: 10px; }
 #new-link label { display: inline-block; width: 85px; text-align: right; }
-#new-link #path { width: 446px; }
-#new-link #dest { width: 600px; }
+#new-link #path { width: 496px; }
+#new-link #dest { width: 650px; }
 #new-link .permission-group { display: inline; margin-right: 20px; }
 #new-link .permission-group label { width: 10px; text-align: left; }
 #new-link label.checkbox-text { width: 300px; text-align: left; }

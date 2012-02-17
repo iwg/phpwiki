@@ -4,9 +4,9 @@
 #edit-page .action { margin: 20px 10px 10px 10px; }
 #edit-page .action * { margin-left: 10px; }
 #edit-page label { display: inline-block; width: 85px; text-align: right; }
-#edit-page #title { width: 600px; }
-#edit-page #body { width: 705px; margin-left: 5px; height: 440px; border: 1px solid #ccc; border-radius: 3px; }
+#edit-page #title { width: 650px; }
+#edit-page #body { width: 755px; margin-left: 5px; height: 440px; border: 1px solid #ccc; border-radius: 3px; }
 #edit-page .permission-group { display: inline; margin-right: 20px; }
 #edit-page .permission-group label { width: 10px; text-align: left; }
-#edit-page #summary { width: 600px; }
+#edit-page #summary { width: 650px; }
 #edit-page label.checkbox-text { width: 300px; text-align: left; }

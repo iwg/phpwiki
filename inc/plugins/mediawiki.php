@@ -112,18 +112,22 @@ function wiki_render_list($lines)
   $html = "";
   $i = 0;
   while ($i < count($lines)) {
-    if ($lines[$i][0] == '*' or $lines[$i][0] == '#') {
+	if ($lines[$i][0] == '*' or $lines[$i][0] == '#') {
       $sublines = array();
       $j = $i;
       while ($j < count($lines) and ($lines[$j][0] == '*' or $lines[$j][0] == '#')) {
         $sublines[] = $lines[$j];
         $j++;
-      }
-      $html .= '<li>'.wiki_render_lists_lines($sublines).'</li>';
-      $i = $j;
+	  }
+	  if($lines[0][0] == $char) {
+		$html .= '<li>'.wiki_render_lists_lines($sublines).'</li>';
+	  } else {
+		$html .= wiki_render_lists_lines($sublines);
+	  }
+	  $i = $j;
     } else {
       $html .= '<li>'.$lines[$i].'</li>';
-      $i++;
+	  $i++;
     }
   }
   if ($char == '*') {

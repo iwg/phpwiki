@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . '/inc/init.php');
 
+fAuthorization::requireLoggedIn();
+
 try {
   $page = new Page(fRequest::get('id'));
   $page_id = $page->getId();

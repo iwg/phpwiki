@@ -18,25 +18,25 @@ function wiki_render_markup($title, $text)
   $html = preg_replace_callback('/\[\[([^|\n\]]+)\]\]/', 'wiki_render_internal_link_without_text', $html);
   
   // headings
-	for ($i = 6; $i >= 2; $i--) {
-		$html = preg_replace(
-			'/[=]{'.$i.'}([^=]+)[=]{'.$i.'}\n(\n+)/',
-			'<h'.$i.'>${1}</h'.$i.'>${2}',
-			$html
-		);
-	}
-	
-	// natural line breaks
-	$html = preg_replace('/\n\n+/', "\n<br/>\n", $html);
-	
-	// lists
-	$html = preg_replace_callback('/((^[*#\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
-	
-	// horizontal rule
-	$html = preg_replace('/----/', '<hr/>', $html);
-	
-	// remove redundant line breaks
-	$html = preg_replace('/[>]<br\/>([\n]?)[<]/', '>${1}<', $html);
+  for ($i = 6; $i >= 2; $i--) {
+    $html = preg_replace(
+      '/[=]{'.$i.'}([^=]+)[=]{'.$i.'}\n(\n+)/',
+      '<h'.$i.'>${1}</h'.$i.'>${2}',
+      $html
+    );
+  }
+  
+  // natural line breaks
+  $html = preg_replace('/\n\n+/', "\n<br/>\n", $html);
+  
+  // lists
+  $html = preg_replace_callback('/((^[*#\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
+  
+  // horizontal rule
+  $html = preg_replace('/----/', '<hr/>', $html);
+  
+  // remove redundant line breaks
+  $html = preg_replace('/[>]<br\/>([\n]?)[<]/', '>${1}<', $html);
   
   return $html;
 }
@@ -112,22 +112,22 @@ function wiki_render_list($lines)
   $html = "";
   $i = 0;
   while ($i < count($lines)) {
-	if ($lines[$i][0] == '*' or $lines[$i][0] == '#') {
+    if ($lines[$i][0] == '*' or $lines[$i][0] == '#') {
       $sublines = array();
       $j = $i;
       while ($j < count($lines) and ($lines[$j][0] == '*' or $lines[$j][0] == '#')) {
         $sublines[] = $lines[$j];
         $j++;
-	  }
-	  if($lines[0][0] == $char) {
-		$html .= '<li>'.wiki_render_lists_lines($sublines).'</li>';
-	  } else {
-		$html .= wiki_render_lists_lines($sublines);
-	  }
-	  $i = $j;
+      }
+      if($lines[0][0] == $char) {
+        $html .= '<li>'.wiki_render_lists_lines($sublines).'</li>';
+      } else {
+        $html .= wiki_render_lists_lines($sublines);
+      }
+      $i = $j;
     } else {
       $html .= '<li>'.$lines[$i].'</li>';
-	  $i++;
+      $i++;
     }
   }
   if ($char == '*') {

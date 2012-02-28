@@ -7,6 +7,7 @@ function wiki_render_markup($title, $text)
   
   $html = wiki_escape_pre($html);
   
+  $html = wiki_remove_unsupported($html);
   $html = wiki_convert_tables($html);
   $html = wiki_simple_text($html);
   
@@ -41,8 +42,22 @@ function wiki_render_pre($matches, $do_map = false)
   return "<pre>".$next_index."</pre>";
 }
 
+function wiki_remove_unsupported($html)
+{
+  $html = preg_replace('/{{[^}]+}}/', '', $html);
+  return $html;
+}
+
+function wiki_render_syntaxhighlight($matches)
+{
+  return '<pre lang="'.$matches[1].'">'.htmlentities($matches[2]).'</pre>';
+}
+
 function wiki_simple_text($html)
 {
+  // syntaxhighlight
+  $html = preg_replace_callback('/\<syntaxhighlight lang="(.+?)"\>(.+?)\<\/syntaxhighlight\>/s', 'wiki_render_syntaxhighlight', $html);
+  
   // bold
   $html = preg_replace('/\'\'\'([^\'\n]+)\'\'\'/', '<b>${1}</b>', $html);
   // italic

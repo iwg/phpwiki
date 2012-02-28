@@ -79,11 +79,11 @@ function wiki_convert_table($text)
 	$intable = false;
 	foreach ($lines as $line) {
 		$line = trim($line);
-		if (substr($line, 0, 1) == '{') {
+		if (substr($line, 0, 2) == '{|') {
 			// begin of the table
-			$stuff = explode('|', substr($line, 1), 2);
+			$stuff = substr($line, 2);
 			$tableopen = true;
-			$table = "<table ".trim($stuff[0]).">\n\t<tr>\n";
+			$table = "<table ".trim($stuff).">\n\t<tr>\n";
 			$rowopen = true;
 		} else if (substr($line, 0, 1) == '|') {
 			// table related

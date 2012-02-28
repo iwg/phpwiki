@@ -5,10 +5,40 @@ function wiki_render_markup($title, $text)
   $html = str_replace("\r\n", "\n", $html);
   $html = str_replace("\r", "\n", $html);
   
+  $html = wiki_escape_pre($html);
+  
   $html = wiki_convert_tables($html);
   $html = wiki_simple_text($html);
   
+  $html = wiki_unescape_pre($html);
+  
   return $html;
+}
+
+function wiki_escape_pre($html)
+{
+  return preg_replace_callback('/\<pre\>(.+?)\<\/pre\>/s', 'wiki_render_pre', $html);
+}
+
+function wiki_unescape_pre($html)
+{
+  return preg_replace_callback('/\<pre\>(\d+)\<\/pre\>/s', 'wiki_do_map_pre', $html);
+}
+
+function wiki_do_map_pre($matches)
+{
+  return "<pre>".wiki_render_pre($matches, true)."</pre>";
+}
+
+function wiki_render_pre($matches, $do_map = false)
+{
+  static $pre_maps = array();
+  if (isset($do_map) and $do_map === true) {
+    return $pre_maps[$matches[1]];
+  }
+  $next_index = count($pre_maps);
+  $pre_maps[] = htmlentities($matches[1]);
+  return "<pre>".$next_index."</pre>";
 }
 
 function wiki_simple_text($html)

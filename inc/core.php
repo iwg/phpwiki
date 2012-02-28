@@ -90,8 +90,6 @@ function wiki_remove_page_by_path($db, $path)
   $db->translatedExecute('DELETE FROM pages WHERE path=%s', $path);
 }
 
-
-
 function wiki_get_current_user_id()
 {
   return fAuthorization::getUserToken();
@@ -99,28 +97,34 @@ function wiki_get_current_user_id()
 
 function wiki_check_lock($page_id, $user_id) 
 {
-  $result = $db->translatedQuery('SELECT * FROM locks
-WHERE page_id=%i', $page_id);
-  if (!result) {
-    exit(false);
+  global $db;
+  $result = $db->translatedQuery('SELECT * FROM locks WHERE page_id=%i', $page_id);
+  if (!$result) {
+    return false;
   }
   foreach ($result as $row) {
-    exit($row['user_id'] == $user_id);
+    $time_diff = strtotime(now()) - strtotime($row['created_at']);
+    if ($time_diff>LOCK_TIME) {
+      wiki_unlock($page_id);
+      return false;
+    }
+    return $row['user_id'];
   }
 }
 
 function wiki_set_lock($page_id, $user_id)
 {
+  global $db;
   if (LOCK_TIME == 0) {
     return;
   }
   $db->translatedExecute('INSERT INTO locks 
 (page_id, user_id, created_at) VALUES 
-(%i, %i, %t)', $page_id, $user_id, now());
+(%i, %i, %s)', $page_id, $user_id, now());
 }
 
 function wiki_unlock($page_id)
 {
-  $db->translatedExecute('DELETE FROM locks
-WHERE page_id=%i', $page_id);
+  global $db;
+  $db->translatedExecute('DELETE FROM locks WHERE page_id=%i', $page_id);
 }

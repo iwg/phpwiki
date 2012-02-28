@@ -1,18 +1,19 @@
 <?php
 include_once(__DIR__ . '/inc/init.php');
 
-fAuthorization::requireLoggedIn();
-/*
-$user_id = wiki_get_current_user_id();
-$page_id = fRequset::get('id');
-$is_locked = wiki_check_lock($page_id, user_id);
-if ($is_locked) {
-  wiki_set_lock($page_id);
-  $disabled = 'disabled';
-} else {
+//fAuthorization::requireLoggedIn();
+
+$user_id = 1;//wiki_get_current_user_id();
+$page_id = fRequest::get('id');
+$locked_by = wiki_check_lock($page_id, $user_id);
+if (!$locked_by) {
+  wiki_set_lock($page_id, $user_id);
   $disabled = '';
+} else if ($locked_by == $user_id) {
+  $disabled = '';
+} else {
+  $disabled = 'disabled';
 }
-*/
 
 try {
   $page = new Page(fRequest::get('id'));
@@ -34,5 +35,3 @@ try {
 } catch (fNotFoundException $e) {
   // TODO fatal error: page not found
 }
-
-// wiki_unlock(fRequest::get('id'));

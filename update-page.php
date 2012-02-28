@@ -3,6 +3,14 @@ include_once(__DIR__ . '/inc/init.php');
 
 if (fRequest::isPost()) {
   try {
+
+    $user_id = 1;//wiki_get_current_user_id();
+    $page_id = fRequest::get('id');
+    $locked_by = wiki_check_lock($page_id, $user_id);
+    if (($locked_by) && ($locked_by != $user_id)) {
+      fURL::redirect(wiki_edit_page_path($page_id));
+    }
+
     $page = new Page(fRequest::get('id'));
     $page_id = $page->getId();
     $page_title = trim(fRequest::get('title'));
@@ -47,6 +55,10 @@ if (fRequest::isPost()) {
         
         $db->query('COMMIT');
         
+        ///*
+        wiki_unlock($page_id);
+        //*/
+
         fURL::redirect(SITE_BASE . $page->getPath());
       } catch (fException $e) {
         $db->query('ROLLBACK');
@@ -54,6 +66,12 @@ if (fRequest::isPost()) {
       }
     } else if ($submit == 'Show preview') {
       try {
+        
+        ///*
+        wiki_unlock($page_id);
+        wiki_set_lock($page_id, $user_id);
+        //*/
+        
         $db->query('BEGIN');
         
         wiki_clear_previous_previews($db, $page_path, wiki_get_current_user());

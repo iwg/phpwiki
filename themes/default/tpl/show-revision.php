@@ -1,7 +1,9 @@
 <?php
 fSession::open();
-$css = array('main');
+$css = array('main', 'revision');
 $js = array('sugar', 'jquery');
 include '_header.php';
-$revision->show();
+?>
+<div class="revision"><?php $revision->show(); ?></div>
+<?php
 include '_footer.php';

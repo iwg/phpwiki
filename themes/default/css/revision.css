@@ -1,0 +1,51 @@
+.revision h2 {
+  font-size: 150%;
+  padding-bottom: 0.17em;
+  padding-top: 0.5em;
+  margin-bottom: 0.6em;
+  border-bottom: 1px solid #AAA;
+}
+.revision h3 {
+  font-size: 132%;
+  font-weight: bold;
+  padding-bottom: 0.17em;
+  padding-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+.revision h4 {
+  font-size: 116%;
+  font-weight: bold;
+  padding-bottom: 0.17em;
+  padding-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+.revision .wikitable {
+  margin: 1em 1em 1em 0;
+  background: #F9F9F9;
+  border: 1px #AAA solid;
+  border-collapse: collapse;
+  color: black;
+  font-size: 100%;
+  display: table;
+  border-spacing: 2px;
+}
+.revision .wikitable th {
+  background: #F2F2F2;
+  text-align: center;
+  border: 1px #AAA solid;
+  padding: 0.2em;
+}
+.revision .wikitable td {
+  border: 1px #AAA solid;
+  padding: 0.2em;
+}
+.revision pre {
+  padding: 1em;
+  border: 1px dashed #2F6FAB;
+  color: black;
+  background-color: #F9F9F9;
+  line-height: 1.3em;
+}
+.revision pre, .revision code, .revision tt, .revision kbd, .revision samp {
+  font-family: Consolas,Monaco,"Lucida Console","Liberation Mono","DejaVu Sans Mono","Bitstream Vera Sans Mono","Courier New",monospace;
+}

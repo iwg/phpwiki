@@ -38,7 +38,7 @@ function wiki_simple_text($html)
   $html = preg_replace('/\n\n+/', "\n<br/>\n", $html);
   
   // lists
-  $html = preg_replace_callback('/((^[*#\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
+  //$html = preg_replace_callback('/((^[*#\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
   
   // horizontal rule
   $html = preg_replace('/----/', '<hr/>', $html);
@@ -78,18 +78,18 @@ function wiki_convert_table($text)
 	$lines = explode("\n",$text);
 	$intable = false;
 	
-	//var_dump($lines);
 	foreach($lines as $line){
 		$line = trim($line);
 		if(substr($line,0,1) == '{'){
 			//begin of the table
-			$stuff = explode('| ',substr($line,1),2);
+			$stuff = explode('|',substr($line,1),2);
 			$tableopen = true;
-			$table = "<table ".$stuff[0].">\n";
+			$table = "<table ".trim($stuff[0]).">\n\t<tr>\n";
+			$rowopen = true;
 		} else if(substr($line,0,1) == '|'){
 			// table related
 			$line = substr($line,1);
-			if(substr($line,0,5) == '-----'){
+			if(preg_match('/[-]+/', $line)){
 				// row break
 				if($thopen)
 					$table .="</th>\n";
@@ -106,33 +106,31 @@ function wiki_convert_table($text)
 				break;
 			}else{
 				// td
-				$stuff = explode('| ',$line,2);
+				$stuff = explode('|',$line,2);
 				if($tdopen)
 					$table .="</td>\n";
 				if(count($stuff)==1)
 					$table .= "\t\t<td>".wiki_simple_text($stuff[0]);
 				else
-					$table .= "\t\t<td ".$stuff[0].">".
+					$table .= "\t\t<td ".trim($stuff[0]).">".
 						wiki_simple_text($stuff[1]);
 				$tdopen = true;
 			}
 		} else if(substr($line,0,1) == '!'){
 			// th
-			$stuff = explode('| ',substr($line,1),2);
+			$stuff = explode('|',substr($line,1),2);
 			if($thopen)
 				$table .="</th>\n";
 			if(count($stuff)==1)
 				$table .= "\t\t<th>".wiki_simple_text($stuff[0]);
 			else
-				$table .= "\t\t<th ".$stuff[0].">".
+				$table .= "\t\t<th ".trim($stuff[0]).">".
 					wiki_simple_text($stuff[1]);
 			$thopen = true;
 		}else{
 			// plain text
 			$table .= wiki_simple_text($line) ."\n";
 		}
-		//echo "<pre>".++$i.": ".htmlspecialchars($line)."</pre>";
-		//echo "<p>Table so far: <pre>".htmlspecialchars($table)."</pre></p>";
 	}
 	if($thopen)
 		$table .="</th>\n";
@@ -142,9 +140,6 @@ function wiki_convert_table($text)
 		$table .="\t</tr>\n";
 	if($tableopen)
 		$table .="</table>\n";
-	//echo "<hr />";
-	//echo "<p>Table at the end: <pre>".htmlspecialchars($table)."</pre></p>";
-	//echo $table;	
 	return $table;
 }
 

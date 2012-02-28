@@ -75,71 +75,63 @@ function wiki_convert_tables($text)
 
 function wiki_convert_table($text)
 {
-	$lines = explode("\n",$text);
+	$lines = explode("\n", $text);
 	$intable = false;
-	
-	foreach($lines as $line){
+	foreach ($lines as $line) {
 		$line = trim($line);
-		if(substr($line,0,1) == '{'){
-			//begin of the table
-			$stuff = explode('|',substr($line,1),2);
+		if (substr($line, 0, 1) == '{') {
+			// begin of the table
+			$stuff = explode('|', substr($line, 1), 2);
 			$tableopen = true;
 			$table = "<table ".trim($stuff[0]).">\n\t<tr>\n";
 			$rowopen = true;
-		} else if(substr($line,0,1) == '|'){
+		} else if (substr($line, 0, 1) == '|') {
 			// table related
 			$line = substr($line,1);
-			if(preg_match('/[-]+/', $line)){
+			if (preg_match('/[-]+/', $line)) {
 				// row break
-				if($thopen)
-					$table .="</th>\n";
-				if($tdopen)
-					$table .="</td>\n";
-				if($rowopen)
-					$table .="\t</tr>\n";
+				if ($thopen) $table .="</th>\n";
+				if ($tdopen) $table .="</td>\n";
+				if ($rowopen) $table .="\t</tr>\n";
 				$table .= "\t<tr>\n";
 				$rowopen = true;
 				$tdopen = false;
 				$thopen = false;
-			}else if(substr($line,0,1) == '}'){
+			} else if (substr($line, 0, 1) == '}') {
 				// table end
 				break;
-			}else{
+			} else {
 				// td
-				$stuff = explode('|',$line,2);
-				if($tdopen)
-					$table .="</td>\n";
-				if(count($stuff)==1)
+  			if ($thopen) $table .="</th>\n";
+				if ($tdopen) $table .="</td>\n";
+				$stuff = explode('|', $line, 2);
+				if (count($stuff) == 1) {
 					$table .= "\t\t<td>".wiki_simple_text($stuff[0]);
-				else
-					$table .= "\t\t<td ".trim($stuff[0]).">".
-						wiki_simple_text($stuff[1]);
+				} else {
+					$table .= "\t\t<td ".trim($stuff[0]).">".wiki_simple_text($stuff[1]);
+				}
 				$tdopen = true;
 			}
-		} else if(substr($line,0,1) == '!'){
+		} else if (substr($line, 0, 1) == '!') {
 			// th
-			$stuff = explode('|',substr($line,1),2);
-			if($thopen)
-				$table .="</th>\n";
-			if(count($stuff)==1)
+			if ($thopen) $table .="</th>\n";
+			if ($tdopen) $table .="</td>\n";
+			$stuff = explode('|', substr($line, 1), 2);
+			if (count($stuff) == 1) {
 				$table .= "\t\t<th>".wiki_simple_text($stuff[0]);
-			else
-				$table .= "\t\t<th ".trim($stuff[0]).">".
-					wiki_simple_text($stuff[1]);
+			} else {
+				$table .= "\t\t<th ".trim($stuff[0]).">".wiki_simple_text($stuff[1]);
+			}
 			$thopen = true;
-		}else{
+		} else {
 			// plain text
-			$table .= wiki_simple_text($line) ."\n";
+			$table .= wiki_simple_text($line)."\n";
 		}
 	}
-	if($thopen)
-		$table .="</th>\n";
-	if($tdopen)
-		$table .="</td>\n";
-	if($rowopen)
-		$table .="\t</tr>\n";
-	if($tableopen)
-		$table .="</table>\n";
+	if ($thopen) $table .="</th>\n";
+	if ($tdopen) $table .="</td>\n";
+	if ($rowopen) $table .="\t</tr>\n";
+	if ($tableopen) $table .="</table>\n";
 	return $table;
 }
 

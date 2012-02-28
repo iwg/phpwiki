@@ -94,7 +94,7 @@ form label {
 	display: none;
 }
 
-#username, #password {
+#username, #password, .text {
 	padding: 11px 5px 11px 8px;
 	background-color: #FBFBFB;
 	border: 1px solid #191814;

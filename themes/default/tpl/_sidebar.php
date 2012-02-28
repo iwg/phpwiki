@@ -1,5 +1,6 @@
 <ul id="sidebar-items">
   <li>Hi, <?php echo fSession::get('current_user[display_name]') ?></li>
+  <li><a href="<?php echo SITE_BASE; ?>/login/change-password.php">Change password</a></li>
   <li>
     <h3><?php echo $lang['Dashboard']; ?></h3>
     <ul class="links">

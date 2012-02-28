@@ -8,6 +8,14 @@ Markup Language
 - `<markdown>...</markdown>` tag for embedding Markdown markups
 - Utilize [Pandoc](http://johnmacfarlane.net/pandoc/) for migrating markups
 
+About Permissions
+------------------
+- Distinguish group users and other users
+- `rwx`-bits:
+  - `r` for reading the page
+  - `w` for editing the page
+  - `x` for creating subpage, e.g. `/a/b` is a subpage of `/a`
+
 Page Locking
 -------------
 See [how DokuWiki do it](http://www.dokuwiki.org/locking). We will do it similarly. 

@@ -1,7 +1,0 @@
-tmp/
-.DS_Store
-*.tmp
-*.log
-*.db
-*.php~
-

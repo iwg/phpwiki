@@ -1,6 +1,9 @@
 <ul id="sidebar-items">
   <li>Hi, <?php echo fSession::get('current_user[display_name]') ?></li>
   <li><a href="<?php echo SITE_BASE; ?>/login/change-password.php">Change password</a></li>
+  <?php if (isset($revision)): ?>
+    <li><a href="<?php echo wiki_edit_page_path($revision->getPageId()); ?>">Edit this page</a></li>
+  <?php endif; ?>
   <li>
     <h3><?php echo $lang['Dashboard']; ?></h3>
     <ul class="links">

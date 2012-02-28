@@ -5,6 +5,14 @@ function wiki_render_markup($title, $text)
   $html = str_replace("\r\n", "\n", $html);
   $html = str_replace("\r", "\n", $html);
   
+  $html = wiki_convert_tables($html);
+  $html = wiki_simple_text($html);
+  
+  return $html;
+}
+
+function wiki_simple_text($html)
+{
   // bold
   $html = preg_replace('/\'\'\'([^\'\n]+)\'\'\'/', '<b>${1}</b>', $html);
   // italic
@@ -20,7 +28,7 @@ function wiki_render_markup($title, $text)
   // headings
   for ($i = 6; $i >= 2; $i--) {
     $html = preg_replace(
-      '/[=]{'.$i.'}([^=]+)[=]{'.$i.'}\n(\n+)/',
+      '/[=]{'.$i.'}([^=]+)[=]{'.$i.'}\n(\n*)/',
       '<h'.$i.'>${1}</h'.$i.'>${2}',
       $html
     );
@@ -39,6 +47,105 @@ function wiki_render_markup($title, $text)
   $html = preg_replace('/[>]<br\/>([\n]?)[<]/', '>${1}<', $html);
   
   return $html;
+}
+
+function wiki_convert_tables($text)
+{
+  $lines = explode("\n", $text);
+  $innertable = 0;
+  $innertabledata = array();
+  foreach ($lines as $line) {
+    if (substr($line, 0, 2) == '{|') {
+      // inner table
+      $innertable++;
+    }
+    $innertabledata[$innertable] .= $line."\n";
+    if ($innertable) {
+      // we're inside
+      if (substr($line, 0, 2) == '|}') {
+        $innertableconverted = wiki_convert_table($innertabledata[$innertable]);
+        $innertabledata[$innertable] = "";
+        $innertable--;
+        $innertabledata[$innertable] .= $innertableconverted."\n";
+      }
+    }
+  }
+  return $innertabledata[0];
+}
+
+function wiki_convert_table($text)
+{
+	$lines = explode("\n",$text);
+	$intable = false;
+	
+	//var_dump($lines);
+	foreach($lines as $line){
+		$line = trim($line);
+		if(substr($line,0,1) == '{'){
+			//begin of the table
+			$stuff = explode('| ',substr($line,1),2);
+			$tableopen = true;
+			$table = "<table ".$stuff[0].">\n";
+		} else if(substr($line,0,1) == '|'){
+			// table related
+			$line = substr($line,1);
+			if(substr($line,0,5) == '-----'){
+				// row break
+				if($thopen)
+					$table .="</th>\n";
+				if($tdopen)
+					$table .="</td>\n";
+				if($rowopen)
+					$table .="\t</tr>\n";
+				$table .= "\t<tr>\n";
+				$rowopen = true;
+				$tdopen = false;
+				$thopen = false;
+			}else if(substr($line,0,1) == '}'){
+				// table end
+				break;
+			}else{
+				// td
+				$stuff = explode('| ',$line,2);
+				if($tdopen)
+					$table .="</td>\n";
+				if(count($stuff)==1)
+					$table .= "\t\t<td>".wiki_simple_text($stuff[0]);
+				else
+					$table .= "\t\t<td ".$stuff[0].">".
+						wiki_simple_text($stuff[1]);
+				$tdopen = true;
+			}
+		} else if(substr($line,0,1) == '!'){
+			// th
+			$stuff = explode('| ',substr($line,1),2);
+			if($thopen)
+				$table .="</th>\n";
+			if(count($stuff)==1)
+				$table .= "\t\t<th>".wiki_simple_text($stuff[0]);
+			else
+				$table .= "\t\t<th ".$stuff[0].">".
+					wiki_simple_text($stuff[1]);
+			$thopen = true;
+		}else{
+			// plain text
+			$table .= wiki_simple_text($line) ."\n";
+		}
+		//echo "<pre>".++$i.": ".htmlspecialchars($line)."</pre>";
+		//echo "<p>Table so far: <pre>".htmlspecialchars($table)."</pre></p>";
+	}
+	if($thopen)
+		$table .="</th>\n";
+	if($tdopen)
+		$table .="</td>\n";
+	if($rowopen)
+		$table .="\t</tr>\n";
+	if($tableopen)
+		$table .="</table>\n";
+	//echo "<hr />";
+	//echo "<p>Table at the end: <pre>".htmlspecialchars($table)."</pre></p>";
+	//echo $table;	
+	return $table;
 }
 
 function wiki_render_internal_link_with_text($matches)

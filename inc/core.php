@@ -35,7 +35,7 @@ function wiki_list_theme_names()
 {
   $names = array();
   foreach (scandir(__DIR__ . '/../themes/') as $name) {
-    if (empty($name) or $name[0] == '.' or $name == DEFAULT_THEME) {
+    if (empty($name) or $name[0] == '.') {
       continue;
     }
     $names[] = $name;

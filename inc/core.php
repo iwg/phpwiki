@@ -95,7 +95,7 @@ function wiki_get_current_user_id()
   return fAuthorization::getUserToken();
 }
 
-function wiki_check_lock($bd, $page_id, $user_id) 
+function wiki_check_lock($db, $page_id, $user_id) 
 {
   $result = $db->translatedQuery('SELECT * FROM locks WHERE page_id=%i', $page_id);
   if (!$result) {

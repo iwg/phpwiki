@@ -95,16 +95,15 @@ function wiki_get_current_user_id()
   return fAuthorization::getUserToken();
 }
 
-function wiki_check_lock($page_id, $user_id) 
+function wiki_check_lock($db, $page_id, $user_id) 
 {
-  global $db;
   $result = $db->translatedQuery('SELECT * FROM locks WHERE page_id=%i', $page_id);
   if (!$result) {
     return false;
   }
   foreach ($result as $row) {
     $time_diff = strtotime(now()) - strtotime($row['created_at']);
-    if ($time_diff>LOCK_TIME) {
+    if ($time_diff > LOCK_TIME) {
       wiki_unlock($page_id);
       return false;
     }
@@ -112,9 +111,8 @@ function wiki_check_lock($page_id, $user_id)
   }
 }
 
-function wiki_set_lock($page_id, $user_id)
+function wiki_set_lock($db, $page_id, $user_id)
 {
-  global $db;
   if (LOCK_TIME == 0) {
     return;
   }
@@ -123,8 +121,7 @@ function wiki_set_lock($page_id, $user_id)
 (%i, %i, %s)', $page_id, $user_id, now());
 }
 
-function wiki_unlock($page_id)
+function wiki_unlock($db, $page_id)
 {
-  global $db;
   $db->translatedExecute('DELETE FROM locks WHERE page_id=%i', $page_id);
 }

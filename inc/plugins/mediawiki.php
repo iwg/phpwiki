@@ -76,7 +76,7 @@ function wiki_simple_text($html)
   for ($i = 6; $i >= 2; $i--) {
     $html = preg_replace(
       '/[=]{'.$i.'}([^=]+)[=]{'.$i.'}\n(\n*)/',
-      '<h'.$i.'>${1}</h'.$i.'>${2}',
+      '<h'.$i.'>${1}</h'.$i.'>${2}'."\n",
       $html
     );
   }

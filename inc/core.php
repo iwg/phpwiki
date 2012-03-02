@@ -104,7 +104,7 @@ function wiki_check_lock($db, $page_id, $user_id)
   foreach ($result as $row) {
     $time_diff = strtotime(now()) - strtotime($row['created_at']);
     if ($time_diff > LOCK_TIME) {
-      wiki_unlock($page_id);
+      wiki_unlock($db, $page_id);
       return false;
     }
     return $row['user_id'];

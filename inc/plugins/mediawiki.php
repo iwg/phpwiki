@@ -8,10 +8,11 @@ function wiki_render_markup($title, $text)
   $html = wiki_escape_pre($html);
   
   $html = wiki_remove_unsupported($html);
-  $html = wiki_convert_tables($html);
+
+  $html = wiki_convert_tables($html); 
   
   $html = wiki_simple_text($html);
-  
+
   $html = wiki_unescape_pre($html);
   
   return $html;
@@ -84,7 +85,8 @@ function wiki_simple_text($html)
   $html = preg_replace('/\n\n+/', "\n<br/>\n", $html);
   
   // lists
-  $html = preg_replace_callback('/((^[*#;:\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
+  //$html = preg_replace_callback('/((^[*#;:\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
+  $html = preg_replace_callback('/((^[*#;:\s]*[*#;:]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
   
   // horizontal rule
   $html = preg_replace('/----/', '<hr/>', $html);

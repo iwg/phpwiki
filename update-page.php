@@ -52,12 +52,13 @@ if (fRequest::isPost()) {
         $revision->setCommitMessage($summary);
         $revision->setCreatedAt(now());
         $revision->store();
+
+        $db->translatedExecute("Update pages SET permission=%i WHERE id=%i",
+$owner_bits . $group_bits . $other_bits, $page_id);
         
         $db->query('COMMIT');
         
-        ///*
         wiki_unlock($db, $page_id);
-        //*/
 
         fURL::redirect(SITE_BASE . $page->getPath());
       } catch (fException $e) {
@@ -67,10 +68,8 @@ if (fRequest::isPost()) {
     } else if ($submit == 'Show preview') {
       try {
         
-        ///*
         wiki_unlock($db, $page_id);
         wiki_set_lock($db, $page_id, $user_id);
-        //*/
         
         $db->query('BEGIN');
         

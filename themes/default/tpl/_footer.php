@@ -1,7 +1,7 @@
       </div>
 
       <div id="outtro">
-        <strong>phpwiki</strong> is a sponsored and made possible by constant development from
+        <strong>phpwiki</strong> is sponsored and made possible by constant development from
         <a href="http://acm.sjtu.edu.cn">ACM class</a>.
       </div>
     </div>

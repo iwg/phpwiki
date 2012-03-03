@@ -8,7 +8,6 @@ if (fRequest::isPost()) {
     $page_path = '/' . wiki_slugify(trim(fRequest::get('path')));
     $body = fRequest::get('body');
     $page_theme = fRequest::get('theme');
-//    $owner_bits = array_sum(fRequest::get('owner_bits', 'integer[]'));
     $group_bits = array_sum(fRequest::get('group_bits', 'integer[]'));
     $other_bits = array_sum(fRequest::get('other_bits', 'integer[]'));
     $summary = trim(fRequest::get('summary'));
@@ -16,11 +15,6 @@ if (fRequest::isPost()) {
     if (empty($page_title)) {
       throw new fValidationException('Title cannot be blank.');
     }
-/*
-    if ($owner_bits < 0 or $owner_bits > 7) {
-      throw new fValidationException('Invalid owner permission bits.');
-    }
-*/
     if ($group_bits < 0 or $group_bits > 7) {
       throw new fValidationException('Invalid group permission bits.');
     }
@@ -38,7 +32,7 @@ if (fRequest::isPost()) {
         $page->setPath($page_path);
         $page->setOwnerName(wiki_get_current_user());
         $page->setGroupId(Group::root()->getId()); // FIXME should use real group
-        $page->setPermission(/*$owner_bits . */$group_bits . $other_bits);
+        $page->setPermission($group_bits . $other_bits);
         $page->setType(Page::NORMAL);
         $page->setCreatedAt(now());
         $page->store();
@@ -71,7 +65,7 @@ if (fRequest::isPost()) {
         $preview->setPath($page_path);
         $preview->setOwnerName(wiki_get_current_user());
         $preview->setGroupId(Group::root()->getId()); // FIXME should use real group
-        $preview->setPermission(/*$owner_bits . */$group_bits . $other_bits);
+        $preview->setPermission($group_bits . $other_bits);
         $preview->setTitle($page_title);
         $preview->setBody($body);
         $preview->setThemeId($theme->getId());

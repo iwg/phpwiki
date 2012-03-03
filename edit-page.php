@@ -3,7 +3,7 @@ include_once(__DIR__ . '/inc/init.php');
 
 fAuthorization::requireLoggedIn();
 
-$user_id = 1;//wiki_get_current_user_id();
+$user_id = wiki_get_current_user_id();
 $page_id = fRequest::get('id');
 $locked_by = wiki_check_lock($db, $page_id, $user_id);
 if (!$locked_by) {

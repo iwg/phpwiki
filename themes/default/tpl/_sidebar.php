@@ -1,5 +1,5 @@
 <ul id="sidebar-items">
-  <li>Hi, <?php echo fSession::get('current_user[display_name]') ?></li>
+  <li>Hi, <?php echo wiki_get_current_user_display_name() ?></li>
   <li><a href="<?php echo SITE_BASE; ?>/login/change-password.php">Change password</a></li>
   <?php if (isset($revision)): ?>
     <li><a href="<?php echo wiki_edit_page_path($revision->getPageId()); ?>">Edit this page</a></li>

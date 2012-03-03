@@ -5,17 +5,56 @@ function wiki_render_markup($title, $text)
   $html = str_replace("\r\n", "\n", $html);
   $html = str_replace("\r", "\n", $html);
   
+  $html = wiki_remove_unsupported($html);
+  
+  $html = wiki_escape_nowiki0($html);
+  $html = wiki_escape_nowiki($html);
   $html = wiki_escape_pre($html);
   
-  $html = wiki_remove_unsupported($html);
-
   $html = wiki_convert_tables($html); 
-  
   $html = wiki_simple_text($html);
 
   $html = wiki_unescape_pre($html);
+  $html = wiki_unescape_nowiki($html);
+  $html = wiki_unescape_nowiki0($html);
   
   return $html;
+}
+
+function wiki_escape_nowiki0($html)
+{
+  return preg_replace('/\<nowiki\s*\/\>/s', '{{nowiki0}}', $html);
+}
+
+function wiki_unescape_nowiki0($html)
+{
+  return preg_replace('/{{nowiki0}}/s', '', $html);
+}
+
+function wiki_escape_nowiki($html)
+{
+  return preg_replace_callback('/\<nowiki\>(.+?)\<\/nowiki\>/s', 'wiki_render_nowiki', $html);
+}
+
+function wiki_unescape_nowiki($html)
+{
+  return preg_replace_callback('/{{nowiki,(\d+)}}/s', 'wiki_do_map_nowiki', $html);
+}
+
+function wiki_do_map_nowiki($matches)
+{
+  return wiki_render_nowiki($matches, true);
+}
+
+function wiki_render_nowiki($matches, $do_map = false)
+{
+  static $nowiki_maps = array();
+  if (isset($do_map) and $do_map === true) {
+    return $nowiki_maps[$matches[1]];
+  }
+  $next_index = count($nowiki_maps);
+  $nowiki_maps[] = $matches[1];
+  return "{{nowiki,".$next_index."}}";
 }
 
 function wiki_escape_pre($html)
@@ -25,7 +64,7 @@ function wiki_escape_pre($html)
 
 function wiki_unescape_pre($html)
 {
-  return preg_replace_callback('/\<pre\>(\d+)\<\/pre\>/s', 'wiki_do_map_pre', $html);
+  return preg_replace_callback('/{{pre,(\d+)}}/s', 'wiki_do_map_pre', $html);
 }
 
 function wiki_do_map_pre($matches)
@@ -41,7 +80,7 @@ function wiki_render_pre($matches, $do_map = false)
   }
   $next_index = count($pre_maps);
   $pre_maps[] = htmlentities($matches[1]);
-  return "<pre>".$next_index."</pre>";
+  return "{{pre,".$next_index."}}";
 }
 
 function wiki_remove_unsupported($html)

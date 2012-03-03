@@ -50,6 +50,7 @@ if (fRequest::isPost()) {
         $revision->store();
         
         $page->setPermission($group_bits . $other_bits);
+        $page->store();
         
         $db->query('COMMIT');
         

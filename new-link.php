@@ -3,7 +3,6 @@ include_once(__DIR__ . '/inc/init.php');
 
 $page_path = '/';
 $dest = 'http://';
-//$owner_bits = 7;
 $group_bits = 7;
 $other_bits = 0;
 $overwrite = false;

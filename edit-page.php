@@ -23,7 +23,6 @@ try {
   $page_path = $page->getPath();
   $body = $revision->getBody();
   $page_theme = $revision->getTheme()->getName();
-//  $owner_bits = $page->getOwnerBits();
   $group_bits = $page->getGroupBits();
   $other_bits = $page->getOtherBits();
   $summary = '';

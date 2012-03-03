@@ -7,6 +7,7 @@ function wiki_render_markup($title, $text)
   
   $html = wiki_remove_unsupported($html);
   
+  $html = wiki_escape_markdown($html);
   $html = wiki_escape_nowiki0($html);
   $html = wiki_escape_nowiki($html);
   $html = wiki_escape_pre($html);
@@ -17,8 +18,35 @@ function wiki_render_markup($title, $text)
   $html = wiki_unescape_pre($html);
   $html = wiki_unescape_nowiki($html);
   $html = wiki_unescape_nowiki0($html);
+  $html = wiki_unescape_markdown($html);
   
   return $html;
+}
+
+function wiki_escape_markdown($html)
+{
+  return preg_replace_callback('/\<markdown\>(.+?)\<\/markdown\>/s', 'wiki_render_markdown', $html);
+}
+
+function wiki_unescape_markdown($html)
+{
+  return preg_replace_callback('/{{markdown,(\d+)}}/s', 'wiki_do_map_markdown', $html);
+}
+
+function wiki_do_map_markdown($matches)
+{
+  return wiki_render_markdown($matches, true);
+}
+
+function wiki_render_markdown($matches, $do_map = false)
+{
+  static $md_maps = array();
+  if (isset($do_map) and $do_map === true) {
+    return Markdown($md_maps[$matches[1]]);
+  }
+  $next_index = count($md_maps);
+  $md_maps[] = $matches[1];
+  return "{{markdown,".$next_index."}}";
 }
 
 function wiki_escape_nowiki0($html)

@@ -1,6 +1,32 @@
 '''Wiki markup''' is the syntax and keywords used by the [[MediaWiki]] software to format a page. To learn how to see this markup and to save an edit, see: [[Wikipedia:How to edit a page|How to edit a page]].
 {{TOC limit}}
 
+<markdown>
+@@@MARKDOWN-BEGIN@@@
+A First Level Header
+====================
+
+A Second Level Header
+---------------------
+
+Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.
+
+The quick brown fox jumped over the lazy
+dog's back.
+
+### Header 3
+
+> This is a blockquote.
+> 
+> This is the second paragraph in the blockquote.
+>
+> ## This is an H2 in a blockquote
+
+@@@MARKDOWN-END@@@
+</markdown>
+
 ==Layout==
 ===Sections===
 ====Section headings====

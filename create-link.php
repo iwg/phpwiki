@@ -5,7 +5,7 @@ if (fRequest::isPost()) {
   try {
     $page_path = '/' . wiki_slugify(trim(fRequest::get('path')));
     $dest = trim(fRequest::get('dest'));
-    $owner_bits = array_sum(fRequest::get('owner_bits', 'integer[]'));
+//    $owner_bits = array_sum(fRequest::get('owner_bits', 'integer[]'));
     $group_bits = array_sum(fRequest::get('group_bits', 'integer[]'));
     $other_bits = array_sum(fRequest::get('other_bits', 'integer[]'));
     $overwrite = fRequest::get('overwrite', 'boolean');
@@ -13,9 +13,11 @@ if (fRequest::isPost()) {
     if (empty($dest)) {
       throw new fValidationException('Destination cannot be blank.');
     }
+/*
     if ($owner_bits < 0 or $owner_bits > 7) {
       throw new fValidationException('Invalid owner permission bits.');
     }
+*/
     if ($group_bits < 0 or $group_bits > 7) {
       throw new fValidationException('Invalid group permission bits.');
     }
@@ -36,7 +38,7 @@ if (fRequest::isPost()) {
         $page->setPath($page_path);
         $page->setOwnerName(wiki_get_current_user());
         $page->setGroupId(Group::root()->getId()); // FIXME should use real group
-        $page->setPermission($owner_bits . $group_bits . $other_bits);
+        $page->setPermission(/*$owner_bits . */$group_bits . $other_bits);
         $page->setType(Page::HYPERLINK);
         $page->setCreatedAt(now());
         $page->store();

@@ -1,7 +1,7 @@
 <?php
 include_once(__DIR__ . '/inc/init.php');
 
-//fAuthorization::requireLoggedIn();
+fAuthorization::requireLoggedIn();
 
 $user_id = 1;//wiki_get_current_user_id();
 $page_id = fRequest::get('id');
@@ -23,7 +23,7 @@ try {
   $page_path = $page->getPath();
   $body = $revision->getBody();
   $page_theme = $revision->getTheme()->getName();
-  $owner_bits = $page->getOwnerBits();
+//  $owner_bits = $page->getOwnerBits();
   $group_bits = $page->getGroupBits();
   $other_bits = $page->getOtherBits();
   $summary = '';

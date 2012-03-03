@@ -42,6 +42,7 @@ include '_header.php';
     <div class="field">
       <label>Permission:</label>
       <div class="permission-group">
+<!--
         <span class="group-type">(owner)</span>
         <input type="checkbox" name="owner_bits[]" value="4" id="ur"<?php echo wiki_bit_checked_helper($owner_bits, 4); ?> <?php echo $disabled?>/>
         <label for="ur">r</label>
@@ -50,6 +51,7 @@ include '_header.php';
         <input type="checkbox" name="owner_bits[]" value="1" id="ux"<?php echo wiki_bit_checked_helper($owner_bits, 1); ?> <?php echo $disabled?>/>
         <label for="ux">x</label>
       </div>
+-->
       <div class="permission-group">
         <span class="group-type">(group)</span>
         <input type="checkbox" name="group_bits[]" value="4" id="gr"<?php echo wiki_bit_checked_helper($group_bits, 4); ?> <?php echo $disabled?>/>

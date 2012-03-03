@@ -11,7 +11,7 @@ try {
   $page_path = empty($slug) ? '/' : $slug;
   $body = '';
   $page_theme = '';
-  $owner_bits = 7;
+//  $owner_bits = 7;
   $group_bits = 7;
   $other_bits = 0;
   $summary = '';

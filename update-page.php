@@ -49,7 +49,7 @@ if (fRequest::isPost()) {
         $revision->setCreatedAt(now());
         $revision->store();
         
-        $page->setPermissions($group_bits . $other_bits);
+        $page->setPermission($group_bits . $other_bits);
         
         $db->query('COMMIT');
         

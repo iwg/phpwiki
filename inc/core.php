@@ -76,8 +76,20 @@ function wiki_equals_helper($a, $b, $c, $d = '')
 
 function wiki_get_current_user()
 {
-  // TODO
-  return "xjia";
+  $temp = fAuthorization::getUserToken();
+  return $temp['name'];
+}
+
+function wiki_get_current_user_id()
+{
+  $temp = fAuthorization::getUserToken();
+  return $temp['id'];
+}
+
+function wiki_get_current_user_display_name()
+{
+  $temp = fAuthorization::getUserToken();
+  return $temp['display_name'];
 }
 
 function wiki_clear_previous_previews($db, $path, $user)
@@ -88,11 +100,6 @@ function wiki_clear_previous_previews($db, $path, $user)
 function wiki_remove_page_by_path($db, $path)
 {
   $db->translatedExecute('DELETE FROM pages WHERE path=%s', $path);
-}
-
-function wiki_get_current_user_id()
-{
-  return fAuthorization::getUserToken();
 }
 
 function wiki_check_lock($db, $page_id, $user_id) 
@@ -124,4 +131,10 @@ function wiki_set_lock($db, $page_id, $user_id)
 function wiki_unlock($db, $page_id)
 {
   $db->translatedExecute('DELETE FROM locks WHERE page_id=%i', $page_id);
+}
+
+function wiki_is_root($user_id)
+{
+  global $ROOT_IDS;
+  return array_search($user_id, $ROOT_IDS);
 }

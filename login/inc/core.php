@@ -18,11 +18,11 @@ function login_check_credential($db, $username, $password)
 function login_authenticate($db, $username, $password)
 {
   if ($row = login_check_credential($db, $username, $password)) {
-    fAuthorization::setUserToken($row['id']);
-    fSession::set('current_user', array(
+    fAuthorization::setUserToken(array(
+      'id' => $row['id'],
       'name' => $username,
       'email' => $row['email'],
-      'display_name' => $row['display_name'],
+      'display_name' => $row['display_name']
     ));
     return true;
   }

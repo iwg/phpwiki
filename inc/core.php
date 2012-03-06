@@ -135,6 +135,34 @@ function wiki_unlock($db, $page_id)
 
 function wiki_is_root($user_id)
 {
-  global $ROOT_IDS;
-  return array_search($user_id, $ROOT_IDS);
+  global $REALROOT_IDS;
+  return array_search($user_id, $REALROOT_IDS);
+}
+
+function wiki_no_permission()
+{
+  echo "You don't have the permission!";
+  exit();
+}
+
+function wiki_get_write_permission($permission_bits)
+{
+  return ($permission_bits % 4) / 2 == 1;
+}
+
+function wiki_get_read_permission($permission_bits)
+{
+  return $permission_bits / 4 == 1;
+}
+
+function wiki_get_create_permission($permission_bits)
+{
+  return $permission_bits % 2 == 1;
+}
+
+function wiki_is_in_group($db, $user_name, $group_id)
+{
+  $result = $db->translatedQuery('SELECT id FROM memberships WHERE 
+group_id=%i AND user_name=%s', $group_id, $user_name);
+  return $result->countReturnedRows() > 0;
 }

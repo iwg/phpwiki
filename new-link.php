@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . '/inc/init.php');
 
+fAuthorization::requireLoggedIn();
+
 $page_path = '/';
 $dest = 'http://';
 $group_bits = 7;

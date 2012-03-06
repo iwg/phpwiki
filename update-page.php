@@ -12,6 +12,19 @@ if (fRequest::isPost()) {
     }
 
     $page = new Page(fRequest::get('id'));
+
+    $group_bits = $page->getGroupBits();
+    $other_bits = $page->getOtherBits();
+    $page_owner = $page->getOwnerName();
+    $page_group_id = $page->getGroupId();
+    $user_name = wiki_get_current_user();
+    $group_permission = wiki_get_write_permission($group_bits);
+    $other_permission = wiki_get_write_permission($other_bits);
+    if ($page_owner!=$user_name)
+      if (!$group_permission || !wiki_is_in_group($db, $user_name, $page_group_id))
+        if (!$other_permission) 
+          wiki_no_permission();
+
     $page_id = $page->getId();
     $page_title = trim(fRequest::get('title'));
     $page_path = $page->getPath();

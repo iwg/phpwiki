@@ -1,6 +1,8 @@
 <?php
 include_once(__DIR__ . '/inc/init.php');
 
+fAuthorization::requireLoggedIn();
+
 $slug = wiki_slugify(fRequest::get('slug'));
 
 try {

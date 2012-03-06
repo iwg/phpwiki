@@ -92,6 +92,18 @@ function wiki_get_current_user_display_name()
   return $temp['display_name'];
 }
 
+function wiki_get_current_user_group($db)
+{
+  $temp = fAuthorization::getUserToken();
+  $result = $db->translatedQuery('SELECT group_id FROM memberships WHERE user_name=%s', $temp['name']);
+  if ($result->countReturnedRows() == 0) {
+    return NOBODY_GROUP;
+  } else {
+    foreach ($result as $row)
+      return $row['group_id'];
+  }
+}
+
 function wiki_clear_previous_previews($db, $path, $user)
 {
   $db->translatedExecute('DELETE FROM previews WHERE path=%s AND owner_name=%s', $path, $user);
@@ -147,17 +159,17 @@ function wiki_no_permission()
 
 function wiki_get_write_permission($permission_bits)
 {
-  return ($permission_bits % 4) / 2 == 1;
+  return (int)(($permission_bits % 4) / 2) == 1;
 }
 
 function wiki_get_read_permission($permission_bits)
 {
-  return $permission_bits / 4 == 1;
+  return (int)($permission_bits / 4) == 1;
 }
 
 function wiki_get_create_permission($permission_bits)
 {
-  return $permission_bits % 2 == 1;
+  return (int)($permission_bits % 2) == 1;
 }
 
 function wiki_is_in_group($db, $user_name, $group_id)
@@ -165,4 +177,14 @@ function wiki_is_in_group($db, $user_name, $group_id)
   $result = $db->translatedQuery('SELECT id FROM memberships WHERE 
 group_id=%i AND user_name=%s', $group_id, $user_name);
   return $result->countReturnedRows() > 0;
+}
+
+function wiki_get_father_page($page_path)
+{
+  $lastpos = strrpos($page_path, '/');
+  if ($lastpos == 0) {
+    return '';
+  } else {
+    return substr($page_path, 0, $lastpos-1);
+  }
 }

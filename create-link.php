@@ -2,8 +2,31 @@
 include_once(__DIR__ . '/inc/init.php');
 
 if (fRequest::isPost()) {
+
+  fAuthorization::requireLoggedIn();
+
   try {
     $page_path = '/' . wiki_slugify(trim(fRequest::get('path')));
+
+    $fatherpage_path = wiki_get_father_page($page_path);
+    if ($fatherpage_path!='') {
+      $fatherpage = new Page(array('path' => $fatherpage_path));
+      $page_id = $fatherpage->getId();
+      $page_owner = $fatherpage->getOwnerName();
+      $page_group_id = $fatherpage->getGroupId();
+      $group_bits = $fatherpage->getGroupBits();
+      $other_bits = $fatherpage->getOtherBits();
+      $group_permission = wiki_get_create_permission($group_bits);
+      $other_permission = wiki_get_create_permission($other_bits);
+      $user_id = wiki_get_current_user_id();
+      $user_name = wiki_get_current_user();
+      if ($page_owner!=$user_name)
+        if (!$group_permission || !wiki_is_in_group($db, $user_name,  $page_group_id)) 
+          if (!$other_permission) {
+            throw new fValidationException('You are not permitted to create links here!');
+          }    
+    }
+
     $dest = trim(fRequest::get('dest'));
     $group_bits = array_sum(fRequest::get('group_bits', 'integer[]'));
     $other_bits = array_sum(fRequest::get('other_bits', 'integer[]'));
@@ -31,7 +54,7 @@ if (fRequest::isPost()) {
         $page = new Page();
         $page->setPath($page_path);
         $page->setOwnerName(wiki_get_current_user());
-        $page->setGroupId(Group::root()->getId()); // FIXME should use real group
+        $page->setGroupId(wiki_get_current_user_group($db));
         $page->setPermission($group_bits . $other_bits);
         $page->setType(Page::HYPERLINK);
         $page->setCreatedAt(now());

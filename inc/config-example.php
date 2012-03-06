@@ -13,5 +13,5 @@ define('LOCK_TIME', 100);
 
 date_default_timezone_set("Asia/Shanghai");
 
-$ROOT_IDS[1] = 1;
-$ROOT_IDS[2] = 2;
+$REALROOT_IDS[1] = 1;
+

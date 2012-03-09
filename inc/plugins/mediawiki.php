@@ -97,7 +97,7 @@ function wiki_unescape_pre($html)
 
 function wiki_do_map_pre($matches)
 {
-  return "<pre>".wiki_render_pre($matches, true)."</pre>";
+  return "<pre>\n".wiki_render_pre($matches, true)."</pre>\n";
 }
 
 function wiki_render_pre($matches, $do_map = false)
@@ -119,7 +119,7 @@ function wiki_remove_unsupported($html)
 
 function wiki_render_syntaxhighlight($matches)
 {
-  return '<pre lang="'.$matches[1].'">'.htmlentities($matches[2]).'</pre>';
+  return '<pre lang="'.$matches[1].'">'.htmlentities($matches[2]).'</pre>'."\n";
 }
 
 function wiki_simple_text($html)
@@ -152,7 +152,7 @@ function wiki_simple_text($html)
   $html = preg_replace('/\n\n+/', "\n<br/>\n", $html);
   
   // lists
-  //$html = preg_replace_callback('/((^[*#;:\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
+  ////$html = preg_replace_callback('/((^[*#;:\s]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
   $html = preg_replace_callback('/((^[*#;:\s]*[*#;:]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
   
   // horizontal rule
@@ -190,64 +190,64 @@ function wiki_convert_tables($text)
 
 function wiki_convert_table($text)
 {
-	$lines = explode("\n", $text);
-	$intable = false;
-	foreach ($lines as $line) {
-		$line = trim($line);
-		if (substr($line, 0, 2) == '{|') {
-			// begin of the table
-			$stuff = substr($line, 2);
-			$tableopen = true;
-			$table = "<table ".trim($stuff).">\n\t<tr>\n";
-			$rowopen = true;
-		} else if (substr($line, 0, 1) == '|') {
-			// table related
-			$line = substr($line,1);
-			if (preg_match('/[-]+/', $line)) {
-				// row break
-				if ($thopen) $table .="</th>\n";
-				if ($tdopen) $table .="</td>\n";
-				if ($rowopen) $table .="\t</tr>\n";
-				$table .= "\t<tr>\n";
-				$rowopen = true;
-				$tdopen = false;
-				$thopen = false;
-			} else if (substr($line, 0, 1) == '}') {
-				// table end
-				break;
-			} else {
-				// td
-  			if ($thopen) $table .="</th>\n";
-				if ($tdopen) $table .="</td>\n";
-				$stuff = explode('|', $line, 2);
-				if (count($stuff) == 1) {
-					$table .= "\t\t<td>".wiki_simple_text($stuff[0]);
-				} else {
-					$table .= "\t\t<td ".trim($stuff[0]).">".wiki_simple_text($stuff[1]);
-				}
-				$tdopen = true;
-			}
-		} else if (substr($line, 0, 1) == '!') {
-			// th
-			if ($thopen) $table .="</th>\n";
-			if ($tdopen) $table .="</td>\n";
-			$stuff = explode('|', substr($line, 1), 2);
-			if (count($stuff) == 1) {
-				$table .= "\t\t<th>".wiki_simple_text($stuff[0]);
-			} else {
-				$table .= "\t\t<th ".trim($stuff[0]).">".wiki_simple_text($stuff[1]);
-			}
-			$thopen = true;
-		} else {
-			// plain text
-			$table .= wiki_simple_text($line)."\n";
-		}
-	}
-	if ($thopen) $table .="</th>\n";
-	if ($tdopen) $table .="</td>\n";
-	if ($rowopen) $table .="\t</tr>\n";
-	if ($tableopen) $table .="</table>\n";
-	return $table;
+  $lines = explode("\n", $text);
+  $intable = false;
+  foreach ($lines as $line) {
+    $line = trim($line);
+    if (substr($line, 0, 2) == '{|') {
+      // begin of the table
+      $stuff = substr($line, 2);
+      $tableopen = true;
+      $table = "<table ".trim($stuff).">\n\t<tr>\n";
+      $rowopen = true;
+    } else if (substr($line, 0, 1) == '|') {
+      // table related
+      $line = substr($line,1);
+      if (preg_match('/[-]+/', $line)) {
+        // row break
+        if ($thopen) $table .="</th>\n";
+        if ($tdopen) $table .="</td>\n";
+        if ($rowopen) $table .="\t</tr>\n";
+        $table .= "\t<tr>\n";
+        $rowopen = true;
+        $tdopen = false;
+        $thopen = false;
+      } else if (substr($line, 0, 1) == '}') {
+        // table end
+        break;
+      } else {
+        // td
+        if ($thopen) $table .="</th>\n";
+        if ($tdopen) $table .="</td>\n";
+        $stuff = explode('|', $line, 2);
+        if (count($stuff) == 1) {
+          $table .= "\t\t<td>\n".wiki_simple_text($stuff[0]);
+        } else {
+          $table .= "\t\t<td ".trim($stuff[0]).">".wiki_simple_text($stuff[1]);
+        }
+        $tdopen = true;
+      }
+    } else if (substr($line, 0, 1) == '!') {
+      // th
+      if ($thopen) $table .="</th>\n";
+      if ($tdopen) $table .="</td>\n";
+      $stuff = explode('|', substr($line, 1), 2);
+      if (count($stuff) == 1) {
+        $table .= "\t\t<th>".wiki_simple_text($stuff[0]);
+      } else {
+        $table .= "\t\t<th ".trim($stuff[0]).">".wiki_simple_text($stuff[1]);
+      }
+      $thopen = true;
+    } else {
+      // plain text
+      $table .= wiki_simple_text($line)."\n";
+    }
+  }
+  if ($thopen) $table .="</th>\n";
+  if ($tdopen) $table .="</td>\n";
+  if ($rowopen) $table .="\t</tr>\n";
+  if ($tableopen) $table .="</table>\n";
+  return $table;
 }
 
 function wiki_render_internal_link_with_text($matches)
@@ -322,105 +322,104 @@ function wiki_render_list($lines)
   $i = 0;
   $f = 0;
   while ($i <= count($lines)) {
-    if ($i < count($lines) and ($lines[$i][0] == '*' or $lines[$i][0] == '#')) {
+  if ($i < count($lines) and ($lines[$i][0] == '*' or $lines[$i][0] == '#')) {
       $sublines = array();
       $j = $i;
       while ($j < count($lines) and ($lines[$j][0] == '*' or $lines[$j][0] == '#')) {
         $sublines[] = $lines[$j];
         $j++;
       }
-	  if ($f == 0) {
-		$html .= '<li>';
-		$f = 1;
-	  }
-	  $html .= wiki_render_lists_lines($sublines).'</li>';
-	  $f = 0;
-      $i = $j;
-	} else if ($i < count($lines) and $lines[$i][0] == ';') {
-	  $sublines = array();
-	  $j = $i;
-	  while ($j < count($lines) and $lines[$j][0] == ';') {
-        $sublines[] = $lines[$j];
-        $j++;
-	  }
-	  if ($f == 0) {
-		$html .= '<dt>';
-		$f = 1;
-	  }
-	  $html .= wiki_render_lists_lines($sublines).'</dt>';
-	  $f = 0;
-	  $i = $j;
-	} else if ($i < count($lines) and $lines[$i][0] == ':') {
-	  $sublines = array();
-	  $j = $i;
-	  while ($j < count($lines) and $lines[$j][0] == ':') {
-        $sublines[] = $lines[$j];
-        $j++;
-	  }
-	  if ($f == 0) {
-		$html .= '<dd>';
-		$f = 1;
-	  }
-	  $html .= wiki_render_lists_lines($sublines).'</dd>';
-	  $f = 0;
-	  $i = $j;
-	} else {
-	  if ($char == ';') {
-		 if ($f == 0) {
-		  if ($i < count($lines)) {
-	        $html .= '<dt>'.$lines[$i];
-	        $f = 1;
-		  }
-	    } else {
-		  $html .= '</dt>';
-		  if ($i < count($lines)) {
-		    $html .= '<dt>'.$lines[$i];
-		    $f = 1;
-		  } else {
-		    $f = 0;
-		  }
-		}		  
-	  } else if ($char == ':') {
-		 if ($f == 0) {
-		  if ($i < count($lines)) {
-	        $html .= '<dd>'.$lines[$i];
-	        $f = 1;
-		  }
-	    } else {
-		  $html .= '</dd>';
-		  if ($i < count($lines)) {
-		    $html .= '<dd>'.$lines[$i];
-		    $f = 1;
-		  } else {
-		    $f = 0;
-		  }
-		}		  
-	  }
-	  else {
-	    if ($f == 0) {
-		  if ($i < count($lines)) {
-	        $html .= '<li>'.$lines[$i];
-	        $f = 1;
-		  }
-	    } else {
-		  $html .= '</li>';
-		  if ($i < count($lines)) {
-		    $html .= '<li>'.$lines[$i];
-		    $f = 1;
-		  } else {
-		    $f = 0;
-		  }
-	    }	
-	  }
-      $i++;
+    if ($f == 0) {
+    $html .= '<li>';
+    $f = 1;
     }
+    $html .= wiki_render_lists_lines($sublines).'</li>';
+    $f = 0;
+      $i = $j;
+  } else if ($i < count($lines) and $lines[$i][0] == ';') {
+    $sublines = array();
+    $j = $i;
+    while ($j < count($lines) and $lines[$j][0] == ';') {
+      $sublines[] = $lines[$j];
+      $j++;
+    }
+    if ($f == 0) {
+      $html .= '<dt>';
+      $f = 1;
+    }
+    $html .= wiki_render_lists_lines($sublines).'</dt>';
+    $f = 0;
+    $i = $j;
+  } else if ($i < count($lines) and $lines[$i][0] == ':') {
+    $sublines = array();
+    $j = $i;
+    while ($j < count($lines) and $lines[$j][0] == ':') {
+      $sublines[] = $lines[$j];
+      $j++;
+    }
+    if ($f == 0) {
+      $html .= '<dd>';
+      $f = 1;
+    }
+    $html .= wiki_render_lists_lines($sublines).'</dd>';
+    $f = 0;
+    $i = $j;
+  } else {
+    if ($char == ';') {
+      if ($f == 0) {
+        if ($i < count($lines)) {
+          $html .= '<dt>'.$lines[$i];
+          $f = 1;
+        }
+      } else {
+        $html .= '</dt>';
+        if ($i < count($lines)) {
+          $html .= '<dt>'.$lines[$i];
+          $f = 1;
+        } else {
+          $f = 0;
+        }
+      }      
+    } else if ($char == ':') {
+      if ($f == 0) {
+        if ($i < count($lines)) {
+          $html .= '<dd>'.$lines[$i];
+          $f = 1;
+        }
+      } else {
+        $html .= '</dd>';
+        if ($i < count($lines)) {
+          $html .= '<dd>'.$lines[$i];
+          $f = 1;
+        } else {
+          $f = 0;
+        }
+      }      
+    } else {
+      if ($f == 0) {
+        if ($i < count($lines)) {
+          $html .= '<li>'.$lines[$i];
+          $f = 1;
+        }
+      } else {
+        $html .= '</li>';
+        if ($i < count($lines)) {
+          $html .= '<li>'.$lines[$i];
+          $f = 1;
+        } else {
+          $f = 0;
+        }
+      }  
+    }
+    $i++;
+  }
   }
   if ($char == '*') {
     return '<ul>'.$html.'</ul>';
   } else if($char == '#') {
     return '<ol>'.$html.'</ol>';
   } else if($char == ';' or $char == ':') {
-	return '<dl>'.$html.'</dl>';
+    return '<dl>'.$html.'</dl>';
   }
 }
  

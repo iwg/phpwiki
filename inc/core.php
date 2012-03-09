@@ -179,7 +179,7 @@ group_id=%i AND user_name=%s', $group_id, $user_name);
   return $result->countReturnedRows() > 0;
 }
 
-function wiki_get_father_page($page_path)
+function wiki_get_parent_page($page_path)
 {
   $lastpos = strrpos($page_path, '/');
   if ($lastpos == 0) {

@@ -10,14 +10,14 @@ if (fRequest::isPost()) {
     $page_title = trim(fRequest::get('title'));
     $page_path = '/' . wiki_slugify(trim(fRequest::get('path')));
 
-    $fatherpage_path = wiki_get_father_page($page_path);
-    if ($fatherpage_path!='') {
-      $fatherpage = new Page(array('path' => $fatherpage_path));
-      $page_id = $fatherpage->getId();
-      $page_owner = $fatherpage->getOwnerName();
-      $page_group_id = $fatherpage->getGroupId();
-      $group_bits = $fatherpage->getGroupBits();
-      $other_bits = $fatherpage->getOtherBits();
+    $parent_path = wiki_get_parent_page($page_path);
+    if ($parent_path!='') {
+      $parent = new Page(array('path' => $parent_path));
+      $page_id = $parent->getId();
+      $page_owner = $parent->getOwnerName();
+      $page_group_id = $parent->getGroupId();
+      $group_bits = $parent->getGroupBits();
+      $other_bits = $parent->getOtherBits();
       $group_permission = wiki_get_create_permission($group_bits);
       $other_permission = wiki_get_create_permission($other_bits);
       $user_id = wiki_get_current_user_id();

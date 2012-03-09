@@ -11,20 +11,10 @@ if (fRequest::isPost()) {
     $parent_path = wiki_get_parent_page($page_path);
     if ($parent_path!='') {
       $parent = new Page(array('path' => $parent_path));
-      $page_id = $parent->getId();
-      $page_owner = $parent->getOwnerName();
-      $page_group_id = $parent->getGroupId();
-      $group_bits = $parent->getGroupBits();
-      $other_bits = $parent->getOtherBits();
-      $group_permission = wiki_get_create_permission($group_bits);
-      $other_permission = wiki_get_create_permission($other_bits);
-      $user_id = wiki_get_current_user_id();
       $user_name = wiki_get_current_user();
-      if ($page_owner!=$user_name)
-        if (!$group_permission || !wiki_is_in_group($db, $user_name,  $page_group_id)) 
-          if (!$other_permission) {
-            throw new fValidationException('You are not permitted to create links here!');
-          }    
+      if (!$parent->isPermitted($user_name, 'create')) {
+        throw new fValidationException('You are not permitted to create links here!');
+      }
     }
 
     $dest = trim(fRequest::get('dest'));

@@ -19,17 +19,11 @@ try {
   $summary = '';
   $is_minor_edit = false;
 
-  $page_owner = $page->getOwnerName();
-  $page_group_id = $page->getGroupId();
   $user_name = wiki_get_current_user();
-  $group_permission = wiki_get_write_permission($group_bits);
-  $other_permission = wiki_get_write_permission($other_bits);
-  if ($page_owner!=$user_name)
-    if (!$group_permission || !wiki_is_in_group($db, $user_name, $page_group_id)) 
-      if (!$other_permission) {
-        wiki_no_permission();
-      }
-  
+  if (!$page->isPermitted($user_name, 'write')) {
+    wiki_no_permission();
+  }
+
   $locked_by = wiki_check_lock($db, $page_id, $user_id);
   if (!$locked_by) {
     wiki_set_lock($db, $page_id, $user_id);

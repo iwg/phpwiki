@@ -37,4 +37,33 @@ class Page extends fActiveRecord
   {
     return $this->getType() == self::HYPERLINK;
   }
+
+  public function isPermitted($user_name, $action)
+  {
+    global $db;
+    $group_bits = $this->getGroupBits();
+    $other_bits = $this->getOtherBits();
+    $page_owner = $this->getOwnerName();
+    $page_group_id = $this->getGroupId();
+    if ($action == 'read') {
+      $group_permission = wiki_allow_write($group_bits);
+      $other_permission = wiki_allow_write($other_bits);
+    } else if ($action == 'write') {
+      $group_permission = wiki_allow_read($group_bits);
+      $other_permission = wiki_allow_read($other_bits);
+    } else if ($action == 'create') {
+      $group_permission = wiki_allow_create($group_bits);
+      $other_permission = wiki_allow_create($other_bits);
+    } else {
+      return FALSE;
+    }
+    if ($user_name == '') {
+      return $other_permission;
+    }
+    if ($page_owner!=$user_name)
+      if (!$group_permission || !wiki_is_in_group($db, $user_name, $page_group_id))
+        if (!$other_permission)
+          return FALSE;
+    return TRUE;
+  }
 }

@@ -24,4 +24,21 @@ class Group extends fActiveRecord
   {
     return new Group(array('name' => 'nobody'));
   }
+
+  public function is_member($user_name)
+  {
+    $result = fRecordSet::build(
+      'Membership', 
+      array(
+        'group_id=' => $this->getId(),
+        'user_name=' => $user_name
+      )
+    );
+    try {
+      $result->tossIfEmpty();
+      return TRUE;
+    } catch (fEmptySetException $e) {
+      return FALSE;
+    }
+  }
 }

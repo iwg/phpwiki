@@ -17,11 +17,9 @@ try {
   if (!$other_permission) {
     fAuthorization::requireLoggedIn();
     $user_name = wiki_get_current_user();
-  } else {
-    $user_name = '';
-  }
-  if (!$page->isPermitted($user_name, 'read')) {
-    wiki_no_permission();
+    if (!$page->isPermitted($user_name, 'read')) {
+      wiki_no_permission();
+    }
   }
 } catch (fException $e) {
   // TODO fatal error

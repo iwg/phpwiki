@@ -62,9 +62,18 @@ class Page extends fActiveRecord
     }
     $tempgroup = new Group(array('id' => $page_group_id));
     if ($page_owner!=$user_name)
-      if (!$group_permission || !$tempgroup->is_member($user_name))
+      if (!$group_permission || !$tempgroup->isMember($user_name))
         if (!$other_permission)
           return FALSE;
     return TRUE;
   }
-}
+
+  public static function parentPage($page_path)
+  {
+    $lastpos = strrpos($page_path, '/');
+    if ($lastpos == 0) {
+      return '/';
+    } else {
+      return substr($page_path, 0, $lastpos);
+    }
+  }

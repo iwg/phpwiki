@@ -171,20 +171,3 @@ function wiki_allow_create($permission_bits)
 {
   return (int)($permission_bits % 2) == 1;
 }
-
-function wiki_is_in_group($db, $user_name, $group_id)
-{
-  $result = $db->translatedQuery('SELECT id FROM memberships WHERE 
-group_id=%i AND user_name=%s', $group_id, $user_name);
-  return $result->countReturnedRows() > 0;
-}
-
-function wiki_get_parent_page($page_path)
-{
-  $lastpos = strrpos($page_path, '/');
-  if ($lastpos == 0) {
-    return '/';
-  } else {
-    return substr($page_path, 0, $lastpos);
-  }
-}

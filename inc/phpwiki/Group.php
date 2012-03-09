@@ -10,7 +10,7 @@ class Group extends fActiveRecord
     return fRecordSet::build('Membership', array('group_id=' => $this->getId()));
   }
   
-  public function is_system_group()
+  public function isSystemGroup()
   {
     return $this->getName() == "root" or $this->getName() == "nobody";
   }
@@ -25,7 +25,7 @@ class Group extends fActiveRecord
     return new Group(array('name' => 'nobody'));
   }
 
-  public function is_member($user_name)
+  public function isMember($user_name)
   {
     $result = fRecordSet::build(
       'Membership', 

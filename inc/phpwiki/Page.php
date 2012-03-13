@@ -77,3 +77,4 @@ class Page extends fActiveRecord
       return substr($page_path, 0, $lastpos);
     }
   }
+}

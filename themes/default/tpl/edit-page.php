@@ -43,20 +43,20 @@ include '_header.php';
       <label>Permission:</label>
       <div class="permission-group">
         <span class="group-type">(group)</span>
-        <input type="checkbox" name="group_bits[]" value="4" id="gr"<?php echo wiki_bit_checked_helper($group_bits, 4); ?> <?php echo $disabled?>/>
+        <input type="checkbox" name="group_bits[]" value="4" id="gr"<?php echo wiki_bit_checked_helper($group_bits, 4); ?> <?php echo $gpdisabled?>/>
         <label for="gr">r</label>
-        <input type="checkbox" name="group_bits[]" value="2" id="gw"<?php echo wiki_bit_checked_helper($group_bits, 2); ?> <?php echo $disabled?>/>
+        <input type="checkbox" name="group_bits[]" value="2" id="gw"<?php echo wiki_bit_checked_helper($group_bits, 2); ?> <?php echo $gpdisabled?>/>
         <label for="gw">w</label>
-        <input type="checkbox" name="group_bits[]" value="1" id="gx"<?php echo wiki_bit_checked_helper($group_bits, 1); ?> <?php echo $disabled?>/>
+        <input type="checkbox" name="group_bits[]" value="1" id="gx"<?php echo wiki_bit_checked_helper($group_bits, 1); ?> <?php echo $gpdisabled?>/>
         <label for="gx">x</label>
       </div>
       <div class="permission-group">
         <span class="group-type">(other)</span>
-        <input type="checkbox" name="other_bits[]" value="4" id="or"<?php echo wiki_bit_checked_helper($other_bits, 4); ?> <?php echo $disabled?>/>
+        <input type="checkbox" name="other_bits[]" value="4" id="or"<?php echo wiki_bit_checked_helper($other_bits, 4); ?> <?php echo $opdisabled?>/>
         <label for="or">r</label>
-        <input type="checkbox" name="other_bits[]" value="2" id="ow"<?php echo wiki_bit_checked_helper($other_bits, 2); ?> <?php echo $disabled?>/>
+        <input type="checkbox" name="other_bits[]" value="2" id="ow"<?php echo wiki_bit_checked_helper($other_bits, 2); ?> <?php echo $opdisabled?>/>
         <label for="ow">w</label>
-        <input type="checkbox" name="other_bits[]" value="1" id="ox"<?php echo wiki_bit_checked_helper($other_bits, 1); ?> <?php echo $disabled?>/>
+        <input type="checkbox" name="other_bits[]" value="1" id="ox"<?php echo wiki_bit_checked_helper($other_bits, 1); ?> <?php echo $opdisabled?>/>
         <label for="ox">x</label>
       </div>
     </div>

@@ -13,7 +13,8 @@ if (fRequest::isPost()) {
 
     $page = new Page(fRequest::get('id'));
     $user_name = wiki_get_current_user();
-    if (!$page->isPermitted($user_name, 'write')) {
+    $permissionlv = $page->isPermitted($user_name, 'write');
+    if (!$permissionlv) {
       wiki_no_permission();
     }
 
@@ -27,6 +28,15 @@ if (fRequest::isPost()) {
     $summary = trim(fRequest::get('summary'));
     $is_minor_edit = fRequest::get('is_minor_edit', 'boolean');
     
+    switch ($permissionlv) {
+      case 'other':
+        $group_bits = $page->getGroupBits();
+        $other_bits = $page->getOtherBits();
+        break;
+      case 'group':
+        $group_bits = $page->getGroupBits();
+    }
+
     if (empty($page_title)) {
       throw new fValidationException('Title cannot be blank.');
     }
@@ -53,7 +63,6 @@ if (fRequest::isPost()) {
         $revision->setCommitMessage($summary);
         $revision->setCreatedAt(now());
         $revision->store();
-        
         $page->setPermission($group_bits . $other_bits);
         $page->store();
         

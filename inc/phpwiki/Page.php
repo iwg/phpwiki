@@ -20,7 +20,7 @@ class Page extends fActiveRecord
   
   public function getGroupBits()
   {
-    return ($this->getPermission() % 100) / 10;
+    return intval($this->getPermission() / 10);
   }
   
   public function getOtherBits()
@@ -40,7 +40,6 @@ class Page extends fActiveRecord
 
   public function isPermitted($user_name, $action)
   {
-    global $db;
     $group_bits = $this->getGroupBits();
     $other_bits = $this->getOtherBits();
     $page_owner = $this->getOwnerName();
@@ -58,14 +57,24 @@ class Page extends fActiveRecord
       return FALSE;
     }
     if ($user_name == '') {
-      return $other_permission;
+      if ($other_permission) 
+        return 'other';
+      else
+        return FALSE;
     }
     $tempgroup = new Group(array('id' => $page_group_id));
-    if ($page_owner!=$user_name)
-      if (!$group_permission || !$tempgroup->isMember($user_name))
+    if ($page_owner!=$user_name) {
+      if (!$group_permission || !$tempgroup->isMember($user_name)) {
         if (!$other_permission)
           return FALSE;
-    return TRUE;
+        else
+          return 'other';
+      } else {
+        return 'group';
+      }
+    } else {
+      return 'owner';
+    }
   }
 
   public static function parentPage($page_path)

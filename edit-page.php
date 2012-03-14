@@ -20,8 +20,25 @@ try {
   $is_minor_edit = false;
 
   $user_name = wiki_get_current_user();
-  if (!$page->isPermitted($user_name, 'write')) {
+  $permissionlv = $page->isPermitted($user_name, 'write');
+  if (!$permissionlv) {
     wiki_no_permission();
+  }
+  switch ($permissionlv) {
+    case 'other':
+      $gpdisabled = 'onclick="this.checked=!this.checked"';
+      $opdisabled = 'onclick="this.checked=!this.checked"';
+      break;
+    case 'group':
+      $gpdisabled = 'onclick="this.checked=!this.checked"';
+      $opdisabled = '';
+      break;
+    case 'owner':
+      $gpdisabled = '';
+      $opdisabled = '';
+      break;  
+    default:
+      wiki_no_permission();
   }
 
   $locked_by = wiki_check_lock($db, $page_id, $user_id);
@@ -32,6 +49,8 @@ try {
     $disabled = '';
   } else {
     $disabled = 'disabled';
+    $gpdisabled = 'disabled';
+    $opdisabled = 'disabled';
   }
 
   $title = $lang['Edit Page'];

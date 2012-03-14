@@ -108,7 +108,7 @@ function wiki_render_pre($matches, $do_map = false)
   }
   $next_index = count($pre_maps);
   $pre_maps[] = htmlentities($matches[1]);
-  return "{{pre,".$next_index."}}";
+  return "{{pre,".$next_index."}}\n";
 }
 
 function wiki_remove_unsupported($html)
@@ -322,97 +322,97 @@ function wiki_render_list($lines)
   $i = 0;
   $f = 0;
   while ($i <= count($lines)) {
-  if ($i < count($lines) and ($lines[$i][0] == '*' or $lines[$i][0] == '#')) {
+    if ($i < count($lines) and ($lines[$i][0] == '*' or $lines[$i][0] == '#')) {
       $sublines = array();
       $j = $i;
       while ($j < count($lines) and ($lines[$j][0] == '*' or $lines[$j][0] == '#')) {
         $sublines[] = $lines[$j];
         $j++;
       }
-    if ($f == 0) {
-    $html .= '<li>';
-    $f = 1;
-    }
-    $html .= wiki_render_lists_lines($sublines).'</li>';
-    $f = 0;
+      if ($f == 0) {
+        $html .= '<li>';
+        $f = 1;
+      }
+      $html .= wiki_render_lists_lines($sublines).'</li>';
+      $f = 0;
       $i = $j;
-  } else if ($i < count($lines) and $lines[$i][0] == ';') {
-    $sublines = array();
-    $j = $i;
-    while ($j < count($lines) and $lines[$j][0] == ';') {
-      $sublines[] = $lines[$j];
-      $j++;
-    }
-    if ($f == 0) {
-      $html .= '<dt>';
-      $f = 1;
-    }
-    $html .= wiki_render_lists_lines($sublines).'</dt>';
-    $f = 0;
-    $i = $j;
-  } else if ($i < count($lines) and $lines[$i][0] == ':') {
-    $sublines = array();
-    $j = $i;
-    while ($j < count($lines) and $lines[$j][0] == ':') {
-      $sublines[] = $lines[$j];
-      $j++;
-    }
-    if ($f == 0) {
-      $html .= '<dd>';
-      $f = 1;
-    }
-    $html .= wiki_render_lists_lines($sublines).'</dd>';
-    $f = 0;
-    $i = $j;
-  } else {
-    if ($char == ';') {
+    } else if ($i < count($lines) and $lines[$i][0] == ';') {
+      $sublines = array();
+      $j = $i;
+      while ($j < count($lines) and $lines[$j][0] == ';') {
+        $sublines[] = $lines[$j];
+        $j++;
+      }
       if ($f == 0) {
-        if ($i < count($lines)) {
-          $html .= '<dt>'.$lines[$i];
-          $f = 1;
-        }
-      } else {
-        $html .= '</dt>';
-        if ($i < count($lines)) {
-          $html .= '<dt>'.$lines[$i];
-          $f = 1;
-        } else {
-          $f = 0;
-        }
-      }      
-    } else if ($char == ':') {
+        $html .= '<dt>';
+        $f = 1;
+      }
+      $html .= wiki_render_lists_lines($sublines).'</dt>';
+      $f = 0;
+      $i = $j;
+    } else if ($i < count($lines) and $lines[$i][0] == ':') {
+      $sublines = array();
+      $j = $i;
+      while ($j < count($lines) and $lines[$j][0] == ':') {
+        $sublines[] = $lines[$j];
+        $j++;
+      }
       if ($f == 0) {
-        if ($i < count($lines)) {
-          $html .= '<dd>'.$lines[$i];
-          $f = 1;
-        }
-      } else {
-        $html .= '</dd>';
-        if ($i < count($lines)) {
-          $html .= '<dd>'.$lines[$i];
-          $f = 1;
-        } else {
-          $f = 0;
-        }
-      }      
+        $html .= '<dd>';
+        $f = 1;
+      }
+      $html .= wiki_render_lists_lines($sublines).'</dd>';
+      $f = 0;
+      $i = $j;
     } else {
-      if ($f == 0) {
-        if ($i < count($lines)) {
-          $html .= '<li>'.$lines[$i];
-          $f = 1;
-        }
-      } else {
-        $html .= '</li>';
-        if ($i < count($lines)) {
-          $html .= '<li>'.$lines[$i];
-          $f = 1;
+      if ($char == ';') {
+        if ($f == 0) {
+          if ($i < count($lines)) {
+            $html .= '<dt>'.$lines[$i];
+            $f = 1;
+          }
         } else {
-          $f = 0;
-        }
-      }  
+          $html .= '</dt>';
+          if ($i < count($lines)) {
+            $html .= '<dt>'.$lines[$i];
+            $f = 1;
+          } else {
+            $f = 0;
+          }
+        }      
+      } else if ($char == ':') {
+        if ($f == 0) {
+          if ($i < count($lines)) {
+            $html .= '<dd>'.$lines[$i];
+            $f = 1;
+          }
+        } else {
+          $html .= '</dd>';
+          if ($i < count($lines)) {
+            $html .= '<dd>'.$lines[$i];
+            $f = 1;
+          } else {
+            $f = 0;
+          }
+        }      
+      } else {
+        if ($f == 0) {
+          if ($i < count($lines)) {
+            $html .= '<li>'.$lines[$i];
+            $f = 1;
+          }
+        } else {
+          $html .= '</li>';
+          if ($i < count($lines)) {
+            $html .= '<li>'.$lines[$i];
+            $f = 1;
+          } else {
+            $f = 0;
+          }
+        }  
+      }
+      $i++;
     }
-    $i++;
-  }
   }
   if ($char == '*') {
     return '<ul>'.$html.'</ul>';

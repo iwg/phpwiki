@@ -11,7 +11,7 @@ if (fRequest::isPost()) {
     $page_path = '/' . wiki_slugify(trim(fRequest::get('path')));
 
     $parent_path = Page::parentPage($page_path);
-    if ($parent_path!='/') {
+    if ($parent_path != '/') {
       $parent = new Page(array('path' => $parent_path));
       $user_name = wiki_get_current_user();
       if (!$parent->isPermitted($user_name, 'create')) {

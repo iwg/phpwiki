@@ -21,24 +21,17 @@ try {
 
   $user_name = wiki_get_current_user();
   $permissionlv = $page->isPermitted($user_name, 'write');
-  if (!$permissionlv) {
+  if ($permissionlv == 'other') {
+    $gpdisabled = 'onclick="this.checked=!this.checked"';
+    $opdisabled = 'onclick="this.checked=!this.checked"';
+  } else if ($permissionlv == 'group') {
+    $gpdisabled = 'onclick="this.checked=!this.checked"';
+    $opdisabled = '';
+  } else if ($permissionlv == 'owner') {
+    $gpdisabled = '';
+    $opdisabled = '';
+  } else {
     wiki_no_permission();
-  }
-  switch ($permissionlv) {
-    case 'other':
-      $gpdisabled = 'onclick="this.checked=!this.checked"';
-      $opdisabled = 'onclick="this.checked=!this.checked"';
-      break;
-    case 'group':
-      $gpdisabled = 'onclick="this.checked=!this.checked"';
-      $opdisabled = '';
-      break;
-    case 'owner':
-      $gpdisabled = '';
-      $opdisabled = '';
-      break;  
-    default:
-      wiki_no_permission();
   }
 
   $locked_by = wiki_check_lock($db, $page_id, $user_id);

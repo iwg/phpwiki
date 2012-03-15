@@ -28,13 +28,11 @@ if (fRequest::isPost()) {
     $summary = trim(fRequest::get('summary'));
     $is_minor_edit = fRequest::get('is_minor_edit', 'boolean');
     
-    switch ($permissionlv) {
-      case 'other':
-        $group_bits = $page->getGroupBits();
-        $other_bits = $page->getOtherBits();
-        break;
-      case 'group':
-        $group_bits = $page->getGroupBits();
+    if ($permissionlv == 'other') {
+      $group_bits = $page->getGroupBits();
+      $other_bits = $page->getOtherBits();
+    } else if ($permissionlv == 'group') {
+      $group_bits = $page->getGroupBits();
     }
 
     if (empty($page_title)) {

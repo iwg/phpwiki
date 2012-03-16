@@ -9,10 +9,17 @@ if (fRequest::isPost()) {
     $slug = wiki_slugify(fRequest::get('slug'));
     $page_title = trim(fRequest::get('title'));
     $page_path = '/' . wiki_slugify(trim(fRequest::get('path')));
+    if (strstr($page_path, '..') || strstr($page_path, '//')) {
+      throw new fValidationException('There cannot be .. or // in the path');
+    }
 
     $parent_path = Page::parentPage($page_path);
     if ($parent_path != '/') {
-      $parent = new Page(array('path' => $parent_path));
+      try {
+        $parent = new Page(array('path' => $parent_path));
+      } catch (fNotFoundException $e) {
+        throw new fValidationException('Please create the parent page first');
+      }
       $user_name = wiki_get_current_user();
       if (!$parent->isPermitted($user_name, 'create')) {
         throw new fValidationException('You are not permitted to create pages here!');

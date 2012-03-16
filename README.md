@@ -18,15 +18,19 @@ About Permissions
 
 Page Locking
 -------------
-See [how DokuWiki do it](http://www.dokuwiki.org/locking). We will do it similarly. 
-Key points: 
+[how DokuWiki do it](http://www.dokuwiki.org/locking).
 
-- Locked are refreshed:
-  - When the preview button is pressed
-  - When JavaScript is available the wiki will refresh the lock in the background while editing the document
-- Locks do expire when:
-  - they are older than the defined age (10 minutes?)
-  - the editing user saves the page
-  - the editing user cancels the editing by hitting the cancel button
+You can't edit the page while another's editing the same page
 
-DokuWiki only enables page-level locking. We will consider section-level locking for better usability. 
+Set a lock:
+  - When user gets into edit-page.php
+Refresh a lock:
+  - When user hits the preview button
+Lock is expired:
+  - It is more then xxx seconds old (xxx: 'LOCK_TIME' in /inc/config.php)
+Lock is deleted:
+  - When user hots the save button
+ToDo:
+  - Refresh the lock in the background while user is editing page
+  - Section level locking
+  - Delete the lock when user hits the cancel button

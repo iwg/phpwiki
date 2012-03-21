@@ -107,7 +107,7 @@ function wiki_render_pre($matches, $do_map = false)
     return $pre_maps[$matches[1]];
   }
   $next_index = count($pre_maps);
-  $pre_maps[] = $matches[1];
+  $pre_maps[] = htmlspecialchars_decode($matches[1]);
   return "{{pre,".$next_index."}}\n";
 }
 

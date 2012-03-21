@@ -11,10 +11,12 @@ function wiki_render_markup($title, $text)
   $html = wiki_escape_nowiki0($html);
   $html = wiki_escape_nowiki($html);
   $html = wiki_escape_pre($html);
+  $html = wiki_escape_syntaxhighlight($html);
   
   $html = wiki_convert_tables($html); 
   $html = wiki_simple_text($html);
 
+  $html = wiki_unescape_syntaxhighlight($html);
   $html = wiki_unescape_pre($html);
   $html = wiki_unescape_nowiki($html);
   $html = wiki_unescape_nowiki0($html);
@@ -117,16 +119,35 @@ function wiki_remove_unsupported($html)
   return $html;
 }
 
-function wiki_render_syntaxhighlight($matches)
+function wiki_escape_syntaxhighlight($html)
 {
-  return '<pre lang="'.$matches[1].'">'.htmlentities($matches[2]).'</pre>'."\n";
+  return preg_replace_callback('/\<syntaxhighlight lang="(.+?)"\>(.+?)\<\/syntaxhighlight\>/s', 'wiki_render_syntaxhighlight', $html);
+}
+
+function wiki_unescape_syntaxhighlight($html)
+{
+  return preg_replace_callback('/{{syntaxhighlight,(\d+)}}/s', 'wiki_do_map_syntaxhighlight', $html);
+}
+
+function wiki_do_map_syntaxhighlight($matches)
+{
+  return wiki_render_syntaxhighlight($matches, true);
+}
+
+function wiki_render_syntaxhighlight($matches, $do_map = false)
+{
+  static $syntaxhighlight_maps = array();
+  if (isset($do_map) and $do_map === true) {
+    return '<pre lang='.$syntaxhighlight_maps[$matches[1]].'">'.htmlentities($syntaxhighlight_maps[$matches[1]+1]).'</pre>'."\n";
+  }
+  $next_index = count($syntaxhighlight_maps);
+  $syntaxhighlight_maps[] = $matches[1];
+  $syntaxhighlight_maps[] = htmlspecialchars_decode($matches[2]);
+  return "{{syntaxhighlight,".$next_index."}}\n";
 }
 
 function wiki_simple_text($html)
 {
-  // syntaxhighlight
-  $html = preg_replace_callback('/\<syntaxhighlight lang="(.+?)"\>(.+?)\<\/syntaxhighlight\>/s', 'wiki_render_syntaxhighlight', $html);
-  
   // bold
   $html = preg_replace('/\'\'\'([^\'\n]+)\'\'\'/', '<b>${1}</b>', $html);
   // italic

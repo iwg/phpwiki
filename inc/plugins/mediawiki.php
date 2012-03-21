@@ -177,7 +177,7 @@ function wiki_simple_text($html)
   $html = preg_replace_callback('/((^[*#;:\s]*[*#;:]+[^\n]*$\n)+)/m', 'wiki_render_lists', $html);
   
   // horizontal rule
-  $html = preg_replace('/----/', '<hr/>', $html);
+  $html = preg_replace('/----\s*\n/', '<hr/>'."\n", $html);
   
   // remove redundant line breaks
   $html = preg_replace('/[>]<br\/>([\n]?)[<]/', '>${1}<', $html);

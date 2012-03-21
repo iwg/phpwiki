@@ -80,7 +80,7 @@ function wiki_render_nowiki($matches, $do_map = false)
 {
   static $nowiki_maps = array();
   if (isset($do_map) and $do_map === true) {
-    return $nowiki_maps[$matches[1]];
+    return htmlentities($nowiki_maps[$matches[1]]);
   }
   $next_index = count($nowiki_maps);
   $nowiki_maps[] = htmlspecialchars_decode($matches[1]);
@@ -99,7 +99,7 @@ function wiki_unescape_pre($html)
 
 function wiki_do_map_pre($matches)
 {
-  return "<pre>\n".htmlentities(wiki_unescape_nowiki(wiki_render_pre($matches, true)))."</pre>\n";
+  return "<pre>\n".wiki_unescape_nowiki(wiki_render_pre($matches, true))."</pre>\n";
 }
 
 function wiki_render_pre($matches, $do_map = false)

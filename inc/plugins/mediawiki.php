@@ -149,7 +149,7 @@ function wiki_render_syntaxhighlight($matches, $do_map = false)
 function wiki_simple_text($html)
 {
   // bold
-  $html = preg_replace('/\'\'\'([^\'\n]+)\'\'\'/', '<b>${1}</b>', $html);
+  $html = preg_replace('/\'\'\'([^\'\n]+)\'\'\'/', '<b>${1}</b>'."<br/>", $html);
   // italic
   $html = preg_replace('/\'\'([^\'\n]+)\'\'?/', '<i>${1}</i>', $html);
   

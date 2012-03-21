@@ -81,7 +81,7 @@ function wiki_render_nowiki($matches, $do_map = false)
     return $nowiki_maps[$matches[1]];
   }
   $next_index = count($nowiki_maps);
-  $nowiki_maps[] = $matches[1];
+  $nowiki_maps[] = htmlspecialchars_decode($matches[1]);
   return "{{nowiki,".$next_index."}}";
 }
 
@@ -97,7 +97,7 @@ function wiki_unescape_pre($html)
 
 function wiki_do_map_pre($matches)
 {
-  return "<pre>\n".wiki_render_pre($matches, true)."</pre>\n";
+  return "<pre>\n".htmlentities(wiki_unescape_nowiki(wiki_render_pre($matches, true)))."</pre>\n";
 }
 
 function wiki_render_pre($matches, $do_map = false)
@@ -107,7 +107,7 @@ function wiki_render_pre($matches, $do_map = false)
     return $pre_maps[$matches[1]];
   }
   $next_index = count($pre_maps);
-  $pre_maps[] = htmlentities($matches[1]);
+  $pre_maps[] = $matches[1];
   return "{{pre,".$next_index."}}\n";
 }
 

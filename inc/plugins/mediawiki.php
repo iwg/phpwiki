@@ -115,7 +115,7 @@ function wiki_render_pre($matches, $do_map = false)
 
 function wiki_remove_unsupported($html)
 {
-  $html = preg_replace('/{{[^}]+}}/', '', $html);
+  $html = preg_replace('/{{[^}]+}}/', ' ', $html);
   return $html;
 }
 

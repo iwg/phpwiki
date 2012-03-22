@@ -38,8 +38,27 @@ class Page extends fActiveRecord
     return $this->getType() == self::HYPERLINK;
   }
 
+  public function isPrivatePage()
+  {
+    $path = $this->getPath();
+    if ($path[1] != '~') {
+      return FALSE;
+    }
+    $ans = '';
+    $i = 2;
+    while (($i < strlen($path)) && ($path[$i] != '/')) {
+      $ans .= $path[$i];
+      $i = $i + 1;
+    }
+    return $ans;
+  }
+
   public function isPermitted($user_name, $action)
   {
+    $privatepage = $this->isPrivatePage();
+    if (($privatepage == $user_name) && ($user_name != '')) {
+      return 'owner';
+    }
     $group_bits = $this->getGroupBits();
     $other_bits = $this->getOtherBits();
     $page_owner = $this->getOwnerName();

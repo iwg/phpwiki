@@ -14,7 +14,7 @@ if (fAuthorization::checkLoggedIn()) {
       $errmsg = '请输入用户名';
     } else if (empty($password)) {
       $errmsg = '请输入密码';
-    } else if (!login_authenticate($db, $username, $password)) {
+    } else if (!login_authenticate($username, $password)) {
       $errmsg = '登录失败';
     } else {
       fURL::redirect(fAuthorization::getRequestedURL(false, SITE_BASE));

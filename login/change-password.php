@@ -6,6 +6,8 @@ fAuthorization::requireLoggedIn();
 $errmsg = '';
 
 if (fRequest::isPost()) {
+  $temp = fAuthorization::getUserToken();
+  $username = $temp['name'];
   $old_password = fRequest::get('old-password');
   $new_password = fRequest::get('new-password');
   $confirm_password = fRequest::get('confirm-password');
@@ -13,9 +15,9 @@ if (fRequest::isPost()) {
     $errmsg = '密码不能为空';
   } else if ($new_password != $confirm_password) {
     $errmsg = '两次输入的新密码不一致';
-  } else if (login_check_credential($db, fSession::get('current_user[name]'), $old_password) == false) {
+  } else if (login_check_credential($username, $old_password) == false) {
     $errmsg = '旧密码错误';
-  } else if (login_change_password($db, fAuthorization::getUserToken(), $new_password)) {
+  } else if (login_change_password($username, $old_password, $new_password)) {
     fURL::redirect(fSession::delete('change-password-referer', SITE_BASE));
   } else {
     $errmsg = '修改密码失败';

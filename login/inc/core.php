@@ -1,41 +1,31 @@
 <?php
-function login_check_credential($db, $username, $password)
+function login_check_credential($username, $password)
 {
-  $result = $db->translatedQuery(
-    'SELECT id,pass,salt,iter,email,display_name FROM users WHERE name=%s AND status=1', $username);
-  $num_of_rows = $result->countReturnedRows();
-  if ($num_of_rows > 0) {
-    $row = $result->fetchRow();
-    if (acm_userpass_check($row, $password)) {
-      return $row;
-    } else {
-      return false;
-    }
-  }
-  return false;
+  $db = new ldap(LDAP_HOST, 1389);
+  return $db->authenticate($username, $password);
 }
 
-function login_authenticate($db, $username, $password)
+function login_authenticate($username, $password)
 {
-  if ($row = login_check_credential($db, $username, $password)) {
+  $db = new ldap(LDAP_HOST, LDAP_PORT);
+  if ($db->authenticate($username, $password)) {
+    $result = $db->getInformation($username);
     fAuthorization::setUserToken(array(
-      'id' => $row['id'],
+      'id' => $result[0]['id'][0],
       'name' => $username,
-      'email' => $row['email'],
-      'display_name' => $row['display_name']
+      'email' => $result[0]['email'][0],
+      'display_name' => $result[0]['display_name'][0]
     ));
     return true;
   }
   return false;
 }
 
-function login_change_password($db, $user_id, $password)
+function login_change_password($username, $oldpassword, $newpassword)
 {
-  $h = acm_userpass_hash($password);
-  $result = $db->translatedQuery(
-    'UPDATE users SET pass=%s,salt=%s,iter=%i WHERE id=%i',
-    $h['pass'], $h['salt'], $h['iter'], $user_id);
-  return $result->countAffectedRows() > 0;
+  $db = new ldap(LDAP_HOST, LDAP_PORT);
+  $h = array('pass' => $newpassword);
+  return $db->changeInformation($username, $oldpassword, $h);
 }
 
 function login_get_referer($default_value)

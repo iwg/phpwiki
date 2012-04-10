@@ -14,10 +14,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
-INSERT INTO `groups` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'root', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'nobody', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
-
 CREATE TABLE IF NOT EXISTS `hyperlinks` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `page_id` bigint(20) unsigned NOT NULL,

@@ -4,6 +4,7 @@
   <?php if (isset($revision)): ?>
     <li><a href="<?php echo wiki_edit_page_path($revision->getPageId()); ?>">Edit this page</a></li>
   <?php endif; ?>
+    <li><a href="<?php echo SITE_BASE; ?>/login/logout.php">Logout</a></li>
   <li>
     <h3><?php echo $lang['Dashboard']; ?></h3>
     <ul class="links">

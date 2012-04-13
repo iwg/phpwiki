@@ -23,7 +23,7 @@ include '_header.php';
   <fieldset>
     <legend>Content &amp; Visualization</legend>
     <div class="field">
-      <textarea class="monofont" id="body" name="body" <?php echo $disabled?>><?php echo htmlentities($body); ?></textarea>
+      <textarea class="monofont" id="body" name="body" <?php echo $disabled?>><?php echo htmlentities($body, ENT_COMPAT | ENT_HTML401, "UTF-8"); ?></textarea>
     </div>
     <div class="field">
       <label for="theme">Theme:</label>

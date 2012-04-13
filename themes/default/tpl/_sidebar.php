@@ -1,11 +1,11 @@
 <ul id="sidebar-items">
   <li>Hi, <?php echo wiki_get_current_user_display_name() ?></li>
-  <?php if (isset($revision)): ?>
-  <?php endif; ?>
   <?php if (!fAuthorization::checkLoggedIn()): ?>
     <li><a href="<?php echo SITE_BASE; ?>/login">Login</a></li>
   <?php else: ?>
-    <li><a href="<?php echo wiki_edit_page_path($revision->getPageId()); ?>">Edit this page</a></li>
+    <?php if (isset($revision)): ?>
+      <li><a href="<?php echo wiki_edit_page_path($revision->getPageId()); ?>">Edit this page</a></li>
+    <?php endif; ?>
     <li><a href="<?php echo SITE_BASE; ?>/login/change-password.php">Change password</a></li>
     <li><a href="<?php echo SITE_BASE; ?>/login/logout.php">Logout</a></li>
   <?php endif; ?>

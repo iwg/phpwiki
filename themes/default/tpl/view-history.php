@@ -13,10 +13,12 @@ include '_header.php';
     <div class="field">
       <label for="history">History:</label>
       <select id="history" name="history" <?php echo $disabled?>>
-        <option value="<?php echo $page_revision; ?>"> <?php echo $revision->getUpdated_at(); ?></option>
+        <?php $i=1; ?>
+        <option value="<?php echo $i.' '.$revision->getUpdated_at(); ?>"> <?php echo $i.' '.$revision->getUpdated_at(); ?></option>
         <?php foreach (wiki_get_page_revision($page) as $name): ?>
           <?php if ($name != $revision): ?>
-            <option value="<?php echo $name->getUpdated_at(); ?>"><?php echo $name->getUpdated_at(); ?></option>
+            <?php $i++; ?>
+            <option value="<?php echo $i.' '.$name->getUpdated_at(); ?>"><?php echo $i.' '.$name->getUpdated_at(); ?></option>
           <?php endif; ?>
         <?php endforeach; ?>
       </select>

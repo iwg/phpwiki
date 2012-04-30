@@ -18,7 +18,7 @@ if (fRequest::isPost()) {
       wiki_no_permission();
     }
 
-    $page_id = $page->getId();
+    $page_id = $page->getId();    
     $page_title = trim(fRequest::get('title'));
     $page_path = $page->getPath();
     $body = fRequest::get('body');
@@ -45,7 +45,6 @@ if (fRequest::isPost()) {
       throw new fValidationException('Invalid other permission bits.');
     }
     $theme = new Theme(array('name' => $page_theme));
-    
     $submit = fRequest::get('submit');
     if ($submit == 'Save page') {
       try {
@@ -82,7 +81,7 @@ if (fRequest::isPost()) {
         $db->query('BEGIN');
         
         wiki_clear_previous_previews($db, $page_path, wiki_get_current_user());
-        
+
         $preview = new Preview();
         $preview->setPath($page_path);
         $preview->setOwnerName(wiki_get_current_user());
@@ -116,6 +115,10 @@ if (fRequest::isPost()) {
         
         wiki_clear_previous_previews($db, $page_path, wiki_get_current_user());
         
+        $history = explode(" ", fRequest::get('history'));
+        $revision = $page->getRevision((integer)$history[0]);
+        $body = $revision->getBody();
+
         $preview = new Preview();
         $preview->setPath($page_path);
         $preview->setOwnerName(wiki_get_current_user());

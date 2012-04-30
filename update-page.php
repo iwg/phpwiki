@@ -107,8 +107,8 @@ if (fRequest::isPost()) {
         throw $e;
       }
     } else if ($submit == 'Show source') {
-    }
-    else {
+    } else if ($submit == 'Show history') {
+    } else {
       throw new fValidationException('Invalid submit action.');
     }
   } catch (fException $e) {

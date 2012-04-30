@@ -61,7 +61,8 @@ function wiki_enabled_theme_names()
 
 function wiki_get_page_revision($page)
 {
-  return array();
+  return $page->getRevisionList();
+  //return array();
 }
 
 function wiki_guess_title_from_slug($slug)

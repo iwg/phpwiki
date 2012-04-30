@@ -106,7 +106,6 @@ if (fRequest::isPost()) {
         $db->query('ROLLBACK');
         throw $e;
       }
-    } else if ($submit == 'test') {
     } else if ($submit == 'Show history') {
       try {
         

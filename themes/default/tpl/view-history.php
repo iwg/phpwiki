@@ -13,17 +13,13 @@ include '_header.php';
     <div class="field">
       <label for="history">History:</label>
       <select id="history" name="history" <?php echo $disabled?>>
-        <option value="<?php echo $page_revision; ?>"> <?php echo $page_revision; ?></option>
-        <?php foreach (wiki_get_page_revision() as $name): ?>
-          <?php if ($name != $page_revision): ?>
-            <option value="<?php echo $name; ?>"><?php echo $name; ?></option>
+        <option value="<?php echo $page_revision; ?>"> <?php echo $revision->getUpdated_at(); ?></option>
+        <?php foreach (wiki_get_page_revision($page) as $name): ?>
+          <?php if ($name != $revision): ?>
+            <option value="<?php echo $name->getUpdated_at(); ?>"><?php echo $name->getUpdated_at(); ?></option>
           <?php endif; ?>
         <?php endforeach; ?>
       </select>
-    </div>
-    <div class="action">
-      <input type="submit" name="submit" value="test" <?php echo $disabled?>/>
-      <a href="javascript: history.go(-1);">Cancel</a>
     </div>
     <div class="action">
       <input type="submit" name="submit" value="Show history" <?php echo $disabled?>/>

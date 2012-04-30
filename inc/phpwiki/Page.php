@@ -36,6 +36,15 @@ class Page extends fActiveRecord
     throw new Exception('Page does not have any revisions (database is inconsistent).');
   }
 
+  public function getRevisionList()
+  {
+    $lis = array();
+    for ($i=0; $i<$this->getRevisionCount(); $i++) {
+      $lis[] = $this->getRevision($i); //->getUpdated_at();
+    }
+    return $lis;
+  }
+
   public function getGroupBits()
   {
     return intval($this->getPermission() / 10);

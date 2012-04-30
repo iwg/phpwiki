@@ -106,7 +106,9 @@ if (fRequest::isPost()) {
         $db->query('ROLLBACK');
         throw $e;
       }
-    } else {
+    } else if ($submit == 'Show source') {
+    }
+    else {
       throw new fValidationException('Invalid submit action.');
     }
   } catch (fException $e) {

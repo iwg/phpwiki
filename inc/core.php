@@ -58,6 +58,12 @@ function wiki_enabled_theme_names()
   return array_filter(wiki_list_theme_names(), 'wiki_is_theme_enabled');
 }
 
+
+function wiki_get_page_revision($page)
+{
+  return array();
+}
+
 function wiki_guess_title_from_slug($slug)
 {
   // TODO

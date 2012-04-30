@@ -5,6 +5,7 @@
   <?php else: ?>
     <?php if (isset($revision)): ?>
       <li><a href="<?php echo wiki_edit_page_path($revision->getPageId()); ?>">Edit this page</a></li>
+      <li><a href="<?php echo wiki_view_history_path($revision->getPageId()); ?>">View history</a></li>
     <?php endif; ?>
     <li><a href="<?php echo SITE_BASE; ?>/login/change-password.php">Change password</a></li>
     <li><a href="<?php echo SITE_BASE; ?>/login/logout.php">Logout</a></li>

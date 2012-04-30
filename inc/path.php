@@ -55,6 +55,11 @@ function wiki_edit_page_path($page_id)
   return SITE_BASE . '/edit-page.php?id=' . $page_id;
 }
 
+function wiki_view_history_path($page_id)
+{
+  return SITE_BASE . '/view-history.php?id=' . $page_id;
+}
+
 function wiki_update_page_path($page_id)
 {
   return SITE_BASE . '/update-page.php?id=' . $page_id;

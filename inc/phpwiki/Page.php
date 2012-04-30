@@ -18,6 +18,24 @@ class Page extends fActiveRecord
     throw new Exception('Page does not have any revisions (database is inconsistent).');
   }
   
+  public function getRevisionCount()
+  {
+    $revisions = $this->buildRevisions();
+    if ($revisions->count()) {
+      return $revisions->count();
+    }
+    throw new Exception('Page does not have any revisions (database is inconsistent).');
+  }
+  
+  public function getRevision($ID)
+  {
+    $revisions = $this->buildRevisions();
+    if ($revisions->count() > $ID) {
+      return $revisions->getRecord($ID);
+    }
+    throw new Exception('Page does not have any revisions (database is inconsistent).');
+  }
+
   public function getGroupBits()
   {
     return intval($this->getPermission() / 10);

@@ -22,7 +22,10 @@ include '_header.php';
       </select>
     </div>
     <div class="action">
-      <input type="submit" name="submit" value="Show source" <?php echo $disabled?>/>
+      <input type="submit" name="submit" value="test" <?php echo $disabled?>/>
+      <a href="javascript: history.go(-1);">Cancel</a>
+    </div>
+    <div class="action">
       <input type="submit" name="submit" value="Show history" <?php echo $disabled?>/>
       <a href="javascript: history.go(-1);">Cancel</a>
     </div>

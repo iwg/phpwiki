@@ -1,7 +1,7 @@
 <?php
 include_once(__DIR__ . '/inc/init.php');
 
-fAuthorization::requireLoggedIn();
+//fAuthorization::requireLoggedIn();
 
 $user_id = wiki_get_current_user_id();
 $page_id = fRequest::get('id');

@@ -27,6 +27,15 @@ class Page extends fActiveRecord
     throw new Exception('Page does not have any revisions (database is inconsistent).');
   }
   
+  public function getRevisionID($revision)
+  {
+    for ($i=0; $i<$this->getRevisionCount(); $i++) {
+      if ($revision == $this->getRevision($i)) {
+        return $i;
+      }
+    }
+  }
+
   public function getRevision($ID)
   {
     $revisions = $this->buildRevisions();
@@ -40,7 +49,7 @@ class Page extends fActiveRecord
   {
     $lis = array();
     for ($i=0; $i<$this->getRevisionCount(); $i++) {
-      $lis[] = $this->getRevision($i); //->getUpdated_at();
+      $lis[] = $this->getRevision($i);
     }
     return $lis;
   }

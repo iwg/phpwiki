@@ -9,7 +9,7 @@ class Revision extends fActiveRecord
   {
     return new Theme($this->getThemeId());
   }
-  
+
   public function show()
   {
     echo wiki_render_markup($this->getTitle(), $this->getBody());

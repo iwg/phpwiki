@@ -116,7 +116,7 @@ if (fRequest::isPost()) {
         wiki_clear_previous_previews($db, $page_path, wiki_get_current_user());
         
         $history = explode(" ", fRequest::get('history'));
-        $revision = $page->getRevision((integer)$history[0]);
+        $revision = $page->getRevision(-1+(integer)$history[0]);
         $body = $revision->getBody();
 
         $preview = new Preview();

@@ -108,6 +108,38 @@ if (fRequest::isPost()) {
       }
     } else if ($submit == 'Show source') {
     } else if ($submit == 'Show history') {
+      try {
+        
+        wiki_unlock($db, $page_id);
+        wiki_set_lock($db, $page_id, $user_id);
+        
+        $db->query('BEGIN');
+        
+        wiki_clear_previous_previews($db, $page_path, wiki_get_current_user());
+        
+        $preview = new Preview();
+        $preview->setPath($page_path);
+        $preview->setOwnerName(wiki_get_current_user());
+        $preview->setGroupId($page->getGroupId());
+        $preview->setPermission($group_bits . $other_bits);
+        $preview->setTitle($page_title);
+        $preview->setBody($body);
+        $preview->setThemeId($theme->getId());
+        $preview->setCreatedAt(now());
+        $preview->store();
+        
+        $db->query('COMMIT');
+        
+        $preview_message = $lang['preview created successfully'] . ' <a target="_blank" href="' . wiki_show_preview_path($preview->getId()) . '">Click here</a>';
+        
+        fMessaging::create('success', 'edit page', $preview_message);
+        $title = $lang['History Page'];
+        $theme_path = wiki_theme_path(DEFAULT_THEME);
+        include wiki_theme(DEFAULT_THEME, 'view-history');
+      } catch (fException $e) {
+        $db->query('ROLLBACK');
+        throw $e;
+      }
     } else {
       throw new fValidationException('Invalid submit action.');
     }

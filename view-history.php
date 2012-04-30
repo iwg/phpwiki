@@ -46,7 +46,7 @@ try {
     $opdisabled = 'disabled';
   }
 
-  $title = $lang['Edit Page'];
+  $title = $lang['History Page'];
   $theme_path = wiki_theme_path(DEFAULT_THEME);
   include wiki_theme(DEFAULT_THEME, 'view-history');
 } catch (fNotFoundException $e) {

@@ -142,6 +142,31 @@ if (fRequest::isPost()) {
         $db->query('ROLLBACK');
         throw $e;
       }
+    } else if ($submit == 'Compare') {
+      try {
+        
+        wiki_unlock($db, $page_id);
+        wiki_set_lock($db, $page_id, $user_id);
+        
+        $db->query('BEGIN');
+        
+        wiki_clear_previous_previews($db, $page_path, wiki_get_current_user());
+        
+        $history = explode(" ", fRequest::get('history'));
+        $revision = $page->getRevision(-1+(integer)$history[0]);
+        $body = $revision->getBody();
+
+        $history2 = explode(" ", fRequest::get('history2'));
+        $revision2 = $page->getRevision(-1+(integer)$history2[0]);
+        $body2 = $revision2->getBody();
+
+        $title = $lang['History Page'];
+        $theme_path = wiki_theme_path(DEFAULT_THEME);
+        include wiki_theme(DEFAULT_THEME, 'show-diff');
+      } catch (fException $e) {
+        $db->query('ROLLBACK');
+        throw $e;
+      }
     } else {
       throw new fValidationException('Invalid submit action.');
     }

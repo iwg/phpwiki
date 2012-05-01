@@ -7,6 +7,7 @@
   <?php foreach ($css as $name): ?>
   <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/<?php echo $name; ?>.css" media="screen"/>
   <?php endforeach; ?>
+  <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/diffview.css"/>
 </head>
 
 <body>

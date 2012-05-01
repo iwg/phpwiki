@@ -10,7 +10,9 @@
     <li><a href="<?php echo SITE_BASE; ?>/login/logout.php">Logout</a></li>
   <?php endif; ?>
   <li>
-  <li><a href="<?php echo wiki_view_history_path($revision->getPageId()); ?>">View history</a></li>
+  <?php if (isset($revision)): ?>
+    <li><a href="<?php echo wiki_view_history_path($revision->getPageId()); ?>">View history</a></li>
+  <?php endif; ?>
     <h3><?php echo $lang['Dashboard']; ?></h3>
     <ul class="links">
       <li><a href="<?php echo SITE_BASE; ?>"><?php echo $lang['Home']; ?></a></li>

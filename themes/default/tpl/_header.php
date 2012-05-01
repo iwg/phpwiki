@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/<?php echo $name; ?>.css" media="screen"/>
   <?php endforeach; ?>
 </head>
+
 <body>
   <div id="page">
     <div id="sidebar">

@@ -57,6 +57,24 @@ include '_header.php';
       </select>
     </div>
   </fieldset>
+  <fieldset>
+    <div class="field">
+      <label for="history2">Compare with:</label>
+      <select id="history2" name="history2" <?php echo $disabled?>>
+        <?php $i=1; $r=1+$page->getRevisionID($revision); ?>
+        <option value="<?php echo $r.' '.$revision->getUpdated_at(); ?>"> <?php echo $r.' '.$revision->getUpdated_at(); ?></option>
+        <?php foreach (wiki_get_page_revision($page) as $name): ?>
+          <?php if ($name != $revision): ?>  
+            <option value="<?php echo $i.' '.$name->getUpdated_at(); ?>"><?php echo $i.' '.$name->getUpdated_at(); ?></option>
+          <?php endif; ?>
+          <?php $i++; ?>
+        <?php endforeach; ?>
+      </select>
+    </div>
+    <div class="action">
+      <input type="submit" name="submit" value="Compare" <?php echo $disabled?>/>
+    </div>
+  </fieldset>
 </form>
 
 <?php

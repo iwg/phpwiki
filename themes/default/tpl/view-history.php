@@ -46,8 +46,8 @@ include '_header.php';
     </div>
     
     <div class="field">
-      <label for="theme">Theme:</label>
-      <select id="theme" name="theme" <?php echo $disabled?> onbeforeactivate="return false" onfocus="this.blur()" onmouseover="this.setCapture()" onmouseout="this.releaseCapture()" onmouseup="return false">
+      <label for="theme"></label>
+      <select id="theme" name="theme" <?php echo $disabled?> style="display:none">
         <option value="<?php echo $page_theme; ?>"> <?php echo $page_theme; ?></option>
         <?php foreach (wiki_enabled_theme_names() as $name): ?>
           <?php if ($name != $page_theme): ?>

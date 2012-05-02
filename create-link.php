@@ -49,7 +49,7 @@ if (fRequest::isPost()) {
         $page = new Page();
         $page->setPath($page_path);
         $page->setOwnerName(wiki_get_current_user());
-        $page->setGroupId(wiki_get_current_user_group($db));
+        $page->setGroupId($groupid);
         $page->setPermission($group_bits . $other_bits);
         $page->setType(Page::HYPERLINK);
         $page->setCreatedAt(now());

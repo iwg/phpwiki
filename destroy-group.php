@@ -11,7 +11,7 @@ if (fRequest::isPost()) {
 
   try {
     $group = new group(fRequest::get('id'));
-    if ($group->is_system_group()) {
+    if ($group->isSystemGroup()) {
       throw new fValidationException($lang['system group cannot be destroyed']);
     }
     $group->delete();

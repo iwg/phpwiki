@@ -45,6 +45,22 @@ include '_header.php';
   <fieldset>
     <legend>Finishing Up</legend>
     <div class="field">
+      <label for="group">Group:</label>
+      <select id="group" name="group">
+        <option value="2">nobody</option>
+        <?php foreach (wiki_get_current_user_group($db) as $row): ?>
+          <?php if ($row != 2): ?>
+            <option value="<?php echo $row; ?>">
+            <?php 
+              $tempgroup = new Group(array('id' => $row));
+              echo $tempgroup->getName(); 
+            ?></option>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      </select>
+    </div>
+
+    <div class="field">
       <label>Permission:</label>
       <div class="permission-group">
         <span class="group-type">(group)</span>

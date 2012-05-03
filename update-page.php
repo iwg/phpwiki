@@ -117,6 +117,9 @@ if (fRequest::isPost()) {
         
         $history = explode(" ", fRequest::get('history'));
         $revision = $page->getRevision(-1+(integer)$history[0]);
+        $page_title = $revision->getTitle();
+        $page_theme = $revision->getTheme()->getName();
+        $theme = new Theme(array('name' => $page_theme));
         $body = $revision->getBody();
 
         $preview = new Preview();

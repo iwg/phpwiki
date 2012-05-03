@@ -103,10 +103,14 @@ function wiki_get_current_user_group($db)
   $temp = fAuthorization::getUserToken();
   $result = $db->translatedQuery('SELECT group_id FROM memberships WHERE user_name=%s', $temp['name']);
   if ($result->countReturnedRows() == 0) {
-    return Group::nobody()->getId();
+    return array(Group::nobody()->getId());
   } else {
-    foreach ($result as $row)
-      return $row['group_id'];
+    $i = 0;
+    foreach ($result as $row) {
+      $ans[$i] = $row['group_id'];
+      $i = $i + 1;
+    }
+    return $ans;
   }
 }
 

@@ -14,16 +14,14 @@ if (fRequest::isPost()) {
     }
 
     $parent_path = Page::parentPage($page_path);
-    if ($parent_path != '/') {
-      try {
-        $parent = new Page(array('path' => $parent_path));
-      } catch (fNotFoundException $e) {
-        throw new fValidationException('Please create the parent page first');
-      }
-      $user_name = wiki_get_current_user();
-      if (!$parent->isPermitted($user_name, 'create')) {
-        throw new fValidationException('You are not permitted to create pages here!');
-      }
+    try {
+      $parent = new Page(array('path' => $parent_path));
+    } catch (fNotFoundException $e) {
+      throw new fValidationException('Please create the parent page first');
+    }
+    $user_name = wiki_get_current_user();
+    if (!$parent->isPermitted($user_name, 'create')) {
+      throw new fValidationException('You are not permitted to create pages here!');
     }
 
     $body = fRequest::get('body');
@@ -31,6 +29,7 @@ if (fRequest::isPost()) {
     $group_bits = array_sum(fRequest::get('group_bits', 'integer[]'));
     $other_bits = array_sum(fRequest::get('other_bits', 'integer[]'));
     $summary = trim(fRequest::get('summary'));
+    $groupid = fRequest::get('group');
     
     if (empty($page_title)) {
       throw new fValidationException('Title cannot be blank.');
@@ -51,7 +50,7 @@ if (fRequest::isPost()) {
         $page = new Page();
         $page->setPath($page_path);
         $page->setOwnerName(wiki_get_current_user());
-        $page->setGroupId(wiki_get_current_user_group($db));
+        $page->setGroupId($groupid);
         $page->setPermission($group_bits . $other_bits);
         $page->setType(Page::NORMAL);
         $page->setCreatedAt(now());
@@ -84,7 +83,7 @@ if (fRequest::isPost()) {
         $preview = new Preview();
         $preview->setPath($page_path);
         $preview->setOwnerName(wiki_get_current_user());
-        $preview->setGroupId(wiki_get_current_user_group($db));
+        $preview->setGroupId($groupid);
         $preview->setPermission($group_bits . $other_bits);
         $preview->setTitle($page_title);
         $preview->setBody($body);

@@ -1,7 +1,7 @@
 <?php
 fSession::open();
 $css = array('main', 'edit-page');
-$js = array('sugar', 'jquery', 'difflib', 'diffview');
+$js = array('sugar', 'jquery', 'difflib', 'diffview', 'diff');
 include '_header.php';
 ?>
 

@@ -80,7 +80,7 @@ function wiki_render_nowiki($matches, $do_map = false)
 {
   static $nowiki_maps = array();
   if (isset($do_map) and $do_map === true) {
-    return htmlentities($nowiki_maps[$matches[1]]);
+    return htmlentities($nowiki_maps[$matches[1]], ENT_COMPAT | ENT_HTML401, "UTF-8");
   }
   $next_index = count($nowiki_maps);
   $nowiki_maps[] = htmlspecialchars_decode($matches[1]);
@@ -138,7 +138,7 @@ function wiki_render_syntaxhighlight($matches, $do_map = false)
 {
   static $syntaxhighlight_maps = array();
   if (isset($do_map) and $do_map === true) {
-    return '<pre lang='.$syntaxhighlight_maps[$matches[1]].'">'.htmlentities($syntaxhighlight_maps[$matches[1]+1]).'</pre>'."\n";
+    return '<pre lang='.$syntaxhighlight_maps[$matches[1]].'">'.htmlentities($syntaxhighlight_maps[$matches[1]+1], ENT_COMPAT | ENT_HTML401, "UTF-8").'</pre>'."\n";
   }
   $next_index = count($syntaxhighlight_maps);
   $syntaxhighlight_maps[] = $matches[1];

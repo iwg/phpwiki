@@ -1,0 +1,23 @@
+/inc/core.php 
+
+return array_search($user_id, $ROOT_IDS);
+->return true;
+
+/login/inc/plugins/lib.php
+
+return @ldap_bind($this->ds,"cn=".$username.",ou=users",$password);
+->return true;
+
+return @ldap_get_entries($this->ds, $sr);
+->return true;
+
+return @ldap_get_entries($this->ds, $sr);
+->return true;
+
+return @ldap_modify($this->ds,"cn=".$username.",ou=users",$array);
+->return true;
+
+/edit-page.php
+
+$user_id = wiki_get_current_user_id();
+->$user_id = 1;

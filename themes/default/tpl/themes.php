@@ -11,12 +11,11 @@ include '_header.php';
 <ul class="themes">
 <?php foreach ($theme_names as $theme_name): ?>
   <li>
-    <?php echo $theme_name; ?>
     <?php if (wiki_is_theme_enabled($theme_name)): ?>
-      <a class="disable action" href="#">(disable)</a>
+      <a class="btn btn-success disable action" href="#"><i class="icon-white icon-ok"></i><?php echo $theme_name; ?></a>
       <form action="<?php echo wiki_disable_theme_path($theme_name); ?>" method="post"></form>
     <?php else: ?>
-      <a class="enable action" href="#">(enable)</a>
+      <a class="btn enable action" href="#"><i class="icon-remove"></i><?php echo $theme_name; ?></a>
       <form action="<?php echo wiki_enable_theme_path($theme_name); ?>" method="post"></form>
     <?php endif; ?>
   </li>

@@ -89,3 +89,18 @@ function wiki_destroy_membership_path($membership_id)
 {
   return SITE_BASE . '/destroy-membership.php?id=' . $membership_id;
 }
+
+function wiki_contributors()
+{
+  return SITE_BASE . '/contributors.php';
+}
+
+/*function wiki_login()
+{
+  return SITE_BASE . '/login/index.php';
+}
+
+function wiki_change_password()
+{
+  return SITE_BASE . '/login/change-password.php';
+}*/

@@ -27,5 +27,5 @@ if (fRequest::isPost()) {
     fSession::set('change-password-referer', login_get_referer(SITE_BASE));
   }
 }
-
+$title = $lang['Change Password'];
 include(__DIR__ . '/tpl/change-password.php');

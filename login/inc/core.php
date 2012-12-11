@@ -35,3 +35,10 @@ function login_get_referer($default_value)
   }
   return $default_value;
 }
+
+function wiki_get_current_user_display_name()
+{
+  $temp = fAuthorization::getUserToken();
+  return $temp['display_name'];
+}
+

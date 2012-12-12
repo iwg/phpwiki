@@ -6,14 +6,14 @@
 	
 	<link rel="stylesheet" type="text/css" href="<?php echo LOGIN_BASE; ?>/css/prettify.css"/>
   	<link rel="stylesheet" type="text/css" href="<?php echo LOGIN_BASE; ?>/css/bootstrap.css"/>
-  	<link rel="stylesheet" type="text/css" href="<?php echo LOGIN_BASE; ?>/css/bootstrap-responsive.css"/>
-  	
   	<style>
       body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */}
   	</style>
+  	<link rel="stylesheet" type="text/css" href="<?php echo LOGIN_BASE; ?>/css/bootstrap-responsive.css"/>
+  	
 </head>
 
-<body id="login" onload="prettyPrint()">
+<body id="login">
 
 	<div class="navbar navbar-fixed-top navbar-inverse">
  	 <div class="navbar-inner">

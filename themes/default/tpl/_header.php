@@ -6,11 +6,11 @@
   
   <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/prettify.css"/>
   <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/bootstrap.css"/>
-  <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/bootstrap-responsive.css"/>
-  
   <style>
       body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */}
   </style>
+  
+  <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/bootstrap-responsive.css"/>
   
 </head>
 

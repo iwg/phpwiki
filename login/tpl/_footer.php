@@ -14,6 +14,5 @@
 	
 <script src="<?php echo LOGIN_BASE; ?>/js/jquery.min.js"></script>
 <script src="<?php echo LOGIN_BASE; ?>/js/bootstrap.min.js"></script>
-<script src="<?php echo LOGIN_BASE; ?>/js/prettify.js"></script>
 </body>
 </html>

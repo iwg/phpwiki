@@ -1,6 +1,6 @@
 <?php
 $lang = array(
-  'page not found' => 'Page not found.',
+  'page not found' => "<div class=\"alert alert-error\"> <a class=\"close\" data-dismiss=\"alert\">&times;</a>Error: Page not found. </div>" ,
   'Groups' => 'Groups',
   'Group name:' => 'Group name:',
   'create group' => 'Create group',
@@ -24,4 +24,7 @@ $lang = array(
   'Edit Page' => 'Edit Page',
   'link created successfully' => 'Link is created successfully.',
   'preview created successfully' => 'Preview is created successfully.',
+  'Contributors' => 'Contributors',
+  'Log In' => 'Log In',
+  'Change Password' => 'Change Password'
 );

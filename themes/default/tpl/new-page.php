@@ -22,7 +22,7 @@ include '_header.php';
       	<?php if (empty($slug)): ?>
         	<span class="add-on"><?php echo HOST_URL . SITE_BASE; ?>/</span><input class="input-xlarge" type="text" id="path" name="path" value="<?php echo substr($page_path, 1); ?>"/>
       	<?php else: ?>
-        	<span class=""><?php echo HOST_URL . SITE_BASE . $slug; ?></span>
+        	<span class="add-on"><?php echo HOST_URL . SITE_BASE . $slug; ?></span>
         	<input type="hidden" name="path" value="<?php echo substr($slug, 1); ?>"/>
       	<?php endif; ?>
       </div>

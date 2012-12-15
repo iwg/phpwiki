@@ -13,7 +13,7 @@ include '_header.php';
   <dt>
     <?php echo $group->getName(); ?>
     (<?php echo $group->countMemberships(); ?> <?php echo fGrammar::inflectOnQuantity($group->countMemberships(), 'member'); ?>)
-    <a class="btn btn-danger remove" href="#">Remove</a>
+    <a class="remove" href="#"><i class="icon-remove-sign"></i></a>
     <form action="<?php echo wiki_destroy_group_path($group->getId()); ?>" method="post"></form>
   </dt>
   <dd>
@@ -21,7 +21,7 @@ include '_header.php';
     <?php foreach ($group->memberships() as $membership): ?>
       <li>
         <span class="username" title="<?php echo $membership->getUserName(); ?>"><?php echo $membership->getUserName(); ?></span>
-        <a class="btn btn-danger remove" href="#">Remove</a>
+        <a class="remove" href="#"><i class="icon-remove-sign"></i></a>
         <form action="<?php echo wiki_destroy_membership_path($membership->getId()); ?>" method="post"></form>
       </li>
     <?php endforeach; ?>

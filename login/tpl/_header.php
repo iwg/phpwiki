@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8"/>
-  <title><?php echo $title; ?><?php echo TITLE_SUFFIX; ?></title>
-  
-  <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/prettify.css"/>
-  <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/bootstrap.css"/>
-  <style>
+	<meta charset="utf-8"/>
+	<title><?php echo $title; ?> | <?php echo SITE_TITLE; ?></title>
+	
+	<link rel="stylesheet" type="text/css" href="<?php echo LOGIN_BASE; ?>/css/prettify.css"/>
+  	<link rel="stylesheet" type="text/css" href="<?php echo LOGIN_BASE; ?>/css/bootstrap.css"/>
+  	<style>
       body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */}
-  </style>
-  
-  <link rel="stylesheet" type="text/css" href="<?php echo $theme_path; ?>/css/bootstrap-responsive.css"/>
-  
+  	</style>
+  	<link rel="stylesheet" type="text/css" href="<?php echo LOGIN_BASE; ?>/css/bootstrap-responsive.css"/>
+  	
 </head>
 
-<body>
-  
-  <div class="navbar navbar-fixed-top navbar-inverse">
+<body id="login">
+
+	<div class="navbar navbar-fixed-top navbar-inverse">
  	 <div class="navbar-inner">
 	    <div class="container">
 	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -36,7 +35,7 @@
 	        </ul>
 	      </div><!--/.nav-collapse -->
       
-	      <?php if (!fAuthorization::checkLoggedIn()): ?>
+      	  <?php if (!fAuthorization::checkLoggedIn()): ?>
 	      <div class="navbar-form pull-right">
 	        <div class="navbar-text pull-right">请登录</div>
 	      </div>
@@ -58,20 +57,7 @@
 	      <div class="navbar-text pull-right">
 	          <time>服务器时间：<?php echo new fTimestamp(); ?>&nbsp;</time>
 	      </div>
+	      
 	    </div>
 	  </div>
 	</div>
-  
-  <div id="page">
-    <div class="container-fluid">
-     <div class="row-fluid">
-       <?php include '_sidebar.php'; ?>
-    
-    <!div class="span9">
-     <div class="span5">
-
-      <div id="header">
-         <h1><?php echo $title; ?></h1>
-      </div>
-
-      <div id="center">

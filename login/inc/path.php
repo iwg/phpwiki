@@ -1,9 +1,4 @@
 <?php
-function wiki_theme_path($theme_name)
-{
-  return THEME_BASE . "/$theme_name";
-}
-
 function wiki_groups_path()
 {
   return SITE_BASE . '/groups.php';
@@ -95,12 +90,3 @@ function wiki_contributors()
   return SITE_BASE . '/contributors.php';
 }
 
-/*function wiki_login()
-{
-  return SITE_BASE . '/login/index.php';
-}
-
-function wiki_change_password()
-{
-  return SITE_BASE . '/login/change-password.php';
-}*/

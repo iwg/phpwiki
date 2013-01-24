@@ -20,6 +20,6 @@ if (fAuthorization::checkLoggedIn()) {
       fURL::redirect(fAuthorization::getRequestedURL(false, SITE_BASE));
     }
   }
-
+  $title = $lang['Log In'];
   include(__DIR__ . '/tpl/login.php');
 }
